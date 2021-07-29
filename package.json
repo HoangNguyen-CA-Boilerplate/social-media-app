@@ -7,6 +7,8 @@
     "start": "node server.js",
     "build": "cd client && npm install && npm run build",
     "server": "nodemon server.js",
+    "client": "npm --prefix client start",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
@@ -27,5 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
   }
 }
