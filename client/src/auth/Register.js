@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Form from '../components/form/Form';
 import Input from '../components/form/Input';
@@ -13,6 +14,7 @@ function Register() {
   const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   const onSubmit = (data) => {
     dispatch(registerUser(data.email, data.password));
@@ -20,6 +22,8 @@ function Register() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {isAuth && <Redirect to='/home' />}
+
       <Label>
         Email:
         <Input {...register('email')}></Input>

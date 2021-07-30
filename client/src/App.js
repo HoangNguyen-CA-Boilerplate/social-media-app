@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 import { theme1 } from './themes';
@@ -15,14 +15,18 @@ function App() {
       <Provider store={store}>
         <ThemeProvider theme={theme1}>
           <Switch>
-            <Route path='/login'>
+            <Route exact path='/login'>
               <Login></Login>
             </Route>
-            <Route path='/register'>
+            <Route exact path='/register'>
               <Register></Register>
             </Route>
-            <Route path='/'>
-              <h1>Hello World</h1>
+            <Route exact path='/home'>
+              <h1>Home</h1>
+            </Route>
+            <Route exact path='/'>
+              <Link to='/login'>Login</Link>
+              <Link to='/register'>Register</Link>
             </Route>
           </Switch>
         </ThemeProvider>
