@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   loading: false,
@@ -50,30 +51,22 @@ const {
 
 export const login = (email, password) => async (dispatch) => {
   dispatch(loginRequest());
-  const res = await fetch('/api/users/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await res.json();
-  dispatch(loginSuccess(data.user));
+  try {
+    const res = await axios.post('/api/users/login', { email, password });
+    dispatch(loginSuccess(res.data.user));
+  } catch (e) {
+    dispatch(loginFail());
+  }
 };
 
 export const register = (email, password) => async (dispatch) => {
   dispatch(registerRequest());
-  const res = await fetch('/api/users/register', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await res.json();
-  dispatch(registerSuccess(data.user));
+  try {
+    const res = await axios.post('/api/users/register', { email, password });
+    dispatch(registerSuccess(res.data.user));
+  } catch (e) {
+    dispatch(registerFail());
+  }
 };
 
 export default authSlice.reducer;
