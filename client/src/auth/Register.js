@@ -1,19 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
-import Form from '../components/forms/Form';
-import Input from '../components/forms/Input';
-import Label from '../components/forms/Label';
+import Form from '../components/form/Form';
+import Input from '../components/form/Input';
+import Label from '../components/form/Label';
 import Button from '../components/Button';
 
-import { register as registerUser } from './authAPI';
+import { register as registerUser } from '../store/slices/authSlice';
 
 function Register() {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data) => {
-    const res = await registerUser(data.email, data.password);
-    console.log(res);
+  const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    dispatch(registerUser(data.email, data.password));
   };
 
   return (
