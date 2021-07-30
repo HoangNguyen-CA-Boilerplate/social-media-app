@@ -9,14 +9,11 @@ import Button from '../components/Button';
 import { login } from './authAPI';
 
 function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    const res = await login(data.email, data.password);
+    console.log(res);
   };
 
   return (

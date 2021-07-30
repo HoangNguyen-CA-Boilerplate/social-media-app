@@ -9,11 +9,7 @@ import Button from '../components/Button';
 import { register as registerUser } from './authAPI';
 
 function Register() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
     const res = await registerUser(data.email, data.password);
