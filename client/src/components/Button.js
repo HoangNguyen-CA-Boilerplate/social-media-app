@@ -5,6 +5,7 @@ const Button = styled.button.attrs((props) => ({
 }))`
   font-size: 1rem;
   font-weight: 600;
+  display: block;
 
   background-color: ${({ theme }) => theme.clrs.primary[500]};
   color: ${({ theme }) => theme.clrs.neutral[100]};
@@ -17,6 +18,8 @@ const Button = styled.button.attrs((props) => ({
 
   cursor: pointer;
   transition: 0.1s ease-out;
+
+  text-decoration: none;
 
   &:hover {
     background-color: ${({ theme }) => theme.clrs.primary[600]};

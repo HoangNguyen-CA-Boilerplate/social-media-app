@@ -4,7 +4,7 @@ import axios from 'axios';
 const initialState = {
   loading: false,
   error: '',
-  isAuthenticated: false,
+  isAuth: false,
   user: null,
 };
 
@@ -19,12 +19,12 @@ const authSlice = createSlice({
       state.error = false;
     },
     loginSuccess: (state, action) => {
-      state.isAuthenticated = true;
+      state.isAuth = true;
       state.loading = false;
       state.user = action.payload;
     },
     loginFail: (state, action) => {
-      state.isAuthenticated = false;
+      state.isAuth = false;
       state.loading = false;
 
       if (action.payload) {
@@ -38,13 +38,13 @@ const authSlice = createSlice({
       state.error = false;
     },
     registerSuccess: (state, action) => {
-      state.isAuthenticated = true;
+      state.isAuth = true;
       state.user = action.payload;
 
       state.loading = false;
     },
     registerFail: (state, action) => {
-      state.isAuthenticated = false;
+      state.isAuth = false;
       state.loading = false;
       if (action.payload) {
         state.error = action.payload;

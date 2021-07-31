@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 import { theme1 } from './themes';
@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 import Register from './auth/Register';
 import Login from './auth/Login';
+import AuthScreen from './auth/AuthScreen';
 
 function App() {
   return (
@@ -25,8 +26,7 @@ function App() {
               <h1>Home</h1>
             </Route>
             <Route exact path='/'>
-              <Link to='/login'>Login</Link>
-              <Link to='/register'>Register</Link>
+              <AuthScreen />
             </Route>
           </Switch>
         </ThemeProvider>
