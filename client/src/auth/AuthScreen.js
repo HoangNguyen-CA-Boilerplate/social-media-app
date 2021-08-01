@@ -8,8 +8,8 @@ function AuthScreen() {
   return (
     <div>
       {isAuth && <Redirect to='/home' />}
-      <LinkButton to='/register'>Register</LinkButton>
-      <LinkButton to='/login'>Login</LinkButton>
+      <LinkButton to='/register'>Sign Up</LinkButton>
+      <LinkButton to='/login'>Log In</LinkButton>
     </div>
   );
 }
