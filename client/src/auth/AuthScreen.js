@@ -3,8 +3,10 @@ import LinkButton from '../components/LinkButton';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { selectIsAuth } from '../store/slices/authSlice';
+
 function AuthScreen() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAuth = useSelector(selectIsAuth);
   return (
     <div>
       {isAuth && <Redirect to='/home' />}

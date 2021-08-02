@@ -93,3 +93,5 @@ export const register = (email, password) => async (dispatch) => {
 };
 
 export default authSlice.reducer;
+
+export const selectIsAuth = (state) => state.isAuth;

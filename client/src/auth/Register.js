@@ -8,13 +8,16 @@ import Input from '../components/form/Input';
 import Label from '../components/form/Label';
 import Button from '../components/Button';
 
-import { register as registerUser } from '../store/slices/authSlice';
+import {
+  register as registerUser,
+  selectIsAuth,
+} from '../store/slices/authSlice';
 
 function Register() {
   const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data) => {
     dispatch(registerUser(data.email, data.password));
