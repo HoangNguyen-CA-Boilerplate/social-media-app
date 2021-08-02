@@ -20,7 +20,7 @@ function Register() {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data) => {
-    dispatch(registerUser(data.email, data.password));
+    dispatch(registerUser({ email: data.email, password: data.password }));
   };
 
   return (

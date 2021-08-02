@@ -17,7 +17,7 @@ function Login() {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data) => {
-    dispatch(login(data.email, data.password));
+    dispatch(login({ email: data.email, password: data.password }));
   };
 
   return (

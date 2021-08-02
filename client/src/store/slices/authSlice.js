@@ -1,97 +1,108 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-  loading: false,
-  error: '',
+  loginStatus: 'idle', // idle | loading | success | fail
+  registerStatus: 'idle',
+  loginError: '',
+  registerError: '',
   isAuth: false,
   user: null,
 };
 
 const defaultError = 'something went wrong';
 
+export const login = createAsyncThunk(
+  'auth/login',
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const res = await axios.post('/api/users/login', { email, password });
+      return res.data.user;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const res = await axios.post('/api/users/register', { email, password });
+      return res.data.user;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    loginRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+  reducers: {},
+  extraReducers: {
+    [login.pending]: (state) => {
+      state.loginStatus = 'loading';
+      state.loginError = '';
     },
-    loginSuccess: (state, action) => {
-      state.isAuth = true;
-      state.loading = false;
-      state.user = action.payload;
+    [register.pending]: (state) => {
+      state.registerStatus = 'loading';
+      state.registerError = '';
     },
-    loginFail: (state, action) => {
-      state.isAuth = false;
-      state.loading = false;
-
-      if (action.payload) {
-        state.error = action.payload;
-      } else {
-        state.error = defaultError;
-      }
-    },
-    registerRequest: (state) => {
-      state.loading = true;
-      state.error = false;
-    },
-    registerSuccess: (state, action) => {
+    [login.fulfilled]: (state, action) => {
+      state.loginStatus = 'success';
       state.isAuth = true;
       state.user = action.payload;
-
-      state.loading = false;
     },
-    registerFail: (state, action) => {
+    [register.fulfilled]: (state, action) => {
+      state.registerStatus = 'success';
+      state.isAuth = true;
+      state.user = action.payload;
+    },
+    [login.rejected]: (state, action) => {
+      state.loginStatus = 'fail';
       state.isAuth = false;
-      state.loading = false;
-      if (action.payload) {
-        state.error = action.payload;
-      } else {
-        state.error = defaultError;
-      }
+      state.loginError = action.payload;
+    },
+
+    [register.rejected]: (state, action) => {
+      state.registerStatus = 'fail';
+      state.isAuth = false;
+      state.registerError = action.payload;
     },
   },
 });
 
-const {
-  loginRequest,
-  loginSuccess,
-  loginFail,
-  registerRequest,
-  registerSuccess,
-  registerFail,
-} = authSlice.actions;
+// export const login = (email, password) => async (dispatch) => {
+//   dispatch(loginRequest());
+//   try {
+//     const res = await axios.post('/api/users/login', { email, password });
+//     dispatch(loginSuccess(res.data.user));
+//   } catch (e) {
+//     if (e.response) {
+//       dispatch(loginFail(e.response.data.error));
+//     } else {
+//       dispatch(loginFail());
+//     }
+//   }
+// };
 
-export const login = (email, password) => async (dispatch) => {
-  dispatch(loginRequest());
-  try {
-    const res = await axios.post('/api/users/login', { email, password });
-    dispatch(loginSuccess(res.data.user));
-  } catch (e) {
-    if (e.response) {
-      dispatch(loginFail(e.response.data.error));
-    } else {
-      dispatch(loginFail());
-    }
-  }
-};
-
-export const register = (email, password) => async (dispatch) => {
-  dispatch(registerRequest());
-  try {
-    const res = await axios.post('/api/users/register', { email, password });
-    dispatch(registerSuccess(res.data.user));
-  } catch (e) {
-    if (e.response) {
-      dispatch(registerFail(e.response.data.error));
-    } else {
-      dispatch(registerFail());
-    }
-  }
-};
+// export const register = (email, password) => async (dispatch) => {
+//   dispatch(registerRequest());
+//   try {
+//     const res = await axios.post('/api/users/register', { email, password });
+//     dispatch(registerSuccess(res.data.user));
+//   } catch (e) {
+//     if (e.response) {
+//       dispatch(registerFail(e.response.data.error));
+//     } else {
+//       dispatch(registerFail());
+//     }
+//   }
+// };
 
 export default authSlice.reducer;
 
-export const selectIsAuth = (state) => state.isAuth;
+export const selectIsAuth = (state) => state.auth.isAuth;
