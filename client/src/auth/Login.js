@@ -21,7 +21,7 @@ function Login() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} data-testid='Login'>
       {isAuth && <Redirect to='/home' />}
       <Label>
         Email:

@@ -24,7 +24,7 @@ function Register() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} data-testid='Register'>
       {isAuth && <Redirect to='/home' />}
 
       <Label>

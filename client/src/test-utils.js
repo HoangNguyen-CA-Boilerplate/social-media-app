@@ -7,15 +7,15 @@ import { theme1 } from './themes';
 import store from './store/store';
 import { Provider } from 'react-redux';
 
-import { MemoryRouter } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 const AllTheProviders = ({ children }) => {
   return (
-    <MemoryRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <ThemeProvider theme={theme1}>{children}</ThemeProvider>
       </Provider>
-    </MemoryRouter>
+    </BrowserRouter>
   );
 };
 

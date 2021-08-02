@@ -8,7 +8,7 @@ import { selectIsAuth } from '../store/slices/authSlice';
 function AuthScreen() {
   const isAuth = useSelector(selectIsAuth);
   return (
-    <div>
+    <div data-testid='AuthScreen'>
       {isAuth && <Redirect to='/home' />}
       <LinkButton to='/register'>Sign Up</LinkButton>
       <LinkButton to='/login'>Log In</LinkButton>
