@@ -1,5 +1,5 @@
 const express = require('express');
-const { body } = require('express-validator');
+const { body, oneOf } = require('express-validator');
 
 const { wrapAsync, issueJWT, handleValidationErrors } = require('../../util');
 const { isAuth } = require('../../middleware/auth');
@@ -11,6 +11,11 @@ const router = express.Router();
 // register an user
 router.post(
   '/register',
+  body('username')
+    .matches(/^[a-zA-Z0-9-_]+$/)
+    .withMessage('username is not valid')
+    .isLength({ min: 4, max: 15 })
+    .withMessage('username must be 4 to 15 characters long'),
   body('email').isEmail().withMessage('email is not valid').normalizeEmail(),
   body('password')
     .isLength({ min: 5 })
@@ -18,12 +23,22 @@ router.post(
   wrapAsync(async (req, res) => {
     handleValidationErrors(req);
 
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
 
-    const foundUser = await User.findOne({ email });
-    if (foundUser) throw new AppError(400, 'user already exists');
+    let foundUser = await User.findOne({ email });
+    if (foundUser)
+      throw new AppError(400, 'user with the given email already exists');
 
-    const newUser = new User({ email, password });
+    foundUser = await User.findOne({ username });
+    if (foundUser)
+      throw new AppError(400, 'user with the given username already exists');
+
+    const newUser = new User({
+      email,
+      password,
+      username,
+      displayName: username,
+    });
     const savedUser = await newUser.save();
 
     savedUser.password = undefined; // !important
@@ -45,8 +60,9 @@ router.post(
 
     const { email, password } = req.body;
 
-    const foundUser = await User.findOne({ email }).select('+password');
-    if (!foundUser) throw new AppError(400, 'user does not exist');
+    let foundUser = await User.findOne({ email }).select('+password');
+    if (!foundUser)
+      throw new AppError(400, 'user with the given email does not exist');
 
     const isValid = await foundUser.verifyPassword(password);
     if (!isValid) throw new AppError(401, 'incorrect password');

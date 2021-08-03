@@ -8,13 +8,14 @@ require('dotenv').config();
 
 const port = process.env.PORT || 5000;
 const mongoString =
-  process.env.MONGODB_STRING || 'mongodb://localhost/jwt-test';
+  process.env.MONGODB_STRING || 'mongodb://localhost/social-media-app';
 
 mongoose
   .connect(mongoString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log('connected to MongoDB');

@@ -39,6 +39,7 @@ const customRender = (ui, { isAuth, ...options } = {}) => {
       </BrowserRouter>
     );
   };
+
   render(ui, { wrapper: AllTheProviders, ...options });
 };
 
