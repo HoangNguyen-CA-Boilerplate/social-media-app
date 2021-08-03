@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { tokenConfig } from '../utils';
 
 export const initialState = {
   loginStatus: 'idle', // idle | loading | success | fail
@@ -8,6 +9,7 @@ export const initialState = {
   signupError: '',
   isAuth: false,
   user: null,
+  token: localStorage.getItem('token'),
 };
 
 const defaultError = 'something went wrong';
@@ -17,7 +19,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const res = await axios.post('/api/users/login', { email, password });
-      return res.data.user;
+      return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
       return rejectWithValue(defaultError);
@@ -30,10 +32,22 @@ export const signup = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const res = await axios.post('/api/users/register', { email, password });
-      return res.data.user;
+      return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
       return rejectWithValue(defaultError);
+    }
+  }
+);
+
+export const loadUser = createAsyncThunk(
+  'auth/loadUser',
+  async (arg, { rejectWithValue, getState }) => {
+    try {
+      const res = await axios.get('/api/users/', tokenConfig(getState));
+      return res.data.user;
+    } catch (e) {
+      return rejectWithValue(e.response.data.error);
     }
   }
 );
@@ -50,6 +64,11 @@ const authSlice = createSlice({
     },
   },
   extraReducers: {
+    [loadUser.fulfilled]: (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload;
+    },
+
     [login.pending]: (state) => {
       state.loginStatus = 'loading';
       state.loginError = '';
@@ -61,12 +80,16 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loginStatus = 'success';
       state.isAuth = true;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      localStorage.setItem('token', action.payload.token);
     },
     [signup.fulfilled]: (state, action) => {
       state.signupStatus = 'success';
       state.isAuth = true;
       state.user = action.payload;
+      state.token = action.payload.token;
+      localStorage.setItem('token', action.payload.token);
     },
     [login.rejected]: (state, action) => {
       state.loginStatus = 'fail';

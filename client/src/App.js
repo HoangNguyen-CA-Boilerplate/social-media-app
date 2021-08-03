@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { loadUser } from './store/slices/authSlice';
 
 import Signup from './auth/Signup';
 import Login from './auth/Login';
@@ -8,7 +10,12 @@ import Home from './home/Home';
 import Layout from './components/Layout';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(loadUser());
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
   return (
     <Switch>
       <Route exact path='/login'>
