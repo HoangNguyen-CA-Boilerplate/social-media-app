@@ -26,8 +26,8 @@ describe('App', () => {
 
   it('Routing to home works correctly', () => {
     window.history.pushState({}, 'Home Page', '/home');
-    render(<App />);
-    expect(screen.getByText(/Home/i)).toBeInTheDocument();
+    render(<App />, { isAuth: true });
+    expect(screen.getByTestId('Home')).toBeInTheDocument();
   });
 
   it('Login workflow', async () => {
@@ -45,8 +45,6 @@ describe('App', () => {
 
     const logoutBtn = await screen.findByRole('button', { name: /Logout/i }); // test login success
     expect(logoutBtn).toBeInTheDocument();
-
-    userEvent.click(logoutBtn);
   });
 
   it('Signup workflow', async () => {
@@ -64,7 +62,5 @@ describe('App', () => {
 
     const logoutBtn = await screen.findByRole('button', { name: /Logout/i }); // test signup success
     expect(logoutBtn).toBeInTheDocument();
-
-    userEvent.click(logoutBtn);
   });
 });

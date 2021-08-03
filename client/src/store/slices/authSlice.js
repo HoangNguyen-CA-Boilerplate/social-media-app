@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = {
+export const initialState = {
   loginStatus: 'idle', // idle | loading | success | fail
   signupStatus: 'idle',
   loginError: '',

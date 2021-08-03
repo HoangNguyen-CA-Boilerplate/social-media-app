@@ -1,4 +1,6 @@
-export const mockLogin = (req, res, ctx) => {
+import mockUser from '../mockUser';
+
+const resolveLogin = (req, res, ctx) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res(
@@ -12,8 +14,10 @@ export const mockLogin = (req, res, ctx) => {
 
   return res(
     ctx.json({
-      user: { _id: '12345', email: 'bob@gmail.com' },
+      user: mockUser,
       token: 'Bearer 12345',
     })
   );
 };
+
+export default resolveLogin;

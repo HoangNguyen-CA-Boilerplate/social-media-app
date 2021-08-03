@@ -1,8 +1,8 @@
 import { rest } from 'msw';
-import { mockLogin } from './resolvers/mockLogin';
+import resolveLogin from './resolvers/resolveLogin';
 
 export const handlers = [
-  rest.post('http://localhost/api/users/login', mockLogin),
+  rest.post('http://localhost/api/users/login', resolveLogin),
 
-  rest.post('http://localhost/api/users/register', mockLogin),
+  rest.post('http://localhost/api/users/register', resolveLogin),
 ];
