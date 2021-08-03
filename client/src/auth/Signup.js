@@ -17,13 +17,22 @@ function Signup() {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data) => {
-    dispatch(signup({ email: data.email, password: data.password }));
+    dispatch(
+      signup({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      })
+    );
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} data-testid='Signup'>
       {isAuth && <Redirect to='/home' />}
-
+      <Label>
+        Username:
+        <Input {...register('username')}></Input>
+      </Label>
       <Label>
         Email:
         <Input {...register('email')}></Input>
