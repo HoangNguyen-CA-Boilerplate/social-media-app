@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const initialState = {
   loginStatus: 'idle', // idle | loading | success | fail
-  registerStatus: 'idle',
+  signupStatus: 'idle',
   loginError: '',
-  registerError: '',
+  signupError: '',
   isAuth: false,
   user: null,
 };
@@ -25,8 +25,8 @@ export const login = createAsyncThunk(
   }
 );
 
-export const register = createAsyncThunk(
-  'auth/register',
+export const signup = createAsyncThunk(
+  'auth/signup',
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const res = await axios.post('/api/users/register', { email, password });
@@ -41,23 +41,30 @@ export const register = createAsyncThunk(
 const authSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.isAuth = false;
+      state.user = null;
+      state.loginStatus = 'idle';
+      state.signupStatus = 'idle';
+    },
+  },
   extraReducers: {
     [login.pending]: (state) => {
       state.loginStatus = 'loading';
       state.loginError = '';
     },
-    [register.pending]: (state) => {
-      state.registerStatus = 'loading';
-      state.registerError = '';
+    [signup.pending]: (state) => {
+      state.signupStatus = 'loading';
+      state.signupError = '';
     },
     [login.fulfilled]: (state, action) => {
       state.loginStatus = 'success';
       state.isAuth = true;
       state.user = action.payload;
     },
-    [register.fulfilled]: (state, action) => {
-      state.registerStatus = 'success';
+    [signup.fulfilled]: (state, action) => {
+      state.signupStatus = 'success';
       state.isAuth = true;
       state.user = action.payload;
     },
@@ -67,41 +74,15 @@ const authSlice = createSlice({
       state.loginError = action.payload;
     },
 
-    [register.rejected]: (state, action) => {
-      state.registerStatus = 'fail';
+    [signup.rejected]: (state, action) => {
+      state.signupStatus = 'fail';
       state.isAuth = false;
-      state.registerError = action.payload;
+      state.signupError = action.payload;
     },
   },
 });
 
-// export const login = (email, password) => async (dispatch) => {
-//   dispatch(loginRequest());
-//   try {
-//     const res = await axios.post('/api/users/login', { email, password });
-//     dispatch(loginSuccess(res.data.user));
-//   } catch (e) {
-//     if (e.response) {
-//       dispatch(loginFail(e.response.data.error));
-//     } else {
-//       dispatch(loginFail());
-//     }
-//   }
-// };
-
-// export const register = (email, password) => async (dispatch) => {
-//   dispatch(registerRequest());
-//   try {
-//     const res = await axios.post('/api/users/register', { email, password });
-//     dispatch(registerSuccess(res.data.user));
-//   } catch (e) {
-//     if (e.response) {
-//       dispatch(registerFail(e.response.data.error));
-//     } else {
-//       dispatch(registerFail());
-//     }
-//   }
-// };
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
 

@@ -8,23 +8,20 @@ import Input from '../components/form/Input';
 import Label from '../components/form/Label';
 import Button from '../components/Button';
 
-import {
-  register as registerUser,
-  selectIsAuth,
-} from '../store/slices/authSlice';
+import { signup, selectIsAuth } from '../store/slices/authSlice';
 
-function Register() {
+function Signup() {
   const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data) => {
-    dispatch(registerUser({ email: data.email, password: data.password }));
+    dispatch(signup({ email: data.email, password: data.password }));
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} data-testid='Register'>
+    <Form onSubmit={handleSubmit(onSubmit)} data-testid='Signup'>
       {isAuth && <Redirect to='/home' />}
 
       <Label>
@@ -40,4 +37,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Signup;
