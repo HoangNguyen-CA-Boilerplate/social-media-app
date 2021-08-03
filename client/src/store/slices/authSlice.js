@@ -61,6 +61,9 @@ const authSlice = createSlice({
       state.user = null;
       state.loginStatus = 'idle';
       state.signupStatus = 'idle';
+      state.token = null;
+
+      localStorage.removeItem('token');
     },
   },
   extraReducers: {

@@ -5,4 +5,10 @@ export const handlers = [
   rest.post('http://localhost/api/users/login', resolveLogin),
 
   rest.post('http://localhost/api/users/register', resolveLogin),
+  rest.get('http://localhost/api/users/', (req, res, ctx) => {
+    return res(
+      ctx.status(400),
+      ctx.json({ status: 400, error: 'test failed' })
+    );
+  }),
 ];
