@@ -38,6 +38,7 @@ function Login() {
           label='Email:'
           error={errors.email?.message}
           inputProps={{
+            error: errors.email?.message,
             type: 'email',
             ...register('email', {
               required: 'email is required',
@@ -53,6 +54,7 @@ function Login() {
           label='Password:'
           error={errors.password?.message}
           inputProps={{
+            error: errors.password?.message,
             type: 'password',
             ...register('password', {
               required: 'password is required',

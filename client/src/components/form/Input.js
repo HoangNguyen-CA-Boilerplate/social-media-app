@@ -9,10 +9,13 @@ const Input = styled.input.attrs((props) => ({
   font-size: 1rem;
   padding: 0.8em;
   outline: none;
-  border: 1px solid grey;
+  border: ${(props) =>
+    props.error
+      ? '2px solid ' + props.theme.clrs.danger
+      : '2px solid ' + props.theme.clrs.neutral[200]};
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.clrs.primary[500]};
+    border: 2px solid ${({ theme }) => theme.clrs.primary[500]};
   }
 `;
 
