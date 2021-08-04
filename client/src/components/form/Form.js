@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   & > * + * {
-    margin-top: 1em;
+    margin-top: 1.5em;
   }
 
-  max-width: 25rem;
+  width: 100%;
 `;
 
 export default Form;

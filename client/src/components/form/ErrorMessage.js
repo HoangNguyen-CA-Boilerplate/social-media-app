@@ -5,6 +5,7 @@ const ErrorMessage = styled.small.attrs({
 })`
   display: block;
   color: ${({ theme }) => theme.clrs.danger};
+  text-transform: capitalize;
 `;
 
 export default ErrorMessage;
