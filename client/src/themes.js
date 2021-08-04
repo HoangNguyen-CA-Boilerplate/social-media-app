@@ -7,6 +7,7 @@ const theme1 = {
     neutral: {
       100: '#FFFFFF',
     },
+    danger: '#F22613',
   },
 };
 

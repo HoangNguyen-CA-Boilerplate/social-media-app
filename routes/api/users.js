@@ -12,7 +12,7 @@ const router = express.Router();
 router.post(
   '/register',
   body('username')
-    .matches(/^[a-zA-Z0-9-_]+$/)
+    .matches(/^[a-zA-Z0-9_]+$/)
     .withMessage('username is not valid')
     .isLength({ min: 4, max: 15 })
     .withMessage('username must be 4 to 15 characters long'),

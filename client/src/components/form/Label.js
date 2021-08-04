@@ -6,7 +6,7 @@ const Label = styled.label`
 
   font-size: 1rem;
 
-  & > input {
+  & > * {
     margin-top: 0.2em;
   }
 `;
