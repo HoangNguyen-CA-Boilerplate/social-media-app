@@ -9,7 +9,7 @@ function FormGroup({ label, error, inputProps }) {
       <Label>
         {label}
         <Input {...inputProps}></Input>
-        <ErrorMessage>{error}</ErrorMessage>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </Label>
     </>
   );

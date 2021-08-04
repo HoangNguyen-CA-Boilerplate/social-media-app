@@ -55,6 +55,7 @@ describe('App', () => {
 
     expect(screen.getByTestId('Signup')).toBeInTheDocument(); // test signup error
 
+    userEvent.type(screen.getByLabelText(/Username:/i), 'bobob');
     userEvent.type(screen.getByLabelText(/Email:/i), 'bob@gmail.com');
     userEvent.type(screen.getByLabelText(/Password:/i), 'bobob');
 

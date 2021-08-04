@@ -32,7 +32,13 @@ function Login() {
         error={errors.email?.message}
         inputProps={{
           type: 'email',
-          ...register('email', { required: 'email is required' }),
+          ...register('email', {
+            required: 'email is required',
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'email is invalid',
+            },
+          }),
         }}
       />
 

@@ -8,13 +8,23 @@ describe('auth/Login', () => {
     const emailInput = screen.getByLabelText(/Email:/i);
     const passwordInput = screen.getByLabelText(/Password:/i);
     const submitBtn = screen.getByRole('button', { name: /Submit/i });
+
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(submitBtn).toBeInTheDocument();
 
-    userEvent.type(emailInput, 'bob@gmail.com');
-    userEvent.type(passwordInput, 'bobob');
-    expect(emailInput).toHaveValue('bob@gmail.com');
-    expect(passwordInput).toHaveValue('bobob');
+    userEvent.type(emailInput, 'email@gmail.com');
+    userEvent.type(passwordInput, 'password');
+    expect(emailInput).toHaveValue('email@gmail.com');
+    expect(passwordInput).toHaveValue('password');
+  });
+
+  it('Should display error if fields are empty', async () => {
+    render(<Login />);
+    const submitBtn = screen.getByRole('button', { name: /Submit/i });
+
+    userEvent.click(submitBtn);
+
+    expect(await screen.findAllByRole('alert')).toHaveLength(2);
   });
 });
