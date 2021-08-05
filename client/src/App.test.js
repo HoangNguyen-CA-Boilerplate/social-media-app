@@ -12,51 +12,57 @@ describe('App', () => {
     render(<App />);
 
     userEvent.click(screen.getByRole('button', { name: /Log In/i }));
-    expect(screen.getByTestId('Login')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Log in/i })
+    ).toBeInTheDocument();
   });
 
   it('Routing to signup works correctly', () => {
     render(<App />);
 
     userEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
-    expect(screen.getByTestId('Signup')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Sign up/i })
+    ).toBeInTheDocument();
   });
 
   it('Routing to home works correctly', () => {
     render(<App />, { isAuth: true, route: '/home' });
-    expect(screen.getByTestId('Home')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Home/i })).toBeInTheDocument();
   });
 
   it('Login workflow', async () => {
     render(<App />, { route: '/login' });
-
-    userEvent.click(screen.getByRole('button', { name: /Submit/i }));
-
-    expect(screen.getByTestId('Login')).toBeInTheDocument(); // test login error
+    const submitBtn = screen.getByRole('button', { name: /Submit/i });
+    expect(submitBtn).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Log in/i })
+    ).toBeInTheDocument();
 
     userEvent.type(screen.getByLabelText(/Email:/i), 'bob@gmail.com');
     userEvent.type(screen.getByLabelText(/Password:/i), 'bobob');
+    userEvent.click(submitBtn);
 
-    userEvent.click(screen.getByRole('button', { name: /Submit/i }));
-
-    const logoutBtn = await screen.findByRole('button', { name: /Logout/i }); // test login success
-    expect(logoutBtn).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: /Home/i })
+    ).toBeInTheDocument();
   });
 
   it('Signup workflow', async () => {
     render(<App />, { route: '/signup' });
-
-    userEvent.click(screen.getByRole('button', { name: /Submit/i }));
-
-    expect(screen.getByTestId('Signup')).toBeInTheDocument(); // test signup error
+    const submitBtn = screen.getByRole('button', { name: /Submit/i });
+    expect(submitBtn).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Sign up/i })
+    ).toBeInTheDocument();
 
     userEvent.type(screen.getByLabelText(/Username:/i), 'bobob');
     userEvent.type(screen.getByLabelText(/Email:/i), 'bob@gmail.com');
     userEvent.type(screen.getByLabelText(/Password:/i), 'bobob');
-
     userEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
-    const logoutBtn = await screen.findByRole('button', { name: /Logout/i }); // test signup success
-    expect(logoutBtn).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: /Home/i })
+    ).toBeInTheDocument();
   });
 });

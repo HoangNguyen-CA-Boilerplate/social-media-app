@@ -31,7 +31,7 @@ function Login() {
 
   return (
     <AuthLayout header='Log in' error={loginError}>
-      <Form onSubmit={handleSubmit(onSubmit)} data-testid='Login'>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         {isAuth && <Redirect to='/home' />}
 
         <FormGroup

@@ -37,7 +37,7 @@ function Signup() {
 
   return (
     <AuthLayout header='Sign up' error={signupError}>
-      <Form onSubmit={handleSubmit(onSubmit)} data-testid='Signup'>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         {isAuth && <Redirect to='/home' />}
 
         <FormGroup
