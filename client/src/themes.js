@@ -14,7 +14,7 @@ const theme1 = {
   },
 
   padding: {
-    button: '0.6em',
+    button: '0.9em',
   },
 };
 

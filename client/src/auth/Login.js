@@ -66,7 +66,9 @@ function Login() {
           }}
         />
 
-        <Button submit>Submit</Button>
+        <Button $fill submit>
+          Submit
+        </Button>
       </Form>
     </AuthLayout>
   );

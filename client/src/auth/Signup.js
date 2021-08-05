@@ -94,7 +94,9 @@ function Signup() {
           }}
         />
 
-        <Button submit>Submit</Button>
+        <Button $fill submit>
+          Submit
+        </Button>
       </Form>
     </AuthLayout>
   );

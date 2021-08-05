@@ -14,7 +14,7 @@ const Button = styled.button.attrs((props) => ({
   outline: none;
   border: 1px solid transparent;
 
-  width: ${(props) => (props.submit ? '100%' : 'auto')};
+  width: ${(props) => (props.$fill ? '100%' : 'auto')};
   padding: ${({ theme }) => theme.padding.button};
 
   cursor: pointer;

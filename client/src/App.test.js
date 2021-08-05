@@ -5,7 +5,9 @@ import userEvent from '@testing-library/user-event';
 describe('App', () => {
   it('Renders correctly', () => {
     render(<App />);
-    expect(screen.getByTestId('AuthScreen')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Join twitter today/i })
+    ).toBeInTheDocument();
   });
 
   it('Routing to login works correctly', () => {
@@ -59,7 +61,7 @@ describe('App', () => {
     userEvent.type(screen.getByLabelText(/Username:/i), 'bobob');
     userEvent.type(screen.getByLabelText(/Email:/i), 'bob@gmail.com');
     userEvent.type(screen.getByLabelText(/Password:/i), 'bobob');
-    userEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    userEvent.click(submitBtn);
 
     expect(
       await screen.findByRole('heading', { name: /Home/i })
