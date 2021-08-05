@@ -5,6 +5,7 @@ const Button = styled.button.attrs((props) => ({
 }))`
   font-size: 1rem;
   font-weight: 600;
+  border-radius: 1000px;
   display: block;
 
   background-color: ${({ theme }) => theme.clrs.primary[500]};
@@ -14,7 +15,7 @@ const Button = styled.button.attrs((props) => ({
   border: 1px solid transparent;
 
   width: ${(props) => (props.submit ? '100%' : 'auto')};
-  padding: 0.7em 1em;
+  padding: ${({ theme }) => theme.padding.button};
 
   cursor: pointer;
   transition: 0.1s ease-out;

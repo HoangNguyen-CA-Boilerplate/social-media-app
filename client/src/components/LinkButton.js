@@ -8,6 +8,7 @@ function LinkButton({ to, children, ...otherProps }) {
   const handleTo = () => {
     history.push(to);
   };
+
   return (
     <Button onClick={handleTo} {...otherProps}>
       {children}

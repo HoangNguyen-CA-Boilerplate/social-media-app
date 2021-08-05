@@ -29,6 +29,11 @@ function App() {
           <Home />
         </Layout>
       </Route>
+      <Route exact path='/profile'>
+        <Layout>
+          <h1>Profile</h1>
+        </Layout>
+      </Route>
       <Route exact path='/'>
         <AuthScreen />
       </Route>
