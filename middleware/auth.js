@@ -24,10 +24,13 @@ const isAuth = wrapAsync(async (req, res, next) => {
 
   const userId = tokenPayload.sub;
   const user = await User.findById(userId);
+  if (!user)
+    throw new AppError(401, 'user with associated token does not exist');
 
   req.user = user; // attach user to request object
   next();
 });
+
 module.exports = {
   isAuth,
 };

@@ -21,8 +21,6 @@ describe('App', () => {
         screen.getByRole('heading', { name: /Sign up/i })
       ).toBeInTheDocument();
     });
-
-    it('Routing to profile', () => {});
   });
 
   describe('App workflows', () => {

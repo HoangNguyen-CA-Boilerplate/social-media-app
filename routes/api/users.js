@@ -41,10 +41,10 @@ router.post(
     });
     const savedUser = await newUser.save();
 
-    savedUser.password = undefined; // !important
+    savedUser.password = undefined; // important
 
     const jwt = issueJWT(savedUser);
-    res.json({ user: savedUser, token: jwt });
+    res.status(201).json({ user: savedUser, token: jwt });
   })
 );
 
@@ -67,16 +67,26 @@ router.post(
     const isValid = await foundUser.verifyPassword(password);
     if (!isValid) throw new AppError(401, 'incorrect password');
 
-    foundUser.password = undefined; // !important
+    foundUser.password = undefined; // important
 
     const jwt = issueJWT(foundUser);
-    res.json({ user: foundUser, token: jwt });
+    res.status(200).json({ user: foundUser, token: jwt });
   })
 );
 
 //protected route
 router.get('/', isAuth, (req, res) => {
-  res.send(req.user);
+  res.status(200).json(req.user);
 });
+
+router.delete(
+  '/',
+  isAuth,
+  wrapAsync(async (req, res) => {
+    const deletedUser = await User.findByIdAndDelete(req.user._id);
+    deletedUser.password = undefined; // important
+    res.status(200).json(deletedUser);
+  })
+);
 
 module.exports = router;
