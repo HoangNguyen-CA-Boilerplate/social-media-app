@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('App', () => {
   describe('App Routing', () => {
-    it('Routing to login works correctly', () => {
+    it('Routing to login', () => {
       render(<App />);
 
       userEvent.click(screen.getByRole('button', { name: /Log In/i }));
@@ -13,7 +13,7 @@ describe('App', () => {
       ).toBeInTheDocument();
     });
 
-    it('Routing to signup works correctly', () => {
+    it('Routing to signup', () => {
       render(<App />);
 
       userEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
@@ -21,7 +21,10 @@ describe('App', () => {
         screen.getByRole('heading', { name: /Sign up/i })
       ).toBeInTheDocument();
     });
+
+    it('Routing to profile', () => {});
   });
+
   describe('App workflows', () => {
     it('Login workflow', async () => {
       render(<App />, { route: '/login' });

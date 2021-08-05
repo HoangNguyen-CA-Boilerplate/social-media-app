@@ -1,23 +1,21 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 import { theme1 } from './themes';
 
-import { Provider } from 'react-redux';
-import authReducer from './store/slices/authSlice';
 import { configureStore } from '@reduxjs/toolkit';
-
-import { initialState } from './store/slices/authSlice';
+import { Provider } from 'react-redux';
+import authReducer, { initialState } from './store/slices/authSlice';
 import mockUser from './mocks/mockUser';
-
-import { BrowserRouter } from 'react-router-dom';
 
 const authState = {
   auth: {
     ...initialState,
     isAuth: true,
     user: mockUser,
+    token: 'Bearer token',
   },
 };
 

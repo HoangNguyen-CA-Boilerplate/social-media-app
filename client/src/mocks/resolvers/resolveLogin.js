@@ -15,7 +15,7 @@ const resolveLogin = (req, res, ctx) => {
   return res(
     ctx.json({
       user: mockUser,
-      token: 'Bearer 12345',
+      token: 'Bearer token',
     })
   );
 };
