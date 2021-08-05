@@ -5,16 +5,12 @@ import Form from '../components/form/Form';
 import FormGroup from '../components/form/FormGroup';
 import Button from '../components/Button';
 
-function LoginForm({ submit }) {
+function LoginForm({ onSubmit }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
-
-  const onSubmit = (data) => {
-    submit(data);
-  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} name='Log in'>

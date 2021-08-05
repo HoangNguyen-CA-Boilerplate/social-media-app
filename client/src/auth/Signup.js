@@ -29,7 +29,7 @@ function Signup() {
   return (
     <AuthLayout header='Sign up' error={error}>
       {isAuth && <Redirect to='/home' />}
-      <SignupForm submit={handleSubmit} />
+      <SignupForm onSubmit={handleSubmit} />
     </AuthLayout>
   );
 }

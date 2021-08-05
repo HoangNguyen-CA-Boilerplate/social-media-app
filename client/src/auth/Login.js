@@ -23,7 +23,7 @@ function Login() {
   return (
     <AuthLayout header='Log In' error={error}>
       {isAuth && <Redirect to='/home' />}
-      <LoginForm submit={handleSubmit} />
+      <LoginForm onSubmit={handleSubmit} />
     </AuthLayout>
   );
 }

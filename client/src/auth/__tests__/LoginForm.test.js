@@ -1,16 +1,18 @@
 import { render, screen } from '../../test-utils';
 import LoginForm from '../LoginForm';
 import userEvent from '@testing-library/user-event';
-import { waitFor } from '@testing-library/react';
+import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 describe('auth/Login', () => {
   let submitBtn;
   let emailInput;
   let passwordInput;
   let form;
+  let mockSubmit;
 
   beforeEach(() => {
-    render(<LoginForm />);
+    mockSubmit = jest.fn();
+    render(<LoginForm onSubmit={mockSubmit} />);
     submitBtn = screen.getByRole('button', { name: /Submit/i });
     emailInput = screen.getByLabelText(/Email:/i);
     passwordInput = screen.getByLabelText(/Password:/i);
@@ -23,9 +25,6 @@ describe('auth/Login', () => {
   });
 
   it('Should display error if email is invalid', async () => {
-    const mockFunc = jest.fn();
-    submitBtn.onclick = mockFunc;
-
     userEvent.type(emailInput, 'bob');
     userEvent.type(passwordInput, 'bobob');
 
@@ -33,17 +32,14 @@ describe('auth/Login', () => {
     expect(passwordInput).toHaveValue('bobob');
 
     userEvent.click(submitBtn);
-    expect(mockFunc).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalledTimes(0);
       expect(screen.getByRole('alert')).toHaveTextContent(/email/i);
     });
   });
 
   it('Should display error if password is invalid', async () => {
-    const mockFunc = jest.fn();
-    submitBtn.onclick = mockFunc;
-
     userEvent.type(emailInput, 'bob@gmail.com');
     userEvent.type(passwordInput, 'bob');
 
@@ -51,14 +47,13 @@ describe('auth/Login', () => {
     expect(passwordInput).toHaveValue('bob');
 
     userEvent.click(submitBtn);
-    expect(mockFunc).toHaveBeenCalledTimes(1);
     await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalledTimes(0);
       expect(screen.getByRole('alert')).toHaveTextContent(/password/i);
     });
   });
 
   it('Should be submit form if fields are valid', async () => {
-    const mockFunc = jest.fn();
     form.onsubmit = null;
 
     userEvent.type(emailInput, 'bob@gmail.com');
@@ -67,8 +62,10 @@ describe('auth/Login', () => {
     expect(emailInput).toHaveValue('bob@gmail.com');
     expect(passwordInput).toHaveValue('bobob');
 
-    //userEvent.click(submitBtn);
-    //await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
-    // expect(screen.queryAllByRole('alert')).toHaveLength(0);
+    userEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalledTimes(1);
+    });
   });
 });
