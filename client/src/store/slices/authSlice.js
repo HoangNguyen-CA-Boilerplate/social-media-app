@@ -75,7 +75,9 @@ const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload;
     },
-
+    [loadUser.rejected]: () => {
+      localStorage.removeItem('token');
+    },
     [login.pending]: (state) => {
       state.loginStatus = 'loading';
       state.loginError = '';

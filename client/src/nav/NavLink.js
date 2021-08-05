@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const linkStyles = css`
   width: max-content;
-  padding: ${({ theme }) => theme.padding.button};
+  padding: ${({ theme }) => theme.padding.navLink};
   border-radius: 1000px;
   color: ${(props) =>
     props.$active
@@ -15,12 +15,13 @@ const linkStyles = css`
 
   cursor: pointer;
 
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-decoration: none;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   & > * + * {
     margin-left: 0.5em;
@@ -65,7 +66,7 @@ function NavLink({ to, icon, children, ...props }) {
     linkElement = (
       <StyledLink to={to} {...props} $active={getActive()}>
         {icon}
-        <NavText>{children}</NavText>
+        {children && <NavText>{children}&nbsp;&nbsp;</NavText>}
       </StyledLink>
     );
   }

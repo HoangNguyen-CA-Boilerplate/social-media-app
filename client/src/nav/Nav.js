@@ -6,10 +6,9 @@ import { Redirect } from 'react-router';
 import { selectIsAuth } from '../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaRegUser } from 'react-icons/fa';
+import { FaRegUser, FaTwitter } from 'react-icons/fa';
 
 import NavLink from './NavLink';
-import Button from '../components/Button';
 
 const Container = styled.div`
   display: flex;
@@ -23,12 +22,17 @@ const Container = styled.div`
   }
 `;
 
+const Logo = styled(FaTwitter)`
+  color: ${({ theme }) => theme.clrs.primary[500]};
+`;
+
 function Nav() {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   return (
     <Container>
       {!isAuth && <Redirect to='/' />}
+      <NavLink icon={<Logo />} to='/home' />
       <NavLink icon={<AiOutlineHome />} to='/home'>
         Home
       </NavLink>

@@ -3,12 +3,6 @@ import App from './App';
 import userEvent from '@testing-library/user-event';
 
 describe('App', () => {
-  it('Renders correctly', () => {
-    render(<App />);
-    expect(
-      screen.getByRole('heading', { name: /Join twitter today/i })
-    ).toBeInTheDocument();
-  });
   describe('App Routing', () => {
     it('Routing to login works correctly', () => {
       render(<App />);

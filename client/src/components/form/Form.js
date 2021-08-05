@@ -6,10 +6,6 @@ const Form = styled.form`
   }
 
   width: 100%;
-
-  & > button {
-    font-size: 1.2rem;
-  }
 `;
 
 export default Form;
