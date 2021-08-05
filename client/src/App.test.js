@@ -9,7 +9,6 @@ describe('App', () => {
   });
 
   it('Routing to login works correctly', () => {
-    window.history.pushState({}, 'AuthScreen', '/');
     render(<App />);
 
     userEvent.click(screen.getByRole('button', { name: /Log In/i }));
@@ -17,7 +16,6 @@ describe('App', () => {
   });
 
   it('Routing to signup works correctly', () => {
-    window.history.pushState({}, 'AuthScreen', '/');
     render(<App />);
 
     userEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
@@ -25,14 +23,12 @@ describe('App', () => {
   });
 
   it('Routing to home works correctly', () => {
-    window.history.pushState({}, 'Home Page', '/home');
-    render(<App />, { isAuth: true });
+    render(<App />, { isAuth: true, route: '/home' });
     expect(screen.getByTestId('Home')).toBeInTheDocument();
   });
 
   it('Login workflow', async () => {
-    window.history.pushState({}, 'Login Page', '/login');
-    render(<App />);
+    render(<App />, { route: '/login' });
 
     userEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
@@ -48,8 +44,7 @@ describe('App', () => {
   });
 
   it('Signup workflow', async () => {
-    window.history.pushState({}, 'Signup Page', '/signup');
-    render(<App />);
+    render(<App />, { route: '/signup' });
 
     userEvent.click(screen.getByRole('button', { name: /Submit/i }));
 

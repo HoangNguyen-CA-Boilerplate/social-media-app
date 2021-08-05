@@ -21,7 +21,7 @@ const authState = {
   },
 };
 
-const customRender = (ui, { isAuth, ...options } = {}) => {
+const customRender = (ui, { isAuth, route = '/', ...options } = {}) => {
   let preloadedState = {};
   if (isAuth) preloadedState = authState;
 
@@ -40,6 +40,7 @@ const customRender = (ui, { isAuth, ...options } = {}) => {
     );
   };
 
+  window.history.pushState({}, 'Test Screen', route);
   render(ui, { wrapper: AllTheProviders, ...options });
 };
 
