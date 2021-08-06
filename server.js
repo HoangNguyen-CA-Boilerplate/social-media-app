@@ -28,6 +28,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
