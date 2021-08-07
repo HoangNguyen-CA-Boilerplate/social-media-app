@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPosts, selectPosts } from '../store/slices/postSlice';
+import Post from '../components/post/Post';
 
 function Home() {
   const dispatch = useDispatch();
@@ -14,9 +15,7 @@ function Home() {
     <div>
       <h1>Home</h1>
       {posts.map(({ title, text }) => (
-        <h1>
-          {title} {text}
-        </h1>
+        <Post title={title} text={text} />
       ))}
     </div>
   );
