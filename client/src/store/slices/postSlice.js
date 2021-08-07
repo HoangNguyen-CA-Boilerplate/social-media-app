@@ -75,3 +75,4 @@ const postSlice = createSlice({
 export default postSlice.reducer;
 
 export const selectPosts = (state) => state.post.posts;
+export const selectGetPostsStatus = (state) => state.post.getPostsStatus;

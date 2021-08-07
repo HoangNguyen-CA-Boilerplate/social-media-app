@@ -18,6 +18,16 @@ router.get(
   })
 );
 
+router.get(
+  '/:id',
+  wrapAsync(async (req, res) => {
+    const { id } = req.params;
+
+    const post = await Post.findById(id);
+    res.status(200).json(post);
+  })
+);
+
 router.post(
   '/',
   isAuth,

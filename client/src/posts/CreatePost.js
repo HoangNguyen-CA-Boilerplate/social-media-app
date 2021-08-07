@@ -1,45 +1,23 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import FormGroup from '../components/form/FormGroup';
-import Form from '../components/form/Form';
-import Button from '../components/Button';
+import styled from 'styled-components';
+import CreatePostForm from './CreatePostForm';
+import { useDispatch } from 'react-redux';
+import { createPost } from '../store/slices/postSlice';
+
+const Container = styled.div`
+  padding: ${({ theme }) => theme.padding.main};
+`;
 
 function CreatePost() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: 'onBlur' });
-
-  const onSubmit = () => {};
+  const dispatch = useDispatch();
+  const onSubmit = (data) => {
+    dispatch(createPost({ title: data.title, text: data.text }));
+  };
 
   return (
-    <Form name='Create Post' onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup
-        label='Title:'
-        error={errors.title?.message}
-        inputProps={{
-          error: errors.title?.message,
-          type: 'title',
-          ...register('title', {
-            required: 'title is required',
-          }),
-        }}
-      ></FormGroup>
-      <FormGroup
-        label='Text:'
-        error={errors.text?.message}
-        inputProps={{
-          error: errors.text?.message,
-          type: 'text',
-          ...register('text', {
-            required: 'text is required',
-          }),
-        }}
-      ></FormGroup>
-
-      <Button submit>Submit</Button>
-    </Form>
+    <Container>
+      <CreatePostForm onSubmit={onSubmit} />;
+    </Container>
   );
 }
 

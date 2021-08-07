@@ -6,7 +6,7 @@ import { Redirect } from 'react-router';
 import { selectIsAuth } from '../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaRegUser } from 'react-icons/fa';
+import { FaRegUser, FaPencilRuler } from 'react-icons/fa';
 import { BrandIcon } from '../brand';
 
 import NavLink from './NavLink';
@@ -17,7 +17,6 @@ const Container = styled.div`
   width: max-content;
 
   padding: 0 1em;
-  border-right: 1px solid ${({ theme }) => theme.clrs.neutral[200]};
   min-height: 100vh;
   & > * + * {
     margin-top: 0.5em;
@@ -40,6 +39,12 @@ function Nav() {
       </NavLink>
       <NavLink icon={<FaRegUser />} to='/profile'>
         Profile
+      </NavLink>
+      <NavLink icon={<FaRegUser />} to='/profile'>
+        Profile
+      </NavLink>
+      <NavLink icon={<FaPencilRuler />} to='/submit'>
+        Post
       </NavLink>
       <NavLink onClick={() => dispatch(logout())}> Logout</NavLink>
     </Container>
