@@ -7,7 +7,7 @@ export const initialState = {
   signupStatus: 'idle',
   loginError: '',
   signupError: '',
-  isAuth: false,
+  isAuth: null,
   user: null,
   token: localStorage.getItem('token'),
 };
@@ -75,7 +75,8 @@ const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload;
     },
-    [loadUser.rejected]: () => {
+    [loadUser.rejected]: (state) => {
+      state.isAuth = false;
       localStorage.removeItem('token');
     },
     [login.pending]: (state) => {

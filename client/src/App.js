@@ -1,43 +1,47 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loadUser } from './store/slices/authSlice';
 
 import Signup from './auth/Signup';
 import Login from './auth/Login';
 import AuthScreen from './auth/AuthScreen';
 import Home from './home/Home';
 import Layout from './components/Layout';
+import Landing from './auth/Landing';
+
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from './store/slices/authSlice';
 
 function App() {
-  const dispatch = useDispatch(loadUser());
-
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
+  const isAuth = useSelector(selectIsAuth);
 
   return (
-    <Switch>
-      <Route exact path='/login'>
-        <Login></Login>
-      </Route>
-      <Route exact path='/signup'>
-        <Signup></Signup>
-      </Route>
-      <Route exact path='/home'>
-        <Layout>
-          <Home />
-        </Layout>
-      </Route>
-      <Route exact path='/profile'>
-        <Layout>
-          <h1>Profile</h1>
-        </Layout>
-      </Route>
-      <Route exact path='/'>
-        <AuthScreen />
-      </Route>
-    </Switch>
+    <>
+      {isAuth === null ? (
+        <Landing />
+      ) : (
+        <Switch>
+          <Route exact path='/login'>
+            <Login></Login>
+          </Route>
+          <Route exact path='/signup'>
+            <Signup></Signup>
+          </Route>
+          <Route exact path='/home'>
+            <Layout>
+              <Home />
+            </Layout>
+          </Route>
+          <Route exact path='/profile'>
+            <Layout>
+              <h1>Profile</h1>
+            </Layout>
+          </Route>
+          <Route exact path='/'>
+            <AuthScreen />
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
 

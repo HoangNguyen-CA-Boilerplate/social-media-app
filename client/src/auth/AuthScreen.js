@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 import { selectIsAuth } from '../store/slices/authSlice';
 
-import { FaTwitter } from 'react-icons/fa';
+import { brandName, BrandIcon } from '../brand';
 
 const Container = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const SubHeader = styled.h2`
   margin-bottom: 1em;
 `;
 
-const Icon = styled(FaTwitter)`
+const Icon = styled(BrandIcon)`
   font-size: 3rem;
   color: ${({ theme }) => theme.clrs.primary[500]};
   margin-bottom: 1em;
@@ -65,7 +65,7 @@ function AuthScreen() {
         <ContentContainer>
           <Icon />
           <Header>Happening now</Header>
-          <SubHeader>Join Twitter today.</SubHeader>
+          <SubHeader>Join {brandName} today.</SubHeader>
           <LinkButton $fill to='/signup'>
             Sign Up
           </LinkButton>

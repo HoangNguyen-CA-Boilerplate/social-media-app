@@ -6,7 +6,8 @@ import { Redirect } from 'react-router';
 import { selectIsAuth } from '../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaRegUser, FaTwitter } from 'react-icons/fa';
+import { FaRegUser } from 'react-icons/fa';
+import { BrandIcon } from '../brand';
 
 import NavLink from './NavLink';
 
@@ -22,7 +23,7 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled(FaTwitter)`
+const Logo = styled(BrandIcon)`
   color: ${({ theme }) => theme.clrs.primary[500]};
 `;
 
