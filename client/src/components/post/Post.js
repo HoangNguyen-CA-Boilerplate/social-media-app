@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: ${({ theme }) => theme.padding.main};
+`;
 
 const Title = styled.h2``;
 const Text = styled.p``;

@@ -5,6 +5,7 @@ import Signup from './auth/Signup';
 import Login from './auth/Login';
 import AuthScreen from './auth/AuthScreen';
 import Home from './home/Home';
+import CreatePost from './posts/CreatePost';
 import Layout from './components/Layout';
 import Landing from './auth/Landing';
 
@@ -27,14 +28,17 @@ function App() {
             <Signup></Signup>
           </Route>
           <Route exact path='/home'>
-            <Layout>
+            <Layout header='Home'>
               <Home />
             </Layout>
           </Route>
-          <Route exact path='/profile'>
-            <Layout>
-              <h1>Profile</h1>
+          <Route exact path='/submit'>
+            <Layout header='Create Post'>
+              <CreatePost />
             </Layout>
+          </Route>
+          <Route exact path='/profile'>
+            <Layout header='Profile'></Layout>
           </Route>
           <Route exact path='/'>
             <AuthScreen />

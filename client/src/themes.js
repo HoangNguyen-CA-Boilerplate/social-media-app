@@ -16,6 +16,7 @@ const theme1 = {
   padding: {
     navLink: '0.6em',
     button: '0.9em',
+    main: '1em',
   },
 };
 

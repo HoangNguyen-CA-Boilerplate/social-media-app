@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import { getPosts, selectPosts } from '../store/slices/postSlice';
 import Post from '../components/post/Post';
 import Spinner from '../components/Spinner';
+import CreatePost from '../posts/CreatePost';
 
-const Container = styled.div`
-  width: 100%;
-`;
+const Container = styled.div``;
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,11 +18,9 @@ function Home() {
   }, [dispatch]);
   return (
     <Container>
-      <h1>Home</h1>
       {posts.map(({ title, text }) => (
         <Post title={title} text={text} />
       ))}
-      <Spinner />
     </Container>
   );
 }

@@ -17,7 +17,8 @@ const Container = styled.div`
   width: max-content;
 
   padding: 0 1em;
-
+  border-right: 1px solid ${({ theme }) => theme.clrs.neutral[200]};
+  min-height: 100vh;
   & > * + * {
     margin-top: 0.5em;
   }
