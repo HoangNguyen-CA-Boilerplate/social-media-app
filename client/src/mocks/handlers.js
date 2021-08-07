@@ -10,4 +10,8 @@ export const handlers = [
   rest.get('http://localhost/api/users/', (req, res, ctx) => {
     return res(ctx.status(400), ctx.json({ status: 400, error: 'test error' }));
   }),
+
+  rest.get('http://localhost/api/posts/', (req, res, ctx) => {
+    return res(ctx.status(400), ctx.json({ status: 400, error: 'test error' }));
+  }),
 ];

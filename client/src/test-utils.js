@@ -8,6 +8,7 @@ import { theme1 } from './themes';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import authReducer, { initialState } from './store/slices/authSlice';
+import postReducer from './store/slices/postSlice';
 import mockUser from './mocks/mockUser';
 
 const authState = {
@@ -24,7 +25,7 @@ const customRender = (ui, { isAuth, route = '/', ...options } = {}) => {
   if (isAuth) preloadedState = authState;
 
   const store = configureStore({
-    reducer: { auth: authReducer },
+    reducer: { auth: authReducer, post: postReducer },
     preloadedState,
   });
 

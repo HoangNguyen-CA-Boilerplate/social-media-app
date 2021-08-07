@@ -4,19 +4,19 @@ import userEvent from '@testing-library/user-event';
 
 describe('App', () => {
   describe('App Routing', () => {
-    it('Routing to login', () => {
+    it('Routing to login', async () => {
       render(<App />);
 
-      userEvent.click(screen.getByRole('button', { name: /Log In/i }));
+      userEvent.click(await screen.findByRole('button', { name: /Log In/i }));
       expect(
         screen.getByRole('heading', { name: /Log in/i })
       ).toBeInTheDocument();
     });
 
-    it('Routing to signup', () => {
+    it('Routing to signup', async () => {
       render(<App />);
 
-      userEvent.click(screen.getByRole('button', { name: /Sign Up/i }));
+      userEvent.click(await screen.findByRole('button', { name: /Sign Up/i }));
       expect(
         screen.getByRole('heading', { name: /Sign up/i })
       ).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe('App', () => {
   describe('App workflows', () => {
     it('Login workflow', async () => {
       render(<App />, { route: '/login' });
-      const submitBtn = screen.getByRole('button', { name: /Submit/i });
+      const submitBtn = await screen.findByRole('button', { name: /Submit/i });
       expect(
         screen.getByRole('heading', { name: /Log in/i })
       ).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('App', () => {
 
     it('Signup workflow', async () => {
       render(<App />, { route: '/signup' });
-      const submitBtn = screen.getByRole('button', { name: /Submit/i });
+      const submitBtn = await screen.findByRole('button', { name: /Submit/i });
       expect(
         screen.getByRole('heading', { name: /Sign up/i })
       ).toBeInTheDocument();
