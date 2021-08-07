@@ -23,7 +23,7 @@ const isAuth = wrapAsync(async (req, res, next) => {
   });
 
   const userId = tokenPayload.sub;
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).select('+email');
   if (!user)
     throw new AppError(401, 'user with associated token does not exist');
 

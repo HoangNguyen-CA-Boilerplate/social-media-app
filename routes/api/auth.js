@@ -59,7 +59,7 @@ router.post(
 
     const { email, password } = req.body;
 
-    let foundUser = await User.findOne({ email }).select('+password');
+    let foundUser = await User.findOne({ email }).select('+password +email');
     if (!foundUser)
       throw new AppError(400, 'user with the given email does not exist');
 

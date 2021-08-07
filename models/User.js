@@ -1,8 +1,18 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema(
+const userRef = {
+  type: Schema.Types.ObjectId,
+  ref: 'User',
+  required: true,
+};
+
+const userSchema = new Schema(
   {
+    profilePicture: {
+      type: String,
+    },
     username: {
       type: String,
       required: true,
@@ -16,12 +26,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      select: false,
     },
     password: {
       type: String,
       required: true,
       select: false,
     },
+    followers: [userRef],
+    followings: [userRef],
   },
   { timestamps: true }
 );
