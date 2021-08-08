@@ -31,8 +31,9 @@ function Nav() {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
+  console.log(user);
 
-  if (!isAuth || !user) return <Redirect to='/' />;
+  if (!isAuth) return <Redirect to='/' />;
 
   return (
     <Container>
