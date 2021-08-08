@@ -7,6 +7,7 @@ import AuthScreen from './auth/AuthScreen';
 import Home from './home/Home';
 import CreatePost from './posts/CreatePost';
 import Layout from './components/Layout';
+import Profile from './profile/Profile';
 import Landing from './auth/Landing';
 
 import { useSelector } from 'react-redux';
@@ -37,8 +38,8 @@ function App() {
               <CreatePost />
             </Layout>
           </Route>
-          <Route exact path='/profile'>
-            <Layout header='Profile'></Layout>
+          <Route exact path='/users/:username'>
+            <Profile />
           </Route>
           <Route exact path='/'>
             <AuthScreen />

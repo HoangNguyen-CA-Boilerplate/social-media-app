@@ -31,7 +31,6 @@ function Nav() {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
-  console.log(user);
 
   if (!isAuth) return <Redirect to='/' />;
 
@@ -41,7 +40,7 @@ function Nav() {
       <NavLink icon={<AiOutlineHome />} to='/home'>
         Home
       </NavLink>
-      <NavLink icon={<FaRegUser />} to='/profile'>
+      <NavLink icon={<FaRegUser />} to={`/users/${user.username}`}>
         Profile
       </NavLink>
       <NavLink icon={<FaPencilRuler />} to='/submit'>

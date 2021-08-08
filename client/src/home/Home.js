@@ -20,6 +20,7 @@ function Home() {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
   return (
     <Container>
       {getPostsStatus === 'loading' ? (

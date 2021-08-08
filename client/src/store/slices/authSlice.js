@@ -48,7 +48,7 @@ export const loadUser = createAsyncThunk(
   'auth/loadUser',
   async (arg, { rejectWithValue, getState }) => {
     try {
-      const res = await axios.get('/api/users/', tokenConfig(getState));
+      const res = await axios.get('/api/users', tokenConfig(getState));
       return res.data;
     } catch (e) {
       return rejectWithValue(e.response.data.error);

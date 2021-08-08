@@ -12,17 +12,6 @@ router.get('/', isAuth, (req, res) => {
   res.status(200).json(req.user);
 });
 
-router.get(
-  '/:username',
-  wrapAsync(async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({ username });
-    if (!user) throw new AppError(400, "user doesn't exist");
-
-    res.status(200).json(user);
-  })
-);
-
 router.delete(
   '/',
   isAuth,
@@ -31,6 +20,17 @@ router.delete(
     deletedUser.password = undefined; // important
     deletedUser.email = undefined;
     res.status(200).json(deletedUser);
+  })
+);
+
+router.get(
+  '/:username',
+  wrapAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (!user) throw new AppError(400, "user doesn't exist");
+
+    res.status(200).json(user);
   })
 );
 
