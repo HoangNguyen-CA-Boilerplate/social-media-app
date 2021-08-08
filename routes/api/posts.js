@@ -24,6 +24,7 @@ router.get(
     const { id } = req.params;
 
     const post = await Post.findById(id);
+    if (!post) throw new AppError(400, "post doesn't exist");
     res.status(200).json(post);
   })
 );

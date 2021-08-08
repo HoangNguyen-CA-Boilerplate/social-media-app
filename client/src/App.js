@@ -5,7 +5,8 @@ import Signup from './auth/Signup';
 import Login from './auth/Login';
 import AuthScreen from './auth/AuthScreen';
 import Home from './home/Home';
-import CreatePost from './posts/CreatePost';
+import CreatePost from './post/CreatePost';
+import FullPost from './post/FullPost';
 import Layout from './components/Layout';
 import Profile from './profile/Profile';
 import Landing from './auth/Landing';
@@ -36,6 +37,11 @@ function App() {
           <Route exact path='/submit'>
             <Layout header='Create Post'>
               <CreatePost />
+            </Layout>
+          </Route>
+          <Route exact path='/post/:id'>
+            <Layout header='Post'>
+              <FullPost />
             </Layout>
           </Route>
           <Route exact path='/users/:username'>

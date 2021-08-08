@@ -34,7 +34,6 @@ function Profile() {
       try {
         const res = await getUser(username);
         setUser(res.data);
-        console.log(res.data);
       } catch (e) {
         setError(e.response.data.error);
       }

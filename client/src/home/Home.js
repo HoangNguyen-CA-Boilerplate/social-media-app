@@ -26,8 +26,8 @@ function Home() {
       {getPostsStatus === 'loading' ? (
         <Spinner />
       ) : (
-        posts.map(({ title, text, _id }) => (
-          <Post key={_id} title={title} text={text} />
+        posts.map(({ _id, ...fields }) => (
+          <Post key={_id} _id={_id} {...fields} />
         ))
       )}
     </Container>
