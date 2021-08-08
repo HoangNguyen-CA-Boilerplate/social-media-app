@@ -40,7 +40,8 @@ router.post(
     });
     const savedUser = await newUser.save();
 
-    savedUser.password = undefined; // important
+    savedUser.password = undefined;
+    savedUser.email = undefined;
 
     const jwt = issueJWT(savedUser);
     res.status(201).json({ user: savedUser, token: jwt });
@@ -59,7 +60,7 @@ router.post(
 
     const { email, password } = req.body;
 
-    let foundUser = await User.findOne({ email }).select('+password +email');
+    let foundUser = await User.findOne({ email }).select('+password');
     if (!foundUser)
       throw new AppError(400, 'user with the given email does not exist');
 

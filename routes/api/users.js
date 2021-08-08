@@ -29,8 +29,11 @@ router.delete(
   wrapAsync(async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(req.user._id);
     deletedUser.password = undefined; // important
+    deletedUser.email = undefined;
     res.status(200).json(deletedUser);
   })
 );
+
+router.put('/');
 
 module.exports = router;
