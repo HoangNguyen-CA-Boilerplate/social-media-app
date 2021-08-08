@@ -1,15 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Signup from './auth/Signup';
-import Login from './auth/Login';
-import AuthScreen from './auth/AuthScreen';
-import Home from './home/Home';
-import CreatePost from './post/CreatePost';
-import FullPost from './post/FullPost';
-import Layout from './components/Layout';
-import Profile from './profile/Profile';
-import Landing from './auth/Landing';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import AuthScreen from './pages/AuthScreen';
+import Home from './pages/Home';
+import CreatePost from './pages/CreatePost';
+import FullPost from './pages/FullPost';
+import Profile from './pages/Profile';
+import Landing from './pages/Landing';
 
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
@@ -24,25 +23,19 @@ function App() {
       ) : (
         <Switch>
           <Route exact path='/login'>
-            <Login></Login>
+            <Login />
           </Route>
           <Route exact path='/signup'>
-            <Signup></Signup>
+            <Signup />
           </Route>
           <Route exact path='/home'>
-            <Layout header='Home'>
-              <Home />
-            </Layout>
+            <Home />
           </Route>
           <Route exact path='/submit'>
-            <Layout header='Create Post'>
-              <CreatePost />
-            </Layout>
+            <CreatePost />
           </Route>
           <Route exact path='/post/:id'>
-            <Layout header='Post'>
-              <FullPost />
-            </Layout>
+            <FullPost />
           </Route>
           <Route exact path='/users/:username'>
             <Profile />

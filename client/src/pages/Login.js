@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import AuthLayout from './AuthLayout';
-import LoginForm from './LoginForm';
+import AuthLayout from '../auth/AuthLayout';
+import LoginForm from '../auth/LoginForm';
 
 import {
   login,

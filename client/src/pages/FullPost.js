@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { getPost } from './APIUtils';
 import Spinner from '../components/Spinner';
 
-import Post from '../components/post/Post';
+import Post from '../components/Post';
+import Layout from '../components/Layout';
 
 function FullPost() {
   const { id } = useParams();
@@ -31,7 +32,7 @@ function FullPost() {
 
     fetchData();
   }, [id]);
-  return <>{element}</>;
+  return <Layout header='Post'>{element}</Layout>;
 }
 
 export default FullPost;

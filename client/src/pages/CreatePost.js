@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import CreatePostForm from './CreatePostForm';
+import CreatePostForm from '../post/CreatePostForm';
+import Layout from '../components/Layout';
+
 import { useDispatch } from 'react-redux';
 import { createPost } from '../store/slices/postSlice';
 
@@ -15,9 +17,11 @@ function CreatePost() {
   };
 
   return (
-    <Container>
-      <CreatePostForm onSubmit={onSubmit} />;
-    </Container>
+    <Layout header='Create Post'>
+      <Container>
+        <CreatePostForm onSubmit={onSubmit} />;
+      </Container>
+    </Layout>
   );
 }
 

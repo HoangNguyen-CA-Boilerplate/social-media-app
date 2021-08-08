@@ -7,8 +7,10 @@ import {
   selectPosts,
   selectGetPostsStatus,
 } from '../store/slices/postSlice';
-import Post from '../components/post/Post';
+
+import Post from '../components/Post';
 import Spinner from '../components/Spinner';
+import Layout from '../components/Layout';
 
 const Container = styled.div``;
 
@@ -22,15 +24,17 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <Container>
-      {getPostsStatus === 'loading' ? (
-        <Spinner />
-      ) : (
-        posts.map(({ _id, ...fields }) => (
-          <Post key={_id} _id={_id} {...fields} />
-        ))
-      )}
-    </Container>
+    <Layout header='Home'>
+      <Container>
+        {getPostsStatus === 'loading' ? (
+          <Spinner />
+        ) : (
+          posts.map(({ _id, ...fields }) => (
+            <Post key={_id} _id={_id} {...fields} />
+          ))
+        )}
+      </Container>
+    </Layout>
   );
 }
 
