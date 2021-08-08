@@ -20,9 +20,10 @@ function Login() {
     dispatch(login({ email: data.email, password: data.password }));
   };
 
+  if (isAuth) return <Redirect to='/home' />;
+
   return (
     <AuthLayout header='Log In' error={error}>
-      {isAuth && <Redirect to='/home' />}
       <LoginForm onSubmit={handleSubmit} />
     </AuthLayout>
   );

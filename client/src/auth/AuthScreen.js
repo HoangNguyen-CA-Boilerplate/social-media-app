@@ -57,9 +57,11 @@ const Icon = styled(BrandIcon)`
 
 function AuthScreen() {
   const isAuth = useSelector(selectIsAuth);
+
+  if (isAuth) return <Redirect to='/home' />;
+
   return (
     <Container>
-      {isAuth && <Redirect to='/home' />}
       <Inner $primary></Inner>
       <Inner>
         <ContentContainer>

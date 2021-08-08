@@ -26,9 +26,10 @@ function Signup() {
     );
   };
 
+  if (isAuth) return <Redirect to='/home' />;
+
   return (
     <AuthLayout header='Sign up' error={error}>
-      {isAuth && <Redirect to='/home' />}
       <SignupForm onSubmit={handleSubmit} />
     </AuthLayout>
   );

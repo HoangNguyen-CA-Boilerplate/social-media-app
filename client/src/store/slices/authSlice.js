@@ -122,3 +122,4 @@ export default authSlice.reducer;
 export const selectIsAuth = (state) => state.auth.isAuth;
 export const selectLoginError = (state) => state.auth.loginError;
 export const selectSignupError = (state) => state.auth.signupError;
+export const selectUser = (state) => state.auth.user;
