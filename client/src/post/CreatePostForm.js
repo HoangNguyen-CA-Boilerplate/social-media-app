@@ -18,23 +18,11 @@ function CreatePostForm({ onSubmit }) {
   return (
     <Form name='Create Post' onSubmit={handleSubmit(onSubmit)}>
       <FormGroup
-        label='Title:'
-        error={errors.title?.message}
-        inputProps={{
-          autoFocus: true,
-          error: errors.title?.message,
-          type: 'title',
-          ...register('title', {
-            required: 'title is required',
-          }),
-        }}
-      ></FormGroup>
-      <FormGroup
-        label='Text:'
+        label=''
         error={errors.text?.message}
         type='textarea'
         inputProps={{
-          rows: 50,
+          placeholder: "What's happening?",
           error: errors.text?.message,
           type: 'text',
           ...register('text', {
@@ -43,7 +31,7 @@ function CreatePostForm({ onSubmit }) {
         }}
       ></FormGroup>
 
-      <CreateButton submit>Submit</CreateButton>
+      <CreateButton submit>Create Post</CreateButton>
     </Form>
   );
 }

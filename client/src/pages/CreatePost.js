@@ -13,7 +13,7 @@ const Container = styled.div`
 function CreatePost() {
   const dispatch = useDispatch();
   const onSubmit = (data) => {
-    dispatch(createPost({ title: data.title, text: data.text }));
+    dispatch(createPost({ text: data.text }));
   };
 
   return (

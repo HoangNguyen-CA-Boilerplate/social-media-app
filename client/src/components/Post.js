@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Post({ title, text }) {
+function Post({ text, _id }) {
   return (
     <div>
-      <h1>{title}</h1>
+      <p>{_id}</p>
       <p>{text}</p>
     </div>
   );

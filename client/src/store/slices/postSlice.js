@@ -14,11 +14,11 @@ const defaultError = 'something went wrong';
 
 export const createPost = createAsyncThunk(
   'post/createPost',
-  async ({ title, text }, { rejectWithValue, getState }) => {
+  async ({ text }, { rejectWithValue, getState }) => {
     try {
       const res = await axios.post(
         '/api/posts',
-        { title, text },
+        { text },
         tokenConfig(getState)
       );
       return res.data;

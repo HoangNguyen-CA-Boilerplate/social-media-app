@@ -34,7 +34,7 @@ function App() {
           <Route exact path='/submit'>
             <CreatePost />
           </Route>
-          <Route exact path='/post/:id'>
+          <Route exact path='/posts/:id'>
             <FullPost />
           </Route>
           <Route exact path='/users/:username'>

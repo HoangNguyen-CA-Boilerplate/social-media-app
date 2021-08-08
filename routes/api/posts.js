@@ -33,8 +33,8 @@ router.post(
   '/',
   isAuth,
   wrapAsync(async (req, res) => {
-    const { title, text } = req.body;
-    const post = new Post({ title, text, user: req.user._id, likes: [] });
+    const { text } = req.body;
+    const post = new Post({ text, user: req.user._id, likes: [] });
     const savedPost = await post.save();
     res.status(200).json(savedPost);
   })
