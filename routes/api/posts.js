@@ -13,7 +13,7 @@ const router = express.Router();
 router.get(
   '/',
   wrapAsync(async (req, res) => {
-    const posts = await Post.find();
+    const posts = await Post.find().populate('user');
     res.status(200).json(posts);
   })
 );
@@ -23,7 +23,7 @@ router.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
 
-    const post = await Post.findById(id);
+    const post = await Post.findById(id).populate('user');
     if (!post) throw new AppError(400, "post doesn't exist");
     res.status(200).json(post);
   })

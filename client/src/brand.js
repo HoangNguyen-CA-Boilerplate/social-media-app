@@ -1,5 +1,5 @@
-import { FaReddit } from 'react-icons/fa';
+import { FaTwitter } from 'react-icons/fa';
 
 export const brandName = 'Moments';
 
-export const BrandIcon = FaReddit;
+export const BrandIcon = FaTwitter;

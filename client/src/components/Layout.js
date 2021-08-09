@@ -30,7 +30,6 @@ function Layout({ children, header }) {
         </TopBar>
         {children}
       </MainContainer>
-      <Nav />
     </Container>
   );
 }

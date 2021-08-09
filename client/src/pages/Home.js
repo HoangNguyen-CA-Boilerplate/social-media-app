@@ -12,7 +12,11 @@ import Post from '../components/Post';
 import Spinner from '../components/Spinner';
 import Layout from '../components/Layout';
 
-const Container = styled.div``;
+const Container = styled.div`
+  & > * {
+    margin-top: 1em;
+  }
+`;
 
 function Home() {
   const dispatch = useDispatch();
