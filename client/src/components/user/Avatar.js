@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
 
 const Container = styled.div`
-  font-size: 1.2rem;
-  height: 2.2em;
-  width: 2.2em;
+  font-size: 1.5rem;
+  height: 2em;
+  width: 2em;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -19,9 +19,9 @@ const Container = styled.div`
   }
 `;
 
-function Avatar({ src, onClick }) {
+function Avatar(props) {
   return (
-    <Container onClick={onClick}>
+    <Container {...props}>
       <FaUser />
     </Container>
   );

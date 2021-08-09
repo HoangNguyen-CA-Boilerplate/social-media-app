@@ -1,4 +1,22 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const defaultStyles = css`
+  background-color: ${({ theme }) => theme.clrs.primary[500]};
+  color: ${({ theme }) => theme.clrs.neutral[100]};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.clrs.primary[600]};
+  }
+`;
+
+const emptyStyles = css`
+  background-color: ${({ theme }) => theme.clrs.neutral[100]};
+  color: ${({ theme }) => theme.clrs.primary[500]};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.clrs.neutral[200]};
+  }
+`;
 
 const Button = styled.button.attrs((props) => ({
   type: props.submit ? 'submit' : 'button',
@@ -8,11 +26,8 @@ const Button = styled.button.attrs((props) => ({
   border-radius: 1000px;
   display: block;
 
-  background-color: ${({ theme }) => theme.clrs.primary[500]};
-  color: ${({ theme }) => theme.clrs.neutral[100]};
-
   outline: none;
-  border: 1px solid transparent;
+  border: 1px solid ${({ theme }) => theme.clrs.primary[500]};
 
   width: ${(props) => (props.$fill ? '100%' : 'auto')};
   padding: ${({ theme }) => theme.padding.button};
@@ -22,9 +37,7 @@ const Button = styled.button.attrs((props) => ({
 
   text-decoration: none;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.clrs.primary[600]};
-  }
+  ${(props) => (props.empty ? emptyStyles : defaultStyles)}
 `;
 
 export default Button;

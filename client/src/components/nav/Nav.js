@@ -10,7 +10,7 @@ import { BrandIcon } from '../../brand';
 
 import NavLink from './NavLink';
 
-const Container = styled.div`
+const Container = styled.nav`
   display: flex;
   flex-direction: column;
   width: max-content;

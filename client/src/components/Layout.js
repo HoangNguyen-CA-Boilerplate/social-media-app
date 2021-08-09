@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const MainContainer = styled.div`
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
 
   border-right: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
   border-left: 1px solid ${({ theme }) => theme.clrs.neutral[300]};

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Spinner from '../components/Spinner';
-import UserProfile from '../components/user/UserProfile';
+import Spinner from '../../components/Spinner';
+import ProfileDisplay from './ProfileDisplay';
 
-import { getUser } from './APIUtils';
+import { getUser } from '../APIUtils';
 
 import { useSelector } from 'react-redux';
-import { selectUser } from '../store/slices/authSlice';
+import { selectUser } from '../../store/slices/authSlice';
 
 function Profile() {
   const { username } = useParams();
@@ -26,7 +26,7 @@ function Profile() {
   } else if (!user) {
     element = <Spinner />;
   } else {
-    element = <UserProfile user={user} auth={auth}></UserProfile>;
+    element = <ProfileDisplay user={user} auth={auth}></ProfileDisplay>;
   }
 
   useEffect(() => {

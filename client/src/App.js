@@ -7,7 +7,7 @@ import Auth from './pages/Auth/Auth';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost/CreatePost';
 import FullPost from './pages/FullPost';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
 import Layout from './components/Layout';
 

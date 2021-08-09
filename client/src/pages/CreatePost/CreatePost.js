@@ -34,11 +34,19 @@ function CreatePost() {
     }
   };
 
-  return (
-    <Container>
-      {loading ? <Spinner /> : <CreatePostForm onSubmit={onSubmit} />}
-    </Container>
-  );
+  let element;
+  if (loading) {
+    element = <Spinner />;
+  } else {
+    element = (
+      <Container>
+        <CreatePostForm onSubmit={onSubmit} />
+        {error && <p>an error occurred</p>}
+      </Container>
+    );
+  }
+
+  return element;
 }
 
 export default CreatePost;
