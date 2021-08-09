@@ -14,7 +14,7 @@ const postSchema = new Schema(
       required: true,
     },
     user: { ...userRef, index: true },
-    likes: [{ userRef }],
+    likes: [userRef],
   },
   { timestamps: true }
 );

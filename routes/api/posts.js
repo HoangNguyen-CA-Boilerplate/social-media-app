@@ -40,6 +40,25 @@ router.post(
   })
 );
 
+// like post
+router.patch(
+  '/:id/like',
+  isAuth,
+  wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+
+    if (post.likes.includes(req.user._id)) {
+      post.likes.pull(req.user._id);
+    } else {
+      post.likes.push(req.user._id);
+    }
+
+    const savedPost = await post.save();
+    res.status(200).json(savedPost);
+  })
+);
+
 router.delete(
   '/:id',
   isAuth,
