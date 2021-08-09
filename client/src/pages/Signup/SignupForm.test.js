@@ -1,5 +1,5 @@
 import { render, screen } from '../../test-utils';
-import SignupForm from '../SignupForm';
+import SignupForm from './SignupForm';
 import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/react';
 
