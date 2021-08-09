@@ -40,8 +40,7 @@ function CreatePost() {
   } else {
     element = (
       <Container>
-        <CreatePostForm onSubmit={onSubmit} />
-        {error && <p>an error occurred</p>}
+        <CreatePostForm onSubmit={onSubmit} error={error} />
       </Container>
     );
   }
