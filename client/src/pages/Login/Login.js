@@ -2,14 +2,14 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import AuthLayout from '../auth/AuthLayout';
-import LoginForm from '../auth/LoginForm';
+import AuthLayout from '../../components/auth/AuthLayout';
+import LoginForm from './LoginForm';
 
 import {
   login,
   selectIsAuth,
   selectLoginError,
-} from '../store/slices/authSlice';
+} from '../../store/slices/authSlice';
 
 function Login() {
   const dispatch = useDispatch();

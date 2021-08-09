@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import UserDisplay from './UserDisplay';
+import UserDisplay from './user/UserDisplay';
 import { useHistory } from 'react-router';
 
 const hoverStyles = css`

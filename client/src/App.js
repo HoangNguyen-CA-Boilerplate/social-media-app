@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import AuthScreen from './pages/AuthScreen';
+import Signup from './pages/Signup/Signup';
+import Login from './pages/Login/Login';
+import Auth from './pages/Auth/Auth';
 import Home from './pages/Home';
-import CreatePost from './pages/CreatePost';
+import CreatePost from './pages/CreatePost/CreatePost';
 import FullPost from './pages/FullPost';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing';
@@ -30,7 +30,7 @@ function App() {
             <Signup />
           </Route>
           <Route exact path='/'>
-            <AuthScreen />
+            <Auth />
           </Route>
 
           <Route exact path='/home'>

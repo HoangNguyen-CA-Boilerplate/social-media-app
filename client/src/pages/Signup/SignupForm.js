@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import Form from '../components/form/Form';
-import Button from '../components/Button';
-import FormGroup from '../components/form/FormGroup';
+import Form from '../../components/form/Form';
+import Button from '../../components/Button';
+import FormGroup from '../../components/form/FormGroup';
 
 function Signup({ onSubmit }) {
   const {

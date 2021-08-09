@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Error from './Error';
+import AuthError from './AuthError';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const AuthLayout = ({ children, header, error }) => {
     <Wrapper>
       <Container>
         <Header>{header}</Header>
-        <Error>{error}</Error>
+        <AuthError>{error}</AuthError>
         {children}
       </Container>
     </Wrapper>

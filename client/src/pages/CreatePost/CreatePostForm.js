@@ -1,7 +1,8 @@
 import React from 'react';
-import FormGroup from '../components/form/FormGroup';
-import Form from '../components/form/Form';
-import Button from '../components/Button';
+import FormGroup from '../../components/form/FormGroup';
+import Form from '../../components/form/Form';
+import Button from '../../components/Button';
+
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 

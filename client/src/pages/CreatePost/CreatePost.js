@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import CreatePostForm from '../post/CreatePostForm';
-import Spinner from '../components/Spinner';
+import CreatePostForm from './CreatePostForm';
+import Spinner from '../../components/Spinner';
 
 import { useSelector } from 'react-redux';
-import { selectToken } from '../store/slices/authSlice.js';
-import { createPost } from './APIUtils';
+import { selectToken } from '../../store/slices/authSlice.js';
+import { createPost } from '../APIUtils';
 import { useHistory } from 'react-router';
 
 const Container = styled.div`

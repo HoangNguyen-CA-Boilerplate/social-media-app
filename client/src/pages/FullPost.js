@@ -31,7 +31,7 @@ function FullPost() {
 
     fetchData();
   }, [id]);
-  return { element };
+  return element;
 }
 
 export default FullPost;

@@ -1,13 +1,13 @@
 import React from 'react';
-import LinkButton from '../components/LinkButton';
+import LinkButton from '../../components/LinkButton';
 import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { selectIsAuth } from '../store/slices/authSlice';
+import { selectIsAuth } from '../../store/slices/authSlice';
 
-import { brandName, BrandIcon } from '../brand';
+import { brandName, BrandIcon } from '../../brand';
 
 const Container = styled.div`
   display: flex;

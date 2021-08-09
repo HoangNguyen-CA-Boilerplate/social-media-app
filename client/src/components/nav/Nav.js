@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../store/slices/authSlice';
-import { selectUser } from '../store/slices/authSlice';
+import { logout } from '../../store/slices/authSlice';
+import { selectUser } from '../../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
 import { FaRegUser, FaPencilRuler } from 'react-icons/fa';
-import { BrandIcon } from '../brand';
+import { BrandIcon } from '../../brand';
 
 import NavLink from './NavLink';
 

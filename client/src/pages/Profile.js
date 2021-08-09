@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Spinner from '../components/Spinner';
+import UserProfile from '../components/user/UserProfile';
 
 import { getUser } from './APIUtils';
 
@@ -25,13 +26,7 @@ function Profile() {
   } else if (!user) {
     element = <Spinner />;
   } else {
-    element = (
-      <>
-        <h2>{user.displayName}</h2>
-        <p>@{user.username}</p>
-        <h1>{auth && 'Auth'}</h1>
-      </>
-    );
+    element = <UserProfile user={user} auth={auth}></UserProfile>;
   }
 
   useEffect(() => {

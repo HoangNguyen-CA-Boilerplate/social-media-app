@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../nav/Nav';
+import Nav from './nav/Nav';
 import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
@@ -30,19 +30,17 @@ function Layout({ children, header }) {
   const isAuth = useSelector(selectIsAuth);
 
   if (!isAuth) return <Redirect to='/' />;
-  else {
-    return (
-      <Container>
-        <Nav />
-        <MainContainer>
-          <TopBar>
-            <Header>{header}</Header>
-          </TopBar>
-          {children}
-        </MainContainer>
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <Nav />
+      <MainContainer>
+        <TopBar>
+          <Header>{header}</Header>
+        </TopBar>
+        {children}
+      </MainContainer>
+    </Container>
+  );
 }
 
 export default Layout;
