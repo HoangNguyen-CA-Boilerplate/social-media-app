@@ -14,6 +14,11 @@ const Container = styled.nav`
   display: flex;
   flex-direction: column;
   width: max-content;
+  height: max-content;
+
+  position: sticky;
+  top: 0;
+  left: 0;
 
   padding: 0 1em;
   min-height: 100vh;
