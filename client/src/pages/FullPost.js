@@ -9,7 +9,7 @@ import Layout from '../components/Layout';
 function FullPost() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
 
   let element;
   if (error) {
@@ -26,7 +26,7 @@ function FullPost() {
         const res = await getPost(id);
         setPost(res.data);
       } catch (e) {
-        setError(e.response.data.error);
+        setError(true);
       }
     };
 

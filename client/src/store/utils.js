@@ -9,3 +9,14 @@ export const tokenConfig = (getState) => {
 
   return config;
 };
+
+export const tokenConfigStateless = (token) => {
+  const config = {
+    headers: {},
+  };
+  if (token) {
+    config.headers['Authorization'] = token;
+  }
+
+  return config;
+};

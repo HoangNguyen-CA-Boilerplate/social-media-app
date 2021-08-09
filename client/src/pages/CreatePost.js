@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import CreatePostForm from '../post/CreatePostForm';
 import Layout from '../components/Layout';
+import Spinner from '../components/Spinner';
 
-import { useDispatch } from 'react-redux';
-import { createPost } from '../store/slices/postSlice';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../store/slices/authSlice.js';
+import { createPost } from './APIUtils';
+import { useHistory } from 'react-router';
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.padding.main};
 `;
 
 function CreatePost() {
-  const dispatch = useDispatch();
-  const onSubmit = (data) => {
-    dispatch(createPost({ text: data.text }));
+  const token = useSelector(selectToken);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
+
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+      const res = await createPost({ text: data.text }, token);
+      history.push(`/posts/${res.data._id}`);
+    } catch (e) {
+      if (e.response) {
+        return setError(e.response.data.error);
+      }
+      setError('something went wrong');
+      setLoading(false);
+    }
   };
 
   return (
     <Layout header='Create Post'>
       <Container>
-        <CreatePostForm onSubmit={onSubmit} />;
+        {loading ? <Spinner /> : <CreatePostForm onSubmit={onSubmit} />}
       </Container>
     </Layout>
   );

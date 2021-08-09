@@ -8,7 +8,6 @@ const TextArea = styled(TextareaAutosize)`
   resize: none;
 
   font-size: 1.2rem;
-  padding: 0.8em;
   outline: none;
   border: none;
 

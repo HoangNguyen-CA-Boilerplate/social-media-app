@@ -29,7 +29,7 @@ function CreatePostForm({ onSubmit }) {
             required: 'text is required',
           }),
         }}
-      ></FormGroup>
+      />
 
       <CreateButton submit>Create Post</CreateButton>
     </Form>
