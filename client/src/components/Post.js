@@ -23,7 +23,9 @@ const Container = styled.div`
   }
 `;
 
-const Text = styled.p``;
+const Text = styled.p`
+  white-space: pre-wrap;
+`;
 
 function Post({ text, user, onClick }) {
   const clickable = onClick !== undefined;
@@ -36,7 +38,7 @@ function Post({ text, user, onClick }) {
   return (
     <Container onClick={onClick} clickable={clickable}>
       <UserDisplay user={user} onClick={routeToUser} />
-      <Text>{text}</Text>
+      <Text> {text}</Text>
     </Container>
   );
 }
