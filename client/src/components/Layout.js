@@ -14,7 +14,7 @@ const MainContainer = styled.div`
 
 const TopBar = styled.div`
   padding: ${({ theme }) => theme.padding.main};
-  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[200]};
+  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
 `;
 const Header = styled.h1`
   font-size: 1.5rem;

@@ -12,7 +12,7 @@ const Input = styled.input.attrs((props) => ({
   border: ${(props) =>
     props.error
       ? '2px solid ' + props.theme.clrs.danger
-      : '2px solid ' + props.theme.clrs.neutral[200]};
+      : '2px solid ' + props.theme.clrs.neutral[300]};
 
   &:focus {
     border: 2px solid ${({ theme }) => theme.clrs.primary[500]};
