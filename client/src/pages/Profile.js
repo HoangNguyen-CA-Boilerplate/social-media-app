@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Layout from '../components/Layout';
 import Spinner from '../components/Spinner';
 
 import { getUser } from './APIUtils';
@@ -48,7 +47,7 @@ function Profile() {
 
     fetchData();
   }, [username]);
-  return <Layout header={username}>{element}</Layout>;
+  return element;
 }
 
 export default Profile;

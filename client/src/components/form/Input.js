@@ -11,11 +11,11 @@ const Input = styled.input.attrs((props) => ({
   outline: none;
   border: ${(props) =>
     props.error
-      ? '2px solid ' + props.theme.clrs.danger
-      : '2px solid ' + props.theme.clrs.neutral[300]};
+      ? '1px solid ' + props.theme.clrs.danger
+      : '1px solid ' + props.theme.clrs.neutral[400]};
 
   &:focus {
-    border: 2px solid ${({ theme }) => theme.clrs.primary[500]};
+    border: 1px solid ${({ theme }) => theme.clrs.primary[500]};
   }
 `;
 

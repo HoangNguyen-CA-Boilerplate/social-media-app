@@ -1,6 +1,9 @@
 import React from 'react';
 import Nav from '../nav/Nav';
 import styled from 'styled-components';
+import { Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../store/slices/authSlice';
 
 const Container = styled.div`
   display: flex;
@@ -10,6 +13,9 @@ const Container = styled.div`
 const MainContainer = styled.div`
   width: 100%;
   max-width: 900px;
+
+  border-right: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
+  border-left: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
 `;
 
 const TopBar = styled.div`
@@ -21,17 +27,22 @@ const Header = styled.h1`
 `;
 
 function Layout({ children, header }) {
-  return (
-    <Container>
-      <Nav />
-      <MainContainer>
-        <TopBar>
-          <Header>{header}</Header>
-        </TopBar>
-        {children}
-      </MainContainer>
-    </Container>
-  );
+  const isAuth = useSelector(selectIsAuth);
+
+  if (!isAuth) return <Redirect to='/' />;
+  else {
+    return (
+      <Container>
+        <Nav />
+        <MainContainer>
+          <TopBar>
+            <Header>{header}</Header>
+          </TopBar>
+          {children}
+        </MainContainer>
+      </Container>
+    );
+  }
 }
 
 export default Layout;

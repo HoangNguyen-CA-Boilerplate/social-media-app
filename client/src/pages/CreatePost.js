@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import CreatePostForm from '../post/CreatePostForm';
-import Layout from '../components/Layout';
 import Spinner from '../components/Spinner';
 
 import { useSelector } from 'react-redux';
@@ -36,11 +35,9 @@ function CreatePost() {
   };
 
   return (
-    <Layout header='Create Post'>
-      <Container>
-        {loading ? <Spinner /> : <CreatePostForm onSubmit={onSubmit} />}
-      </Container>
-    </Layout>
+    <Container>
+      {loading ? <Spinner /> : <CreatePostForm onSubmit={onSubmit} />}
+    </Container>
   );
 }
 

@@ -12,7 +12,6 @@ import {
 
 import Post from '../components/Post';
 import Spinner from '../components/Spinner';
-import Layout from '../components/Layout';
 
 const Container = styled.div``;
 
@@ -31,22 +30,20 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <Layout header='Home'>
-      <Container>
-        {getPostsStatus === 'loading' ? (
-          <Spinner />
-        ) : (
-          posts.map(({ _id, ...fields }) => (
-            <Post
-              key={_id}
-              _id={_id}
-              {...fields}
-              onClick={() => routeToPost(_id)}
-            />
-          ))
-        )}
-      </Container>
-    </Layout>
+    <Container>
+      {getPostsStatus === 'loading' ? (
+        <Spinner />
+      ) : (
+        posts.map(({ _id, ...fields }) => (
+          <Post
+            key={_id}
+            _id={_id}
+            {...fields}
+            onClick={() => routeToPost(_id)}
+          />
+        ))
+      )}
+    </Container>
   );
 }
 

@@ -9,6 +9,7 @@ import CreatePost from './pages/CreatePost';
 import FullPost from './pages/FullPost';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing';
+import Layout from './components/Layout';
 
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
@@ -28,20 +29,29 @@ function App() {
           <Route exact path='/signup'>
             <Signup />
           </Route>
-          <Route exact path='/home'>
-            <Home />
-          </Route>
-          <Route exact path='/submit'>
-            <CreatePost />
-          </Route>
-          <Route exact path='/posts/:id'>
-            <FullPost />
-          </Route>
-          <Route exact path='/users/:username'>
-            <Profile />
-          </Route>
           <Route exact path='/'>
             <AuthScreen />
+          </Route>
+
+          <Route exact path='/home'>
+            <Layout header='Home'>
+              <Home />
+            </Layout>
+          </Route>
+          <Route exact path='/submit'>
+            <Layout header='Create Post'>
+              <CreatePost />
+            </Layout>
+          </Route>
+          <Route exact path='/posts/:id'>
+            <Layout header='Post'>
+              <FullPost />
+            </Layout>
+          </Route>
+          <Route exact path='/users/:username'>
+            <Layout header='Profile'>
+              <Profile />
+            </Layout>
           </Route>
         </Switch>
       )}

@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/authSlice';
-import { Redirect } from 'react-router';
-import { selectIsAuth, selectUser } from '../store/slices/authSlice';
+import { selectUser } from '../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
 import { FaRegUser, FaPencilRuler } from 'react-icons/fa';
@@ -29,10 +28,7 @@ const Logo = styled(BrandIcon)`
 
 function Nav() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
-
-  if (!isAuth) return <Redirect to='/' />;
 
   return (
     <Container>

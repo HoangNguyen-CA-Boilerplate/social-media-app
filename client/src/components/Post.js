@@ -8,10 +8,9 @@ const hoverStyles = css`
 `;
 
 const Container = styled.div`
-  margin-top: 1em;
   padding: ${({ theme }) => theme.padding.main};
 
-  border: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
+  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
   & > * + * {
     margin-top: 0.5em;
   }

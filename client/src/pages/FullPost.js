@@ -4,7 +4,6 @@ import { getPost } from './APIUtils';
 import Spinner from '../components/Spinner';
 
 import Post from '../components/Post';
-import Layout from '../components/Layout';
 
 function FullPost() {
   const { id } = useParams();
@@ -32,7 +31,7 @@ function FullPost() {
 
     fetchData();
   }, [id]);
-  return <Layout header='Post'>{element}</Layout>;
+  return { element };
 }
 
 export default FullPost;
