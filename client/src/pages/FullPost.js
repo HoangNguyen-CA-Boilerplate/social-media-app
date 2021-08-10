@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../components/Spinner';
+import Post from '../components/post/Post';
+
 import { useParams } from 'react-router-dom';
 import { getPost } from '../APIUtils';
-import Spinner from '../components/Spinner';
-
-import Post from '../components/post/Post';
 
 function FullPost() {
   const { id } = useParams();
@@ -16,7 +16,7 @@ function FullPost() {
   } else if (!post) {
     element = <Spinner />;
   } else {
-    element = <Post {...post} />;
+    element = <Post {...post} em={true} />;
   }
 
   useEffect(() => {

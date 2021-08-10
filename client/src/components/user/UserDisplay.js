@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 const TextContainer = styled.div`
   cursor: pointer;
+  font-size: 1rem;
 `;
 
 const DisplayName = styled.p`
