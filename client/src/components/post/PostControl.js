@@ -21,6 +21,10 @@ const ControlButton = styled.div`
   border-radius: 50%;
   cursor: pointer;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   transition: 0.2s ease-out;
 
   color: ${(props) =>
@@ -38,13 +42,13 @@ const ControlButton = styled.div`
   }
 `;
 
-function PostControl({ onClick, active, value, icon }) {
+function PostControl({ onClick, active, label, icon }) {
   return (
     <ControlContainer>
       <ControlButton onClick={onClick} active={active}>
         {icon}
       </ControlButton>
-      <ControlLabel>{value}</ControlLabel>
+      {label && <ControlLabel>{label}</ControlLabel>}
     </ControlContainer>
   );
 }

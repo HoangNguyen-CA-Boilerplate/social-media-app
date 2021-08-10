@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import styled from 'styled-components';
 
@@ -19,11 +18,6 @@ function Home() {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const getPostsStatus = useSelector(selectGetPostsStatus);
-  const history = useHistory();
-
-  const routeToPost = (id) => {
-    history.push(`/posts/${id}`);
-  };
 
   useEffect(() => {
     dispatch(getPosts());
@@ -35,12 +29,7 @@ function Home() {
         <Spinner />
       ) : (
         posts.map(({ _id, ...fields }) => (
-          <Post
-            key={_id}
-            _id={_id}
-            {...fields}
-            onClick={() => routeToPost(_id)}
-          />
+          <Post key={_id} _id={_id} {...fields} />
         ))
       )}
     </Container>

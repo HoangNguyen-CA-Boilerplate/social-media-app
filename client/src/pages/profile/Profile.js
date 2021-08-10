@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 
 import Spinner from '../../components/Spinner';
 import ProfileDisplay from './ProfileDisplay';
+import Post from '../../components/post/Post';
 
-import { getUser } from '../../APIUtils';
+import { getUser, getUserPosts } from '../../APIUtils';
 
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slices/authSlice';
@@ -17,6 +18,7 @@ function Profile() {
 
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   if (authUser._id === user?._id) auth = true;
 
@@ -26,7 +28,14 @@ function Profile() {
   } else if (!user) {
     element = <Spinner />;
   } else {
-    element = <ProfileDisplay user={user} auth={auth}></ProfileDisplay>;
+    element = (
+      <>
+        <ProfileDisplay user={user} auth={auth}></ProfileDisplay>{' '}
+        {posts.map(({ _id, ...fields }) => {
+          return <Post key={_id} _id={_id} {...fields}></Post>;
+        })}
+      </>
+    );
   }
 
   useEffect(() => {
@@ -35,6 +44,9 @@ function Profile() {
         setError(false);
         const res = await getUser(username);
         setUser(res.data);
+
+        const resPosts = await getUserPosts(username);
+        setPosts(resPosts.data);
       } catch (e) {
         setError(true);
       }
@@ -42,7 +54,7 @@ function Profile() {
 
     fetchData();
   }, [username]);
-  return element;
+  return <>{element}</>;
 }
 
 export default Profile;
