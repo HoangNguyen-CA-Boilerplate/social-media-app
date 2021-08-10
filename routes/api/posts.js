@@ -48,7 +48,7 @@ router.patch(
     const { id } = req.params;
     const post = await Post.findById(id);
 
-    let setLikesNum;
+    let likes;
 
     if (post.likes.includes(req.user._id)) {
       post.likes.pull(req.user._id);
@@ -58,7 +58,7 @@ router.patch(
       likes = true;
     }
 
-    const savedPost = await post.save();
+    await post.save();
     res.status(200).json({ likes });
   })
 );
