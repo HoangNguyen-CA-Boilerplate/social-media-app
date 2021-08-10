@@ -1,60 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import Spinner from '../../components/Spinner';
 import ProfileDisplay from './ProfileDisplay';
-import Post from '../../components/post/Post';
+import Posts from '../../components/post/Posts';
+import LoadAsync from '../../components/LoadAsync';
 
 import { getUser, getUserPosts } from '../../APIUtils';
 
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slices/authSlice';
+import useAsync from '../../hooks/useAsync';
 
 function Profile() {
   const { username } = useParams();
+  const user = useAsync(getUser, [username]);
+  const posts = useAsync(getUserPosts, [username]);
 
   const authUser = useSelector(selectUser);
   let auth = false;
 
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(false);
-  const [posts, setPosts] = useState([]);
+  if (authUser._id === user.data?._id) auth = true;
 
-  if (authUser._id === user?._id) auth = true;
-
-  let element;
-  if (error) {
-    element = <h1>Profile Not Found!</h1>;
-  } else if (!user) {
-    element = <Spinner />;
-  } else {
-    element = (
-      <>
-        <ProfileDisplay user={user} auth={auth}></ProfileDisplay>{' '}
-        {posts.map(({ _id, ...fields }) => {
-          return <Post key={_id} _id={_id} {...fields}></Post>;
-        })}
-      </>
-    );
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setError(false);
-        const res = await getUser(username);
-        setUser(res.data);
-
-        const resPosts = await getUserPosts(username);
-        setPosts(resPosts.data);
-      } catch (e) {
-        setError(true);
-      }
-    };
-
-    fetchData();
-  }, [username]);
-  return <>{element}</>;
+  return (
+    <>
+      <LoadAsync {...user}>
+        <ProfileDisplay user={user.data} auth={auth}></ProfileDisplay>
+      </LoadAsync>
+      <LoadAsync {...posts}>
+        <Posts posts={posts.data}></Posts>
+      </LoadAsync>
+    </>
+  );
 }
 
 export default Profile;

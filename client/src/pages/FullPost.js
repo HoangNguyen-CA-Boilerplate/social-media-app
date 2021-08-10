@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import Spinner from '../components/Spinner';
+import React from 'react';
 import Post from '../components/post/Post';
+import LoadAsync from '../components/LoadAsync';
 
 import { useParams } from 'react-router-dom';
 import { getPost } from '../APIUtils';
+import useAsync from '../hooks/useAsync';
 
 function FullPost() {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
-  const [error, setError] = useState(false);
+  const post = useAsync(getPost, [id]);
 
-  let element;
-  if (error) {
-    element = error;
-  } else if (!post) {
-    element = <Spinner />;
-  } else {
-    element = <Post {...post} em={true} />;
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getPost(id);
-        setPost(res.data);
-      } catch (e) {
-        setError(true);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-  return element;
+  return (
+    <LoadAsync {...post}>
+      <Post {...post.data} em={true} />
+    </LoadAsync>
+  );
 }
 
 export default FullPost;
