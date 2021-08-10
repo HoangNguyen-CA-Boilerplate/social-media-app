@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPost } from './APIUtils';
+import { getPost } from '../APIUtils';
 import Spinner from '../components/Spinner';
 
-import Post from '../components/Post';
+import Post from '../components/post/Post';
 
 function FullPost() {
   const { id } = useParams();

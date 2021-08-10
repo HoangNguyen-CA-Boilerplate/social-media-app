@@ -17,6 +17,10 @@ const Container = styled.div`
   &:hover {
     filter: brightness(90%);
   }
+
+  & > * {
+    display: block;
+  }
 `;
 
 function Avatar(props) {

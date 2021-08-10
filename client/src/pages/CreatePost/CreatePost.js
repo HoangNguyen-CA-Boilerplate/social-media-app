@@ -6,7 +6,7 @@ import Spinner from '../../components/Spinner';
 
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../store/slices/authSlice.js';
-import { createPost } from '../APIUtils';
+import { createPost } from '../../APIUtils';
 import { useHistory } from 'react-router';
 
 const Container = styled.div`

@@ -20,6 +20,7 @@ const Container = styled.div`
 
 const AlertIcon = styled(GoAlert)`
   font-size: 1rem;
+  display: block;
   color: ${({ theme }) => theme.clrs.danger};
 `;
 

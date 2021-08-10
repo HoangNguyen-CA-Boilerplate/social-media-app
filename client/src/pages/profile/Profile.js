@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
 import ProfileDisplay from './ProfileDisplay';
 
-import { getUser } from '../APIUtils';
+import { getUser } from '../../APIUtils';
 
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slices/authSlice';

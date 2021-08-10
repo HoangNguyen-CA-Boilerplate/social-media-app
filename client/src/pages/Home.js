@@ -10,7 +10,7 @@ import {
   selectGetPostsStatus,
 } from '../store/slices/postSlice';
 
-import Post from '../components/Post';
+import Post from '../components/post/Post';
 import Spinner from '../components/Spinner';
 
 const Container = styled.div``;
