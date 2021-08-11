@@ -8,7 +8,6 @@ describe('auth/SignupForm', () => {
   let usernameInput;
   let emailInput;
   let passwordInput;
-  let form;
   let mockSubmit;
 
   beforeEach(() => {
@@ -18,7 +17,6 @@ describe('auth/SignupForm', () => {
     usernameInput = screen.getByLabelText(/Username:/i);
     emailInput = screen.getByLabelText(/Email:/i);
     passwordInput = screen.getByLabelText(/Password:/i);
-    form = screen.getByRole('form');
   });
 
   it('Should display error if fields are empty', async () => {
@@ -77,8 +75,6 @@ describe('auth/SignupForm', () => {
   });
 
   it('Should be submit form if fields are valid', async () => {
-    form.onsubmit = null;
-
     userEvent.type(usernameInput, 'bobob');
     userEvent.type(emailInput, 'bob@gmail.com');
     userEvent.type(passwordInput, 'bobob');
