@@ -1,43 +1,21 @@
-import { useReducer, useEffect } from 'react';
+import { useEffect } from 'react';
+import useAsyncFn from './useAsyncFn';
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'FETCH_SUCCESS': {
-      return { ...state, data: action.payload, loading: false, error: '' };
-    }
-    case 'FETCH_FAIL': {
-      return { ...state, loading: false, error: action.payload };
-    }
-    default:
-      return state;
-  }
-}
+function useAsync(asyncFn, params) {
+  const { execute, loading, error, data } = useAsyncFn(asyncFn);
 
-function useAsync(getData, params) {
-  const [state, dispatch] = useReducer(reducer, {
-    data: null,
-    loading: true,
-    error: '',
-  });
+  // userAsync renders addition times when useAsync is used twice or more ??;
+
+  // WHY?
+  // first call resolves first, causes 2 re-renders on completion,
+  // second call resolves second, causing 2 more re-renders on completion
 
   useEffect(() => {
-    const execute = async () => {
-      try {
-        const res = await getData(...params);
-        dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
-      } catch (e) {
-        if (e.response)
-          dispatch({ type: 'FETCH_FAIL', payload: e.response.data.error });
-        else {
-          dispatch({ type: 'FETCH_FAIL', payload: 'something went wrong' });
-        }
-      }
-    };
-    execute();
+    execute(...params);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, params);
 
-  return state;
+  return { loading, error, data };
 }
 
 export default useAsync;

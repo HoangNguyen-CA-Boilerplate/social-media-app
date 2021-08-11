@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import CreatePostForm from './CreatePostForm';
@@ -6,8 +6,9 @@ import Spinner from '../../components/Spinner';
 
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../store/slices/authSlice.js';
-import { createPost } from '../../APIUtils';
 import { useHistory } from 'react-router';
+import { createPost } from '../../APIUtils';
+import useAsyncFn from '../../hooks/useAsyncFn';
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.padding.main};
@@ -15,23 +16,12 @@ const Container = styled.div`
 
 function CreatePost() {
   const token = useSelector(selectToken);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
+  const { execute, loading, error } = useAsyncFn(createPost);
   const history = useHistory();
 
-  const onSubmit = async (data) => {
-    try {
-      setLoading(true);
-      const res = await createPost({ text: data.text }, token);
-      history.push(`/posts/${res.data._id}`);
-    } catch (e) {
-      if (e.response) {
-        return setError(e.response.data.error);
-      }
-      setError('something went wrong');
-      setLoading(false);
-    }
+  const onSubmit = async (formData) => {
+    const data = await execute({ text: formData.text }, token);
+    history.push(`/posts/${data._id}`);
   };
 
   let element;

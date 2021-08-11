@@ -6,7 +6,7 @@ function LoadAsync({ data, error, loading, children }) {
   else if (data) {
     return children;
   } else {
-    return <h1>Could Not Get Resource!</h1>;
+    return null;
   }
 }
 

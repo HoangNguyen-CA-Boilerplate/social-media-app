@@ -17,15 +17,16 @@ function Profile() {
   const posts = useAsync(getUserPosts, [username]);
 
   const authUser = useSelector(selectUser);
-  let auth = false;
-
-  if (authUser._id === user.data?._id) auth = true;
 
   return (
     <>
       <LoadAsync {...user}>
-        <ProfileDisplay user={user.data} auth={auth}></ProfileDisplay>
+        <ProfileDisplay
+          user={user.data}
+          auth={authUser._id === user.data?._id}
+        ></ProfileDisplay>
       </LoadAsync>
+
       <LoadAsync {...posts}>
         <Posts posts={posts.data}></Posts>
       </LoadAsync>
