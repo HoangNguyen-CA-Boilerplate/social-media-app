@@ -12,6 +12,7 @@ function DeleteControl({ postId, token }) {
     try {
       await deletePost(postId, token);
       history.push('/home');
+      // show popup
     } catch (e) {
       console.error(e);
     }

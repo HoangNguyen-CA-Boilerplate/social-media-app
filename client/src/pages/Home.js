@@ -1,31 +1,23 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import useAsync from '../hooks/useAsync';
+
+import { getPosts } from '../APIUtils';
 
 import styled from 'styled-components';
 
-import {
-  getPosts,
-  selectPosts,
-  selectGetPostsStatus,
-} from '../store/slices/postSlice';
-
 import Posts from '../components/post/Posts';
-import Spinner from '../components/Spinner';
+import LoadAsync from '../components/LoadAsync';
 
 const Container = styled.div``;
 
 function Home() {
-  const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
-  const getPostsStatus = useSelector(selectGetPostsStatus);
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
+  const posts = useAsync(getPosts, []);
 
   return (
     <Container>
-      {getPostsStatus === 'loading' ? <Spinner /> : <Posts posts={posts} />}
+      <LoadAsync {...posts}>
+        <Posts posts={posts.data} />
+      </LoadAsync>
     </Container>
   );
 }
