@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import useAsyncFn from './useAsyncFn';
 
 function useAsync(asyncFn, params) {
-  const [state, execute] = useAsyncFn(asyncFn);
+  const [state, execute] = useAsyncFn(asyncFn, {
+    loading: true,
+    data: null,
+    error: '',
+  });
 
   useEffect(() => {
     execute(...params);

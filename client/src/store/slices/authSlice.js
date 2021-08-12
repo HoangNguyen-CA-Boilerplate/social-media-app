@@ -57,7 +57,7 @@ export const loadUser = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: 'user',
+  name: 'auth',
   initialState,
   reducers: {
     logout: (state) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styled, { css } from 'styled-components';
 import UserDisplay from '../user/UserDisplay';
@@ -7,8 +7,6 @@ import DeleteControl from './DeleteControl';
 
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import useTokenConfig from '../../hooks/useTokenConfig';
-
 import { selectUser } from '../../store/slices/authSlice';
 
 const clickableStyles = css`
@@ -40,11 +38,9 @@ const Controls = styled.div`
   justify-content: space-between;
 `;
 
-function Post({ text, user, _id, likes, em, onDelete }) {
+function Post({ text, user, _id, likes, onDelete, onLike, em }) {
   const history = useHistory();
-  const tokenConfig = useTokenConfig();
   const authUser = useSelector(selectUser);
-  const [hide, setHide] = useState(false);
 
   const clickable = history.location.pathname !== `/posts/${_id}`;
   const routeToPost = () => {
@@ -55,30 +51,18 @@ function Post({ text, user, _id, likes, em, onDelete }) {
     history.push(`/users/${user.username}`);
   };
 
-  const handleDelete = () => {
-    if (onDelete) onDelete();
-    else setHide(true);
-  };
-
-  if (hide) return null;
-
   return (
     <Container onClick={routeToPost} clickable={clickable} em={em}>
       <UserDisplay user={user} onClick={routeToUser} />
       <Text> {text}</Text>
       <Controls>
         <LikeControl
-          postId={_id}
           userLikes={likes.includes(authUser._id)}
           numLikes={likes.length}
-          tokenConfig={tokenConfig}
+          onLike={onLike}
         ></LikeControl>
         {authUser._id === user._id && (
-          <DeleteControl
-            postId={_id}
-            tokenConfig={tokenConfig}
-            onDelete={handleDelete}
-          ></DeleteControl>
+          <DeleteControl onDelete={onDelete}></DeleteControl>
         )}
       </Controls>
     </Container>
