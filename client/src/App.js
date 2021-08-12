@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Auth from './pages/Auth/Auth';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import CreatePost from './pages/CreatePost/CreatePost';
 import FullPost from './pages/FullPost';
 import Profile from './pages/profile/Profile';

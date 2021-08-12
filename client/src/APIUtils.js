@@ -1,30 +1,29 @@
 import axios from 'axios';
-import { tokenConfigStateless } from './store/utils';
 
-export const getUser = (username) => {
-  return axios.get(`/api/users/${username}`);
+export const getUser = (username, config) => {
+  return axios.get(`/api/users/${username}`, config);
 };
 
-export const getUserPosts = (username) => {
-  return axios.get(`/api/users/${username}/posts`);
+export const getUserPosts = (username, config) => {
+  return axios.get(`/api/users/${username}/posts`, config);
 };
 
-export const getPosts = () => {
-  return axios.get('/api/posts');
+export const getPosts = (config) => {
+  return axios.get('/api/posts', config);
 };
 
-export const getPost = (id) => {
-  return axios.get(`/api/posts/${id}`);
+export const getPost = (id, config) => {
+  return axios.get(`/api/posts/${id}`, config);
 };
 
-export const createPost = async ({ text }, token) => {
-  return axios.post('/api/posts', { text }, tokenConfigStateless(token));
+export const createPost = async ({ text }, config) => {
+  return axios.post('/api/posts', { text }, config); // requires token
 };
 
-export const likePost = (id, token) => {
-  return axios.patch(`/api/posts/${id}/like`, {}, tokenConfigStateless(token));
+export const likePost = (id, config) => {
+  return axios.patch(`/api/posts/${id}/like`, {}, config); // requires token
 };
 
-export const deletePost = (id, token) => {
-  return axios.delete(`/api/posts/${id}`, tokenConfigStateless(token));
+export const deletePost = (id, config) => {
+  return axios.delete(`/api/posts/${id}`, config); // requires token
 };

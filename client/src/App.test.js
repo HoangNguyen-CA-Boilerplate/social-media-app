@@ -22,7 +22,6 @@ describe('App', () => {
       ).toBeInTheDocument();
     });
   });
-
   describe('App workflows', () => {
     it('Login workflow', async () => {
       render(<App />, { route: '/login' });

@@ -4,14 +4,14 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { deletePost } from '../../APIUtils';
 import { useHistory } from 'react-router-dom';
 
-function DeleteControl({ postId, token }) {
+function DeleteControl({ postId, tokenConfig }) {
   const history = useHistory();
 
   const onDelete = async (e) => {
     e.stopPropagation();
     try {
-      await deletePost(postId, token);
-      history.push('/home');
+      await deletePost(postId, tokenConfig);
+      history.push('/');
       // show popup
     } catch (e) {
       console.error(e);

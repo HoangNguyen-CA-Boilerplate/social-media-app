@@ -3,14 +3,14 @@ import PostControl from './PostControl';
 import { FaRegHeart } from 'react-icons/fa';
 import { likePost } from '../../APIUtils';
 
-function LikeControl({ likes, postId, authUser, token }) {
+function LikeControl({ likes, postId, authUser, tokenConfig }) {
   const [numLikes, setNumLikes] = useState(likes.length);
   const [userLikes, setUserLikes] = useState(likes.includes(authUser._id));
 
   const onLike = async (e) => {
     e.stopPropagation();
     try {
-      const res = await likePost(postId, token);
+      const res = await likePost(postId, tokenConfig);
       if (res.data.likes) {
         setNumLikes(numLikes + 1);
         setUserLikes(true);

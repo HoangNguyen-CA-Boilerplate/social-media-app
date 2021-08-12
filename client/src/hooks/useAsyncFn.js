@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import useMountedState from './useMountedState';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -22,23 +23,28 @@ function useAsyncFn(asyncFn) {
     error: '',
     data: null,
   });
+  const isMounted = useMountedState();
 
   const execute = async (...params) => {
+    dispatch({ type: 'FETCH_START' });
     try {
-      dispatch({ type: 'FETCH_START' });
       const res = await asyncFn(...params);
-      dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
-      return res.data;
+      if (isMounted()) {
+        dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
+        return res.data;
+      }
     } catch (e) {
-      if (e.response)
-        dispatch({ type: 'FETCH_FAIL', payload: e.response.data.error });
-      else {
-        dispatch({ type: 'FETCH_FAIL', payload: 'something went wrong' });
+      if (isMounted()) {
+        if (e.response)
+          dispatch({ type: 'FETCH_FAIL', payload: e.response.data.error });
+        else {
+          dispatch({ type: 'FETCH_FAIL', payload: 'something went wrong' });
+        }
       }
     }
   };
 
-  return { execute, ...state };
+  return [state, execute];
 }
 
 export default useAsyncFn;

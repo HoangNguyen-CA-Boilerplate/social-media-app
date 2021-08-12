@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled, { css } from 'styled-components';
 import UserDisplay from '../user/UserDisplay';
 import LikeControl from './LikeControl';
@@ -7,7 +8,8 @@ import DeleteControl from './DeleteControl';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
-import { selectToken, selectUser } from '../../store/slices/authSlice';
+import useTokenConfig from '../../hooks/useTokenConfig';
+import { selectUser } from '../../store/slices/authSlice';
 
 const clickableStyles = css`
   cursor: pointer;
@@ -40,7 +42,7 @@ const Controls = styled.div`
 
 function Post({ text, user, _id, likes, em }) {
   const history = useHistory();
-  const token = useSelector(selectToken);
+  const tokenConfig = useTokenConfig();
   const authUser = useSelector(selectUser);
 
   const clickable = history.location.pathname !== `/posts/${_id}`;
@@ -62,10 +64,10 @@ function Post({ text, user, _id, likes, em }) {
           postId={_id}
           likes={likes}
           authUser={authUser}
-          token={token}
+          tokenConfig={tokenConfig}
         ></LikeControl>
         {authUser._id === user._id && (
-          <DeleteControl postId={_id} token={token}></DeleteControl>
+          <DeleteControl postId={_id} tokenConfig={tokenConfig}></DeleteControl>
         )}
       </Controls>
     </Container>
