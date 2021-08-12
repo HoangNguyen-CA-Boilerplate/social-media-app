@@ -14,6 +14,7 @@ const Container = styled.div``;
 function Home() {
   const tokenConfig = useTokenConfig();
   const posts = useAsync(getPosts, [tokenConfig]);
+  console.log(posts.data);
 
   return (
     <Container>

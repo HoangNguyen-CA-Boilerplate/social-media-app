@@ -11,7 +11,7 @@ const load8 = keyframes`
   }
 `;
 
-const Spinner = styled.div`
+const Spinner = styled.div.attrs({ 'data-testid': 'spinner' })`
   &,
   &::after {
     border-radius: 50%;

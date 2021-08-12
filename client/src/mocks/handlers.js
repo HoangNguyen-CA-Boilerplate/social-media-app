@@ -1,6 +1,7 @@
 import { rest } from 'msw';
 import resolveLogin from './resolvers/resolveLogin';
 import resolveSignup from './resolvers/resolveSignup';
+import mockPost from './mockPost';
 
 export const handlers = [
   rest.post('http://localhost/api/auth/login', resolveLogin),
@@ -12,6 +13,6 @@ export const handlers = [
   }),
 
   rest.get('http://localhost/api/posts/', (req, res, ctx) => {
-    return res(ctx.status(400), ctx.json({ status: 400, error: 'test error' }));
+    return res(ctx.json([mockPost]));
   }),
 ];
