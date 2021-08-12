@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PostControl from './PostControl';
 import { FaRegHeart } from 'react-icons/fa';
 import { likePost } from '../../APIUtils';
 
-function LikeControl({ likes, postId, authUser, tokenConfig }) {
-  const [numLikes, setNumLikes] = useState(likes.length);
-  const [userLikes, setUserLikes] = useState(likes.includes(authUser._id));
+import useAsyncFn from '../../hooks/useAsyncFn';
+
+function LikeControl({ userLikes, numLikes, postId, tokenConfig }) {
+  const [state, execute] = useAsyncFn(likePost, { userLikes, numLikes });
 
   const onLike = async (e) => {
     e.stopPropagation();
-    try {
-      const res = await likePost(postId, tokenConfig);
-      if (res.data.likes) {
-        setNumLikes(numLikes + 1);
-        setUserLikes(true);
-      } else {
-        setNumLikes(numLikes - 1);
-        setUserLikes(false);
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    await execute(postId, tokenConfig);
   };
 
   return (
     <PostControl
       icon={<FaRegHeart />}
       onClick={onLike}
-      active={userLikes}
-      label={numLikes}
+      active={state.data.userLikes}
+      label={state.data.numLikes}
     ></PostControl>
   );
 }

@@ -2,23 +2,23 @@ import React from 'react';
 import PostControl from './PostControl';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { deletePost } from '../../APIUtils';
-import { useHistory } from 'react-router-dom';
 
-function DeleteControl({ postId, tokenConfig }) {
-  const history = useHistory();
+import useAsyncFn from '../../hooks/useAsyncFn';
 
-  const onDelete = async (e) => {
+function DeleteControl({ postId, tokenConfig, onDelete }) {
+  const [, execute] = useAsyncFn(deletePost);
+
+  const handleDelete = async (e) => {
     e.stopPropagation();
-    try {
-      await deletePost(postId, tokenConfig);
-      history.push('/');
-      // show popup
-    } catch (e) {
-      console.error(e);
-    }
+    await execute(postId, tokenConfig);
+    onDelete();
   };
+
   return (
-    <PostControl icon={<RiDeleteBin5Line />} onClick={onDelete}></PostControl>
+    <PostControl
+      icon={<RiDeleteBin5Line />}
+      onClick={handleDelete}
+    ></PostControl>
   );
 }
 

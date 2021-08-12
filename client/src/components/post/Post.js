@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled, { css } from 'styled-components';
 import UserDisplay from '../user/UserDisplay';
@@ -7,8 +7,8 @@ import DeleteControl from './DeleteControl';
 
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-
 import useTokenConfig from '../../hooks/useTokenConfig';
+
 import { selectUser } from '../../store/slices/authSlice';
 
 const clickableStyles = css`
@@ -40,13 +40,13 @@ const Controls = styled.div`
   justify-content: space-between;
 `;
 
-function Post({ text, user, _id, likes, em }) {
+function Post({ text, user, _id, likes, em, onDelete }) {
   const history = useHistory();
   const tokenConfig = useTokenConfig();
   const authUser = useSelector(selectUser);
+  const [hide, setHide] = useState(false);
 
   const clickable = history.location.pathname !== `/posts/${_id}`;
-
   const routeToPost = () => {
     if (clickable) history.push(`/posts/${_id}`);
   };
@@ -55,6 +55,13 @@ function Post({ text, user, _id, likes, em }) {
     history.push(`/users/${user.username}`);
   };
 
+  const handleDelete = () => {
+    if (onDelete) onDelete();
+    else setHide(true);
+  };
+
+  if (hide) return null;
+
   return (
     <Container onClick={routeToPost} clickable={clickable} em={em}>
       <UserDisplay user={user} onClick={routeToUser} />
@@ -62,12 +69,16 @@ function Post({ text, user, _id, likes, em }) {
       <Controls>
         <LikeControl
           postId={_id}
-          likes={likes}
-          authUser={authUser}
+          userLikes={likes.includes(authUser._id)}
+          numLikes={likes.length}
           tokenConfig={tokenConfig}
         ></LikeControl>
         {authUser._id === user._id && (
-          <DeleteControl postId={_id} tokenConfig={tokenConfig}></DeleteControl>
+          <DeleteControl
+            postId={_id}
+            tokenConfig={tokenConfig}
+            onDelete={handleDelete}
+          ></DeleteControl>
         )}
       </Controls>
     </Container>

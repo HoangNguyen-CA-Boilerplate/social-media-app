@@ -17,11 +17,11 @@ function reducer(state, action) {
   }
 }
 
-function useAsyncFn(asyncFn) {
+function useAsyncFn(asyncFn, initialData = null) {
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     error: '',
-    data: null,
+    data: initialData,
   });
   const isMounted = useMountedState();
 
