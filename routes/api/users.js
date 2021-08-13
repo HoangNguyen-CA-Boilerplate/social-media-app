@@ -35,19 +35,22 @@ router.get(
   })
 );
 
-/*
-const { id } = req.params;
-    const post = await Post.findById(id);
+router.get(
+  '/:username/follow',
+  wrapAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username }).populate(
+      'followers followings'
+    );
+    if (!user) throw new AppError(400, "user doesn't exist");
 
-    if (post.likes.includes(req.user._id)) {
-      post.likes.pull(req.user._id);
-    } else {
-      post.likes.push(req.user._id);
-    }
+    console.log(user.followings);
+    res
+      .status(200)
+      .json({ followers: user.followers, followings: user.followings });
+  })
+);
 
-    const savedPost = await post.save();
-    res.status(200).json(savedPost);
-    */
 router.patch(
   '/:username/follow',
   isAuth,
