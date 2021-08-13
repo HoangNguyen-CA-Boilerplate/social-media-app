@@ -20,6 +20,7 @@ import {
   followUser,
   selectUserPostsStatus,
   selectUserPostsError,
+  getFollowers,
 } from '../../store/slices/userSlice';
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 
@@ -53,6 +54,10 @@ function Profile() {
     dispatch(followUser(username));
   };
 
+  const onGetFollowers = () => {
+    dispatch(getFollowers(username));
+  };
+
   return (
     <>
       <LoadAsync
@@ -63,6 +68,7 @@ function Profile() {
           user={user}
           authUser={authUser}
           onFollow={onFollow}
+          showFollow={onGetFollowers}
         ></ProfileDisplay>
       </LoadAsync>
       <LoadAsync loading={postsStatus === 'loading'} error={postsError}>

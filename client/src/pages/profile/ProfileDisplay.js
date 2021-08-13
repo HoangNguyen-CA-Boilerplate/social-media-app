@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Avatar from '../../components/user/Avatar';
 import Button from '../../components/Button';
+import Followers from './Followers';
+import Followings from './Followings';
 
 import { FaRegCalendarAlt } from 'react-icons/fa';
 
@@ -80,10 +82,12 @@ const Follow = styled.a`
   }
 `;
 
-function ProfileDisplay({ user, authUser, onFollow }) {
+function ProfileDisplay({ user, authUser, onFollow, showFollow }) {
   const following = user.followers.includes(authUser._id);
   return (
     <>
+      <Followers user={user}></Followers>
+      <Followings user={user}></Followings>
       <Cover>
         <ProfileAvatar></ProfileAvatar>
       </Cover>
@@ -106,11 +110,11 @@ function ProfileDisplay({ user, authUser, onFollow }) {
           <time>Joined {new Date(user.createdAt).toDateString()}</time>
         </DateContainer>
         <FollowContainer>
-          <Follow>
+          <Follow onClick={showFollow}>
             <Bold>{user.followers.length}</Bold> Follower
             {user.followers.length === 1 ? '' : 's'}
           </Follow>
-          <Follow>
+          <Follow onClick={showFollow}>
             <Bold>{user.followings.length}</Bold> Following
           </Follow>
         </FollowContainer>

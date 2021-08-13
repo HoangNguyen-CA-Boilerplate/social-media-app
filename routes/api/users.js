@@ -36,7 +36,7 @@ router.get(
 );
 
 router.get(
-  '/:username/follow',
+  '/:username/followers',
   wrapAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username }).populate(
@@ -44,10 +44,17 @@ router.get(
     );
     if (!user) throw new AppError(400, "user doesn't exist");
 
-    console.log(user.followings);
-    res
-      .status(200)
-      .json({ followers: user.followers, followings: user.followings });
+    res.status(200).json(user.followers);
+  })
+);
+router.get(
+  '/:username/followings',
+  wrapAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username }).populate('followings');
+    if (!user) throw new AppError(400, "user doesn't exist");
+
+    res.status(200).json(user.followings);
   })
 );
 

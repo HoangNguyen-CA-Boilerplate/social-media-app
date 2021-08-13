@@ -46,14 +46,10 @@ function Post({ text, user, _id, likes, onDelete, onLike, em }) {
   const routeToPost = () => {
     if (clickable) history.push(`/posts/${_id}`);
   };
-  const routeToUser = (e) => {
-    e.stopPropagation();
-    history.push(`/users/${user.username}`);
-  };
 
   return (
     <Container onClick={routeToPost} clickable={clickable} em={em}>
-      <UserDisplay user={user} onClick={routeToUser} />
+      <UserDisplay user={user} />
       <Text> {text}</Text>
       <Controls>
         <LikeControl

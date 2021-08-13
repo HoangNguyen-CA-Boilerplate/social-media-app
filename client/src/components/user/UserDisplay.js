@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Avatar from './Avatar';
 
+import { useHistory } from 'react-router';
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -25,11 +27,18 @@ const Username = styled.p`
   color: ${({ theme }) => theme.clrs.neutral[600]};
 `;
 
-function UserDisplay({ user, onClick }) {
+function UserDisplay({ user }) {
+  const history = useHistory();
+
+  const routeToUser = (e) => {
+    e.stopPropagation();
+    history.push(`/users/${user.username}`);
+  };
+
   return (
     <Container>
-      <Avatar onClick={onClick} />
-      <TextContainer onClick={onClick}>
+      <Avatar onClick={routeToUser} />
+      <TextContainer onClick={routeToUser}>
         <DisplayName>{user.displayName}</DisplayName>
         <Username>@{user.username}</Username>
       </TextContainer>

@@ -6,6 +6,12 @@ export const initialState = {
   userStatus: 'initial',
   user: null,
   userError: '',
+  getFollowersStatus: 'initial',
+  getFollowersError: '',
+  getFollowingsStatus: 'initial',
+  getFollowingsError: '',
+  followers: [],
+  followings: [],
   postsStatus: 'initial', // initial, loading, success, fail
   posts: [],
   postsError: '',
@@ -18,6 +24,31 @@ export const getUser = createAsyncThunk(
   async ({ username }, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/api/users/${username}/`);
+      return res.data;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
+export const getFollowers = createAsyncThunk(
+  'user/getFollowers',
+  async (username, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/api/users/${username}/followers`);
+      return res.data;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+export const getFollowings = createAsyncThunk(
+  'user/getFollowings',
+  async (username, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/api/users/${username}/followings`);
       return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
@@ -128,6 +159,32 @@ const userSlice = createSlice({
     [followUser.fulfilled]: (state, action) => {
       state.user = action.payload;
     },
+
+    [getFollowers.pending]: (state) => {
+      state.getFollowersStatus = 'loading';
+      state.getFollowersError = '';
+    },
+    [getFollowers.fulfilled]: (state, action) => {
+      state.getFollowersStatus = 'success';
+      state.followers = action.payload;
+    },
+    [getFollowers.rejected]: (state, action) => {
+      state.getFollowersStatus = 'fail';
+      state.getFollowersError = action.payload;
+    },
+
+    [getFollowings.pending]: (state) => {
+      state.getFollowingsStatus = 'loading';
+      state.getFollowingsError = '';
+    },
+    [getFollowings.fulfilled]: (state, action) => {
+      state.getFollowingsStatus = 'success';
+      state.followings = action.payload;
+    },
+    [getFollowings.rejected]: (state, action) => {
+      state.getFollowingsStatus = 'fail';
+      state.getFollowingsError = action.payload;
+    },
   },
 });
 
@@ -140,3 +197,14 @@ export const selectUserPostsError = (state) => state.posts.postsError;
 export const selectUser = (state) => state.user.user;
 export const selectUserStatus = (state) => state.user.userStatus;
 export const selectUserError = (state) => state.user.userError;
+
+export const selectFollowers = (state) => state.user.followers;
+export const selectGetFollowersStatus = (state) =>
+  state.user.getFollowersStatus;
+export const selectGetFollowersError = (state) => state.user.getFollowersError;
+
+export const selectFollowings = (state) => state.user.followings;
+export const selectGetFollowingsStatus = (state) =>
+  state.user.getFollowingsStatus;
+export const selectGetFollowingsError = (state) =>
+  state.user.getFollowingsError;
