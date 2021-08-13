@@ -85,7 +85,9 @@ router.get(
     const user = await User.findOne({ username });
     if (!user) throw new AppError(400, "user doesn't exist");
 
-    const posts = await Post.find({ user: user._id }).populate('user');
+    const posts = await Post.find({ user: user._id })
+      .sort({ createdAt: -1 })
+      .populate('user');
     res.status(200).json(posts);
   })
 );

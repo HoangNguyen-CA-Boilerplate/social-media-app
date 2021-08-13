@@ -5,7 +5,7 @@ import { logout } from '../../store/slices/authSlice';
 import { selectUser } from '../../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaRegUser, FaPencilRuler } from 'react-icons/fa';
+import { FaRegUser } from 'react-icons/fa';
 import { BrandIcon } from '../../brand';
 
 import NavLink from './NavLink';
@@ -44,9 +44,7 @@ function Nav() {
       <NavLink icon={<FaRegUser />} to={`/users/${user.username}`}>
         Profile
       </NavLink>
-      <NavLink icon={<FaPencilRuler />} to='/submit'>
-        Post
-      </NavLink>
+
       <NavLink onClick={() => dispatch(logout())}> Logout</NavLink>
     </Container>
   );

@@ -5,7 +5,6 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Auth from './pages/Auth/Auth';
 import Home from './pages/Home/Home';
-import CreatePost from './pages/CreatePost/CreatePost';
 import FullPost from './pages/FullPost';
 import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
@@ -36,11 +35,6 @@ function App() {
           <Route exact path='/home'>
             <Layout header='Home'>
               <Home />
-            </Layout>
-          </Route>
-          <Route exact path='/submit'>
-            <Layout header='Create Post'>
-              <CreatePost />
             </Layout>
           </Route>
           <Route exact path='/posts/:id'>

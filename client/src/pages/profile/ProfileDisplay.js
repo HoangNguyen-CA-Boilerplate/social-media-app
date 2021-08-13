@@ -12,7 +12,7 @@ const Cover = styled.div`
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  font-size: 4.5rem;
+  font-size: 4rem;
   transform: translateY(50%);
 `;
 
@@ -38,17 +38,20 @@ const Username = styled.p`
   color: ${({ theme }) => theme.clrs.neutral[600]};
 `;
 
-function ProfileDisplay({ user, auth }) {
+function ProfileDisplay({ user, authUser, onFollow }) {
+  const following = user.followers.includes(authUser._id);
   return (
     <>
       <Cover>
         <ProfileAvatar></ProfileAvatar>
       </Cover>
       <Controls>
-        {auth ? (
+        {authUser._id === user._id ? (
           <Button empty>Edit Profile</Button>
         ) : (
-          <Button empty>Follow</Button>
+          <Button empty={!following} onClick={onFollow}>
+            {following ? 'Following' : 'Follow'}
+          </Button>
         )}
       </Controls>
       <Main>

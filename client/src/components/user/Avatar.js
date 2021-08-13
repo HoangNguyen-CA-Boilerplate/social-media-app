@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
 
 const Container = styled.div`
+  flex-shrink: 0;
+
   font-size: 1.5rem;
   height: 2em;
   width: 2em;

@@ -13,7 +13,7 @@ const router = express.Router();
 router.get(
   '/',
   wrapAsync(async (req, res) => {
-    const posts = await Post.find().populate('user');
+    const posts = await Post.find().sort({ createdAt: -1 }).populate('user');
     res.status(200).json(posts);
   })
 );
@@ -36,7 +36,9 @@ router.post(
     const { text } = req.body;
     const post = new Post({ text, user: req.user._id, likes: [] });
     const savedPost = await post.save();
-    res.status(200).json(savedPost);
+
+    const foundPost = await Post.findById(savedPost._id).populate('user');
+    res.status(200).json(foundPost);
   })
 );
 

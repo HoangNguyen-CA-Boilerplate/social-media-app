@@ -69,6 +69,23 @@ export const likeUserPost = createAsyncThunk(
   }
 );
 
+export const followUser = createAsyncThunk(
+  'user/followUser',
+  async (username, { rejectWithValue, getState }) => {
+    try {
+      const res = await axios.patch(
+        `/api/users/${username}/follow`,
+        {},
+        tokenConfig(getState)
+      );
+      return res.data;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -105,8 +122,11 @@ const userSlice = createSlice({
       );
     },
     [likeUserPost.fulfilled]: (state, action) => {
-      let found = state.posts.find((post) => post._id === action.payload._id);
+      const found = state.posts.find((post) => post._id === action.payload._id);
       found.likes = action.payload.likes;
+    },
+    [followUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
     },
   },
 });

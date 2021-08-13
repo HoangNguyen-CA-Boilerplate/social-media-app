@@ -17,9 +17,11 @@ import {
   deleteUserPost,
   getUserPosts,
   getUser,
+  followUser,
   selectUserPostsStatus,
   selectUserPostsError,
 } from '../../store/slices/userSlice';
+import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 
 function Profile() {
   const { username } = useParams();
@@ -37,6 +39,7 @@ function Profile() {
   const posts = useSelector(selectUserPosts);
   const postsStatus = useSelector(selectUserPostsStatus);
   const postsError = useSelector(selectUserPostsError);
+  const authUser = useSelector(selectAuthUser);
 
   const onLike = (id) => {
     dispatch(likeUserPost(id));
@@ -46,14 +49,21 @@ function Profile() {
     dispatch(deleteUserPost(id));
   };
 
-  //authUser._id === user.data?._id
+  const onFollow = () => {
+    dispatch(followUser(username));
+  };
+
   return (
     <>
       <LoadAsync
         loading={userStatus === 'loading' || userStatus === 'initial'}
         error={userError}
       >
-        <ProfileDisplay user={user} auth={false}></ProfileDisplay>
+        <ProfileDisplay
+          user={user}
+          authUser={authUser}
+          onFollow={onFollow}
+        ></ProfileDisplay>
       </LoadAsync>
       <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
         <Posts posts={posts} onLike={onLike} onDelete={onDelete} />
