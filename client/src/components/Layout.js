@@ -26,7 +26,11 @@ const Header = styled.h1`
   font-size: 1.5rem;
 `;
 
-function Layout({ children, header }) {
+const SubHeader = styled.p`
+  color: ${({ theme }) => theme.clrs.neutral[600]};
+`;
+
+function Layout({ children, header, subheader }) {
   const isAuth = useSelector(selectIsAuth);
 
   if (!isAuth) return <Redirect to='/' />;
@@ -36,6 +40,7 @@ function Layout({ children, header }) {
       <MainContainer>
         <TopBar>
           <Header>{header}</Header>
+          <SubHeader>{subheader}</SubHeader>
         </TopBar>
         {children}
       </MainContainer>

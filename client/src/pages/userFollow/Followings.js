@@ -10,15 +10,15 @@ import {
   getFollowings,
 } from '../../store/slices/userSlice';
 
-function Followings({ user }) {
+function Followings({ username }) {
   const dispatch = useDispatch();
   const followings = useSelector(selectFollowings);
   const status = useSelector(selectGetFollowingsStatus);
   const error = useSelector(selectGetFollowingsError);
 
   useEffect(() => {
-    dispatch(getFollowings(user.username));
-  }, [dispatch, user]);
+    dispatch(getFollowings(username));
+  }, [dispatch, username]);
 
   return (
     <LoadAsync loading={status === 'loading'} error={error}>

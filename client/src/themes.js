@@ -24,6 +24,7 @@ const theme1 = {
     navLink: '0.6em',
     button: '0.7em 1em',
     main: '1em',
+    modal: '0.5em',
   },
 };
 

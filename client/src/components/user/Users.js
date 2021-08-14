@@ -3,7 +3,9 @@ import UserDisplay from './UserDisplay';
 
 function Users({ users }) {
   if (!users) return null;
-  return users.map((user) => <UserDisplay user={user}></UserDisplay>);
+  return users.map((user) => (
+    <UserDisplay key={user._id} user={user}></UserDisplay>
+  ));
 }
 
 export default Users;

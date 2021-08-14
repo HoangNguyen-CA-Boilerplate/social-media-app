@@ -1,14 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Signup from './pages/Signup/Signup';
-import Login from './pages/Login/Login';
-import Auth from './pages/Auth/Auth';
-import Home from './pages/Home/Home';
+import Signup from './pages/signup/Signup';
+import Login from './pages/login/Login';
+import Auth from './pages/auth/Auth';
+import Home from './pages/home/Home';
 import FullPost from './pages/FullPost';
 import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
 import Layout from './components/Layout';
+import UserFollowers from './pages/userFollow/UserFollowers';
+import UserFollowings from './pages/userFollow/UserFollowings';
 
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
@@ -43,9 +45,13 @@ function App() {
             </Layout>
           </Route>
           <Route exact path='/users/:username'>
-            <Layout header='Profile'>
-              <Profile />
-            </Layout>
+            <Profile />
+          </Route>
+          <Route exact path='/users/:username/followers'>
+            <UserFollowers />
+          </Route>
+          <Route exact path='/users/:username/following'>
+            <UserFollowings />
           </Route>
         </Switch>
       )}
