@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled, { css } from 'styled-components';
-import UserDisplay from '../user/UserDisplay';
+import UserPreview from '../user/UserPreview';
 import LikeControl from './LikeControl';
 import DeleteControl from './DeleteControl';
 
@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slices/authSlice';
 
-const clickableStyles = css`
+export const clickableStyles = css`
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.clrs.neutral[200]};
@@ -43,13 +43,19 @@ function Post({ text, user, _id, likes, onDelete, onLike, em }) {
   const authUser = useSelector(selectUser);
 
   const clickable = history.location.pathname !== `/posts/${_id}`;
+
   const routeToPost = () => {
     if (clickable) history.push(`/posts/${_id}`);
   };
 
+  const routeToUser = (e) => {
+    e.stopPropagation();
+    history.push(`/users/${user.username}`);
+  };
+
   return (
     <Container onClick={routeToPost} clickable={clickable} em={em}>
-      <UserDisplay user={user} />
+      <UserPreview user={user} onClick={routeToUser} />
       <Text> {text}</Text>
       <Controls>
         <LikeControl

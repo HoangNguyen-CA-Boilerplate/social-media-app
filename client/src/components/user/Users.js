@@ -1,11 +1,9 @@
 import React from 'react';
-import UserDisplay from './UserDisplay';
+import User from './User';
 
 function Users({ users }) {
   if (!users) return null;
-  return users.map((user) => (
-    <UserDisplay key={user._id} user={user}></UserDisplay>
-  ));
+  return users.map((user) => <User key={user._id} user={user}></User>);
 }
 
 export default Users;
