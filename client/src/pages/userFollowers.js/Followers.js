@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Users from '../../components/user/Users';
 import LoadAsync from '../../components/LoadAsync';
+import LayoutMessage from '../../components/layout/LayoutMessage';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -22,7 +23,13 @@ function Followers({ username }) {
 
   return (
     <LoadAsync loading={status === 'loading'} error={error}>
-      <Users users={followers}></Users>
+      {followers.length === 0 ? (
+        <LayoutMessage sub="When someone follows them, they'll be listed here.">
+          @{username} doesn't have any followers
+        </LayoutMessage>
+      ) : (
+        <Users users={followers}></Users>
+      )}
     </LoadAsync>
   );
 }

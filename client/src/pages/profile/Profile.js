@@ -52,6 +52,7 @@ function Profile() {
   const onFollow = () => {
     dispatch(followUser(username));
   };
+  console.log(postsError);
 
   return (
     <>
@@ -66,7 +67,8 @@ function Profile() {
           onFollow={onFollow}
         ></ProfileDisplay>
       </LoadAsync>
-      <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
+
+      <LoadAsync loading={postsStatus === 'loading'}>
         <Posts posts={posts} onLike={onLike} onDelete={onDelete} />
       </LoadAsync>
     </>

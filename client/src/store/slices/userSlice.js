@@ -125,7 +125,7 @@ const userSlice = createSlice({
   extraReducers: {
     [getUser.pending]: (state, action) => {
       state.userStatus = 'loading';
-      state.error = '';
+      state.userError = '';
     },
     [getUser.fulfilled]: (state, action) => {
       state.userStatus = 'success';
@@ -133,11 +133,11 @@ const userSlice = createSlice({
     },
     [getUser.rejected]: (state, action) => {
       state.userStatus = 'fail';
-      state.error = action.payload;
+      state.userError = action.payload;
     },
     [getUserPosts.pending]: (state) => {
       state.postsStatus = 'loading';
-      state.error = '';
+      state.postsError = '';
     },
     [getUserPosts.fulfilled]: (state, action) => {
       state.postsStatus = 'success';
@@ -145,7 +145,7 @@ const userSlice = createSlice({
     },
     [getUserPosts.rejected]: (state, action) => {
       state.postsStatus = 'fail';
-      state.error = action.payload;
+      state.postsError = action.payload;
     },
     [deleteUserPost.fulfilled]: (state, action) => {
       state.posts = state.posts.filter(
@@ -192,7 +192,7 @@ export default userSlice.reducer;
 
 export const selectUserPosts = (state) => state.user.posts;
 export const selectUserPostsStatus = (state) => state.user.postsStatus;
-export const selectUserPostsError = (state) => state.posts.postsError;
+export const selectUserPostsError = (state) => state.user.postsError;
 
 export const selectUser = (state) => state.user.user;
 export const selectUserStatus = (state) => state.user.userStatus;
