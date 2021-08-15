@@ -18,7 +18,7 @@ const MainContainer = styled.div`
   border-left: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
 `;
 
-function Layout({ children, header, subheader, top }) {
+function Layout({ children }) {
   const isAuth = useSelector(selectIsAuth);
 
   if (!isAuth) return <Redirect to='/' />;

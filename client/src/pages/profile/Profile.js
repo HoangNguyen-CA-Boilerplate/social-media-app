@@ -4,10 +4,9 @@ import { useParams } from 'react-router-dom';
 import ProfileDisplay from './ProfileDisplay';
 import Posts from '../../components/post/Posts';
 import LoadAsync from '../../components/LoadAsync';
+import LayoutHeader from '../../components/layout/LayoutHeader';
 
-import { useDispatch } from 'react-redux';
-
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   selectUser,
   selectUserStatus,
@@ -56,6 +55,7 @@ function Profile() {
 
   return (
     <>
+      <LayoutHeader>{username}</LayoutHeader>
       <LoadAsync
         loading={userStatus === 'loading' || userStatus === 'initial'}
         error={userError}

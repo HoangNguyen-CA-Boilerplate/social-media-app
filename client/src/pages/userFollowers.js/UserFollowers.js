@@ -1,13 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Followers from './Followers';
-import FollowNavbar from './FollowNavbar';
+import FollowNav from '../../components/FollowNav';
+import LayoutHeader from '../../components/layout/LayoutHeader';
 
 function UserFollowers() {
   const { username } = useParams();
   return (
     <>
-      <FollowNavbar username={username}></FollowNavbar>
+      <LayoutHeader>{username}</LayoutHeader>
+      <FollowNav username={username}></FollowNav>
       <Followers username={username}></Followers>
     </>
   );

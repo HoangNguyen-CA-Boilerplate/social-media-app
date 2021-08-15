@@ -5,16 +5,17 @@ const Container = styled.div`
   padding: ${({ theme }) => theme.padding.main};
   border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
 `;
+
 const Header = styled.h1`
   font-size: 1.5rem;
 `;
 
-function TopBar({ header }) {
+function LayoutHeader({ children }) {
   return (
     <Container>
-      <Header>{header}</Header>
+      <Header>{children}</Header>
     </Container>
   );
 }
 
-export default TopBar;
+export default LayoutHeader;

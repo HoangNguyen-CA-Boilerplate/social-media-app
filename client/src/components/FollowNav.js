@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router';
-import FlexLink, { FlexLinkContainer } from '../../components/button/FlexLink';
+import FlexLink, { FlexLinkContainer } from './button/FlexLink';
 
 function Navbar({ username }) {
   const match = useRouteMatch();

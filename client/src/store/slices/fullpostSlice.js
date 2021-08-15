@@ -6,7 +6,6 @@ export const initialState = {
   postStatus: 'initial', // initial, loading, success, fail
   post: {},
   postError: '',
-  deleted: false,
 };
 
 const defaultError = 'something went wrong';
@@ -26,9 +25,10 @@ export const getPost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   'fullpost/deletePost',
-  async (id, { rejectWithValue, getState }) => {
+  async ({ id, history }, { rejectWithValue, getState }) => {
     try {
       const res = await axios.delete(`/api/posts/${id}`, tokenConfig(getState));
+      history.push('/home');
       return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
@@ -72,9 +72,7 @@ const postsSlice = createSlice({
       state.postStatus = 'fail';
       state.postError = action.payload;
     },
-    [deletePost.fulfilled]: (state, action) => {
-      state.deleted = true;
-    },
+    [deletePost.fulfilled]: (state, action) => {},
     [likePost.fulfilled]: (state, action) => {
       state.post.likes = action.payload.likes;
     },

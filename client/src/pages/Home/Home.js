@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
 
 import LoadAsync from '../../components/LoadAsync';
-import CreatePost from '../../components/CreatePost/CreatePost';
+import CreatePost from '../../components/createPost/CreatePost';
 import Posts from '../../components/post/Posts';
+import LayoutHeader from '../../components/layout/LayoutHeader';
 
 import {
   getPosts,
@@ -14,8 +14,6 @@ import {
   selectPostsStatus,
 } from '../../store/slices/postsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
-const Container = styled.div``;
 
 function Home() {
   const dispatch = useDispatch();
@@ -36,12 +34,13 @@ function Home() {
   };
 
   return (
-    <Container>
+    <>
+      <LayoutHeader>Home</LayoutHeader>
       <CreatePost />
       <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
         <Posts posts={posts} onDelete={onDelete} onLike={onLike} />
       </LoadAsync>
-    </Container>
+    </>
   );
 }
 
