@@ -1,7 +1,7 @@
 import React from 'react';
 import FormGroup from '../form/FormGroup';
 import Form from '../form/Form';
-import Button from '../Button';
+import Button from '../button/Button';
 import ErrorMessage from '../form/ErrorMessage';
 
 import { useForm } from 'react-hook-form';

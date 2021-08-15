@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.padding.main};
-  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[400]};
+  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
 
   ${clickableStyles}
 `;

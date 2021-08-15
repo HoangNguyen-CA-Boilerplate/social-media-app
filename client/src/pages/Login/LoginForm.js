@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import Form from '../../components/form/Form';
 import FormGroup from '../../components/form/FormGroup';
-import Button from '../../components/Button';
+import Button from '../../components/button/Button';
 
 function LoginForm({ onSubmit }) {
   const {

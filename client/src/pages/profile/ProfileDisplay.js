@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Avatar from '../../components/user/Avatar';
-import Button from '../../components/Button';
+import Button from '../../components/button/Button';
 
 import FollowControls from './FollowControls';
 

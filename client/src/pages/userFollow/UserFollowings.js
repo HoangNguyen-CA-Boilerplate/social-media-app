@@ -1,15 +1,16 @@
 import React from 'react';
 import Followings from './Followings';
-import Layout from '../../components/Layout';
+import FollowNavbar from './FollowNavbar';
 
 import { useParams } from 'react-router-dom';
 
 function UserFollowings() {
   const { username } = useParams();
   return (
-    <Layout header={`${username}`}>
+    <>
+      <FollowNavbar username={username}></FollowNavbar>
       <Followings username={username}></Followings>
-    </Layout>
+    </>
   );
 }
 

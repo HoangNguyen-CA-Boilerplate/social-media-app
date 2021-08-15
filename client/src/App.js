@@ -8,7 +8,7 @@ import Home from './pages/home/Home';
 import FullPost from './pages/FullPost';
 import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
-import Layout from './components/Layout';
+import Layout from './components/Layout/Layout';
 import UserFollowers from './pages/userFollow/UserFollowers';
 import UserFollowings from './pages/userFollow/UserFollowings';
 
@@ -23,37 +23,39 @@ function App() {
       {isAuth === null ? (
         <Landing />
       ) : (
-        <Switch>
-          <Route exact path='/login'>
-            <Login />
-          </Route>
-          <Route exact path='/signup'>
-            <Signup />
-          </Route>
-          <Route exact path='/'>
-            <Auth />
-          </Route>
+        <>
+          <Switch>
+            <Route exact path='/login'>
+              <Login />
+            </Route>
+            <Route exact path='/signup'>
+              <Signup />
+            </Route>
+            <Route exact path='/'>
+              <Auth />
+            </Route>
+          </Switch>
 
-          <Route exact path='/home'>
-            <Layout header='Home'>
-              <Home />
-            </Layout>
-          </Route>
-          <Route exact path='/posts/:id'>
-            <Layout header='Post'>
-              <FullPost />
-            </Layout>
-          </Route>
-          <Route exact path='/users/:username'>
-            <Profile />
-          </Route>
-          <Route exact path='/users/:username/followers'>
-            <UserFollowers />
-          </Route>
-          <Route exact path='/users/:username/following'>
-            <UserFollowings />
-          </Route>
-        </Switch>
+          <Layout>
+            <Switch>
+              <Route exact path='/home'>
+                <Home />
+              </Route>
+              <Route exact path='/posts/:id'>
+                <FullPost />
+              </Route>
+              <Route exact path='/users/:username'>
+                <Profile />
+              </Route>
+              <Route exact path='/users/:username/followers'>
+                <UserFollowers />
+              </Route>
+              <Route exact path='/users/:username/following'>
+                <UserFollowings />
+              </Route>
+            </Switch>
+          </Layout>
+        </>
       )}
     </>
   );

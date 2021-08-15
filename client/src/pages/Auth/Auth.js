@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../components/button/LinkButton';
 import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
