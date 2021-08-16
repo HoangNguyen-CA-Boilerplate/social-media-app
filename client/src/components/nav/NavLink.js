@@ -45,6 +45,10 @@ const StyledLink = styled(Link)`
 
 const NavText = styled.p`
   line-height: 100%;
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    display: none;
+  }
 `;
 
 function NavLink({ to, icon, children, ...props }) {

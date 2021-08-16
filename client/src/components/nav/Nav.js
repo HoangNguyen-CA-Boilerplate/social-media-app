@@ -6,6 +6,8 @@ import { selectUser } from '../../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
 import { FaRegUser } from 'react-icons/fa';
+import { VscSignOut } from 'react-icons/vsc';
+
 import { BrandIcon } from '../../brand';
 
 import NavLink from './NavLink';
@@ -20,7 +22,7 @@ const Container = styled.nav`
   top: 0;
   left: 0;
 
-  padding: ${({ theme }) => theme.padding.main} 1em;
+  padding: 0.5em;
   min-height: 100vh;
   & > * + * {
     margin-top: 0.5em;
@@ -49,7 +51,9 @@ function Nav() {
         Profile
       </NavLink>
 
-      <BottomNavLink onClick={() => dispatch(logout())}>Logout</BottomNavLink>
+      <BottomNavLink icon={<VscSignOut />} onClick={() => dispatch(logout())}>
+        Logout
+      </BottomNavLink>
     </Container>
   );
 }

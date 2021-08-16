@@ -26,6 +26,13 @@ const theme1 = {
     main: '1em',
     modal: '0.5em',
   },
+
+  breakpoints: {
+    mobile: '(max-width: 500px)',
+    tablet: '(max-width:900px)',
+    laptop: '(max-width: 1440px)',
+    desktop: '(max-width: 1980px)',
+  },
 };
 
 export { theme1 };
