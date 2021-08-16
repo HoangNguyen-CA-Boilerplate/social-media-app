@@ -38,7 +38,9 @@ function CreatePostForm({ onSubmit, error }) {
 
       <Controls>
         <ErrorMessage>{error}</ErrorMessage>
-        <CreateButton submit>Create Post</CreateButton>
+        <CreateButton submit small>
+          Post
+        </CreateButton>
       </Controls>
     </Form>
   );

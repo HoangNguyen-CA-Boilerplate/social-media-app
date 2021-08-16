@@ -10,17 +10,26 @@ import { FaRegCalendarAlt } from 'react-icons/fa';
 const Cover = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[400]};
   width: 100%;
-  padding-top: 10%;
+  padding-top: 30%;
   position: relative;
-  padding-left: ${({ theme }) => theme.padding.main};
 `;
 
 const ProfileAvatar = styled(Avatar)`
   font-size: 4rem;
-  transform: translateY(50%);
+  position: absolute;
+  left: ${({ theme }) => theme.padding.main};
+  bottom: ${({ theme }) => theme.padding.main};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: 3rem;
+  }
+  @media ${({ theme }) => theme.breakpoints.mobile} {
+    font-size: 2.5rem;
+  }
 `;
 
 const Controls = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -64,10 +73,10 @@ function ProfileDisplay({ user, authUser, onFollow }) {
   const following = user.followers.includes(authUser._id);
   return (
     <>
-      <Cover>
-        <ProfileAvatar></ProfileAvatar>
-      </Cover>
+      <Cover></Cover>
       <Controls>
+        <ProfileAvatar></ProfileAvatar>
+
         {authUser._id === user._id ? (
           <Button empty>Edit Profile</Button>
         ) : (

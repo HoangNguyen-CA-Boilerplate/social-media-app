@@ -18,6 +18,10 @@ const emptyStyles = css`
   }
 `;
 
+const smallStyles = css`
+  padding: ${({ theme }) => theme.padding.buttonSmall};
+`;
+
 const Button = styled.button.attrs((props) => ({
   type: props.submit ? 'submit' : 'button',
 }))`
@@ -37,6 +41,7 @@ const Button = styled.button.attrs((props) => ({
 
   text-decoration: none;
 
+  ${(props) => props.small && smallStyles}
   ${(props) => (props.empty ? emptyStyles : defaultStyles)}
 `;
 
