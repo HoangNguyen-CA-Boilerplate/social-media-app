@@ -15,11 +15,13 @@ import UserFollowings from './pages/userFollowings.js/UserFollowings';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+
 function App() {
   const isAuth = useSelector(selectIsAuth);
 
   return (
-    <>
+    <Router>
       {isAuth === null ? (
         <Landing />
       ) : (
@@ -57,7 +59,7 @@ function App() {
           </Layout>
         </>
       )}
-    </>
+    </Router>
   );
 }
 

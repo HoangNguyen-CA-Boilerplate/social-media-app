@@ -20,7 +20,7 @@ const Container = styled.nav`
   top: 0;
   left: 0;
 
-  padding: 0 1em;
+  padding: ${({ theme }) => theme.padding.main} 1em;
   min-height: 100vh;
   & > * + * {
     margin-top: 0.5em;
@@ -29,6 +29,10 @@ const Container = styled.nav`
 
 const Logo = styled(BrandIcon)`
   color: ${({ theme }) => theme.clrs.primary[500]};
+`;
+
+const BottomNavLink = styled(NavLink)`
+  margin-top: auto;
 `;
 
 function Nav() {
@@ -45,7 +49,7 @@ function Nav() {
         Profile
       </NavLink>
 
-      <NavLink onClick={() => dispatch(logout())}> Logout</NavLink>
+      <BottomNavLink onClick={() => dispatch(logout())}>Logout</BottomNavLink>
     </Container>
   );
 }
