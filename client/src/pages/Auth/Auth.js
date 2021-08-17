@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { selectIsAuth } from '../../store/slices/authSlice';
-
-import { brandName, BrandIcon } from '../../brand';
+import { brandName, BrandIcon } from '../../theme/brand';
 
 const Container = styled.div`
   display: flex;

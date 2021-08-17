@@ -8,7 +8,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { FaRegUser } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 
-import { BrandIcon } from '../../brand';
+import { BrandIcon } from '../../theme/brand';
 
 import NavLink from './NavLink';
 

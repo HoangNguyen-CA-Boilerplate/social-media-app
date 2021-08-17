@@ -3,11 +3,12 @@ import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
-import { theme1 } from './themes';
+import { theme1 } from './theme/default';
 
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import authReducer, { initialState } from './store/slices/authSlice';
+
 import mockUser from './mocks/mockUser';
 
 const authState = {

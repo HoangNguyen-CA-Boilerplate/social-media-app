@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { BrandIcon } from '../brand';
+
+import { BrandIcon } from '../theme/brand';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../store/slices/authSlice';
 

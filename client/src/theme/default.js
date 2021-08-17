@@ -1,4 +1,4 @@
-const theme1 = {
+const theme = {
   clrs: {
     primary: {
       100: '#d3f1ff',
@@ -36,4 +36,4 @@ const theme1 = {
   },
 };
 
-export { theme1 };
+export default theme;
