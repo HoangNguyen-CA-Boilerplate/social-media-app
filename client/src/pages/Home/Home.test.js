@@ -8,6 +8,5 @@ describe('Home', () => {
     expect(
       await screen.findByRole('heading', { name: /Home/i })
     ).toBeInTheDocument();
-    screen.debug();
   });
 });

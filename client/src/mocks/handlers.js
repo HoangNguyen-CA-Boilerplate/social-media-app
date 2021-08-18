@@ -2,6 +2,7 @@ import { rest } from 'msw';
 import resolveLogin from './resolvers/resolveLogin';
 import resolveSignup from './resolvers/resolveSignup';
 import mockPost from './mockPost';
+import mockUser from './mockUser';
 
 export const handlers = [
   rest.post('http://localhost/api/auth/login', resolveLogin),
@@ -13,6 +14,14 @@ export const handlers = [
   }),
 
   rest.get('http://localhost/api/posts/', (req, res, ctx) => {
+    return res(ctx.json([mockPost]));
+  }),
+
+  rest.get('http://localhost/api/users/:username', (req, res, ctx) => {
+    return res(ctx.json(mockUser));
+  }),
+
+  rest.get('http://localhost/api/users/:username/posts', (req, res, ctx) => {
     return res(ctx.json([mockPost]));
   }),
 ];

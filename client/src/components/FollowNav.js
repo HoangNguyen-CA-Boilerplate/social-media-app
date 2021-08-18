@@ -4,7 +4,7 @@ import FlexLink, { FlexLinkContainer } from './button/FlexLink';
 
 function Navbar({ username }) {
   const match = useRouteMatch();
-  console.log(match);
+
   return (
     <FlexLinkContainer>
       <FlexLink

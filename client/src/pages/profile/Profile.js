@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 import ProfileDisplay from './ProfileDisplay';
 import Posts from '../../components/post/Posts';
 import LoadAsync from '../../components/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectUser,
@@ -39,6 +39,7 @@ function Profile() {
   const posts = useSelector(selectUserPosts);
   const postsStatus = useSelector(selectUserPostsStatus);
   const postsError = useSelector(selectUserPostsError);
+
   const authUser = useSelector(selectAuthUser);
 
   const onLike = (id) => {
@@ -52,7 +53,6 @@ function Profile() {
   const onFollow = () => {
     dispatch(followUser(username));
   };
-  console.log(postsError);
 
   return (
     <>
@@ -68,7 +68,7 @@ function Profile() {
         ></ProfileDisplay>
       </LoadAsync>
 
-      <LoadAsync loading={postsStatus === 'loading'}>
+      <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
         <Posts posts={posts} onLike={onLike} onDelete={onDelete} />
       </LoadAsync>
     </>

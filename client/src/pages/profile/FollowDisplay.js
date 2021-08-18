@@ -15,7 +15,7 @@ const Bold = styled.span`
   color: ${({ theme }) => theme.clrs.neutral[900]};
 `;
 
-const Follow = styled.a`
+const Link = styled.a`
   border-bottom: 1px solid transparent;
   cursor: pointer;
   color: ${({ theme }) => theme.clrs.neutral[600]};
@@ -27,21 +27,23 @@ const Follow = styled.a`
 
 function FollowControls({ user }) {
   const history = useHistory();
+
   const routeToFollowers = () => {
     history.push(`/users/${user.username}/followers`);
   };
   const routeToFollowings = () => {
     history.push(`/users/${user.username}/following`);
   };
+
   return (
     <Container>
-      <Follow onClick={routeToFollowers}>
+      <Link onClick={routeToFollowers}>
         <Bold>{user.followers.length}</Bold> Follower
         {user.followers.length === 1 ? '' : 's'}
-      </Follow>
-      <Follow onClick={routeToFollowings}>
+      </Link>
+      <Link onClick={routeToFollowings}>
         <Bold>{user.followings.length}</Bold> Following
-      </Follow>
+      </Link>
     </Container>
   );
 }

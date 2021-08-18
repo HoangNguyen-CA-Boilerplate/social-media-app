@@ -1,9 +1,9 @@
 import React from 'react';
+
 import styled from 'styled-components';
 import Avatar from '../../components/user/Avatar';
 import Button from '../../components/button/Button';
-
-import FollowControls from './FollowControls';
+import FollowDisplay from './FollowDisplay';
 
 import { FaRegCalendarAlt } from 'react-icons/fa';
 
@@ -11,7 +11,6 @@ const Cover = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[400]};
   width: 100%;
   padding-top: 30%;
-  position: relative;
 `;
 
 const ProfileAvatar = styled(Avatar)`
@@ -28,7 +27,7 @@ const ProfileAvatar = styled(Avatar)`
   }
 `;
 
-const Controls = styled.div`
+const Top = styled.div`
   position: relative;
   display: flex;
   justify-content: flex-end;
@@ -74,7 +73,7 @@ function ProfileDisplay({ user, authUser, onFollow }) {
   return (
     <>
       <Cover></Cover>
-      <Controls>
+      <Top>
         <ProfileAvatar></ProfileAvatar>
 
         {authUser._id === user._id ? (
@@ -84,17 +83,19 @@ function ProfileDisplay({ user, authUser, onFollow }) {
             {following ? 'Following' : 'Follow'}
           </Button>
         )}
-      </Controls>
+      </Top>
       <Main>
         <div>
           <DisplayName>{user.displayName}</DisplayName>
           <Username>@{user.username}</Username>
         </div>
+
         <DateContainer>
           <FaRegCalendarAlt />
           <time>Joined {new Date(user.createdAt).toDateString()}</time>
         </DateContainer>
-        <FollowControls user={user} />
+
+        <FollowDisplay user={user} />
       </Main>
     </>
   );
