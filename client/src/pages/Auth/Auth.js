@@ -11,20 +11,51 @@ import { brandName, BrandIcon } from '../../theme/brand';
 const Container = styled.div`
   display: flex;
   min-height: 100vh;
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    flex-direction: column;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.mobile} {
+    font-size: 0.8em;
+  }
+`;
+
+const Cover = styled.div`
+  width: 50%;
+  padding: 2.5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${({ theme }) => theme.clrs.primary[500]};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    width: 100%;
+    order: 1;
+    flex-grow: 1;
+  }
+`;
+
+const CoverIcon = styled(BrandIcon)`
+  font-size: 15em;
+  color: ${({ theme }) => theme.clrs.neutral[100]};
 `;
 
 const Inner = styled.div`
-  padding: 2.5em;
   width: 50%;
-  z-index: 1;
-  position: relative;
+  padding: 2.5em;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  background-color: ${(props) =>
-    props.$primary ? props.theme.clrs.primary[500] : 'white'};
+  background-color: ${(props) => props.theme.clrs.neutral[100]};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    width: 100%;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -33,23 +64,24 @@ const ContentContainer = styled.div`
   & > button {
     font-size: 1rem;
   }
+
   & > button + button {
     margin-top: 1em;
   }
 `;
 
 const Header = styled.h1`
-  font-size: 3rem;
+  font-size: 3em;
   margin-bottom: 1em;
 `;
 
 const SubHeader = styled.h2`
-  font-size: 2rem;
+  font-size: 2em;
   margin-bottom: 1em;
 `;
 
 const Icon = styled(BrandIcon)`
-  font-size: 3rem;
+  font-size: 3em;
   color: ${({ theme }) => theme.clrs.primary[500]};
   margin-bottom: 1em;
 `;
@@ -61,7 +93,9 @@ function AuthScreen() {
 
   return (
     <Container>
-      <Inner $primary></Inner>
+      <Cover>
+        <CoverIcon />
+      </Cover>
       <Inner>
         <ContentContainer>
           <Icon />
