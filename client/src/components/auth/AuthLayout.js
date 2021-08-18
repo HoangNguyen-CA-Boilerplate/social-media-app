@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import AuthError from './AuthError';
 
 const Wrapper = styled.div`

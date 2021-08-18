@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './theme/GlobalStyles';
-import theme from './theme/default';
+import theme from './theme/theme';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,10 +1,10 @@
 import React from 'react';
+
 import LinkButton from '../../components/button/LinkButton';
 import styled from 'styled-components';
 
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../store/slices/authSlice';
 import { brandName, BrandIcon } from '../../theme/brand';
 

@@ -36,10 +36,8 @@ function App() {
             <Route exact path='/'>
               <Auth />
             </Route>
-          </Switch>
 
-          <Layout>
-            <Switch>
+            <Layout>
               <Route exact path='/home'>
                 <Home />
               </Route>
@@ -55,8 +53,8 @@ function App() {
               <Route exact path='/users/:username/following'>
                 <UserFollowings />
               </Route>
-            </Switch>
-          </Layout>
+            </Layout>
+          </Switch>
         </>
       )}
     </Router>
