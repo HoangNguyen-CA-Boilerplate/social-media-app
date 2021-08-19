@@ -1,5 +1,5 @@
 import React from 'react';
-import Followings from './Followings';
+import Followings from './FollowingsData';
 import FollowNav from '../../components/FollowNav';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 

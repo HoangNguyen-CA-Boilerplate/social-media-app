@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Followers from './Followers';
+import Followers from './FollowersData';
 import FollowNav from '../../components/FollowNav';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 

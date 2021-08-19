@@ -9,8 +9,8 @@ import FullPost from './pages/FullPost';
 import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
 import Layout from './components/layout/Layout';
-import UserFollowers from './pages/userFollowers.js/UserFollowers';
-import UserFollowings from './pages/userFollowings.js/UserFollowings';
+import UserFollowers from './pages/followers/Followers';
+import UserFollowings from './pages/followings/Followings';
 
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
