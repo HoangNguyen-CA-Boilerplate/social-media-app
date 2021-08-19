@@ -1,19 +1,37 @@
-import React from 'react';
-import Followings from './FollowingsData';
-import FollowNav from '../../components/FollowNav';
-import LayoutHeader from '../../components/layout/LayoutHeader';
+import React, { useEffect } from 'react';
+import Users from '../../components/user/Users';
+import LoadAsync from '../../components/LoadAsync';
+import LayoutMessage from '../../components/layout/LayoutMessage';
 
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectFollowings,
+  selectGetFollowingsStatus,
+  selectGetFollowingsError,
+  getFollowings,
+} from '../../store/slices/userSlice';
 
-function UserFollowings() {
-  const { username } = useParams();
+function Followings({ username }) {
+  const dispatch = useDispatch();
+  const followings = useSelector(selectFollowings);
+  const status = useSelector(selectGetFollowingsStatus);
+  const error = useSelector(selectGetFollowingsError);
+
+  useEffect(() => {
+    dispatch(getFollowings(username));
+  }, [dispatch, username]);
+
   return (
-    <>
-      <LayoutHeader>{username}</LayoutHeader>
-      <FollowNav username={username}></FollowNav>
-      <Followings username={username}></Followings>
-    </>
+    <LoadAsync loading={status === 'loading'} error={error}>
+      {followings.length === 0 ? (
+        <LayoutMessage sub="When someone follows them, they'll be listed here.">
+          @{username} doesn't have any followers
+        </LayoutMessage>
+      ) : (
+        <Users users={followings}></Users>
+      )}
+    </LoadAsync>
   );
 }
 
-export default UserFollowings;
+export default Followings;

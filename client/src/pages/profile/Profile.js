@@ -5,7 +5,6 @@ import Posts from '../../components/post/Posts';
 import LoadAsync from '../../components/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectUser,
@@ -22,10 +21,10 @@ import {
 } from '../../store/slices/userSlice';
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 
-function Profile() {
-  const { username } = useParams();
-
+function Profile({ username }) {
   const dispatch = useDispatch();
+
+  console.log('Hello world');
 
   useEffect(() => {
     dispatch(getUser({ username }));

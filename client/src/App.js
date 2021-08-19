@@ -6,11 +6,9 @@ import Login from './pages/login/Login';
 import Auth from './pages/auth/Auth';
 import Home from './pages/home/Home';
 import FullPost from './pages/FullPost';
-import Profile from './pages/profile/Profile';
 import Landing from './pages/Landing';
 import Layout from './components/layout/Layout';
-import UserFollowers from './pages/followers/Followers';
-import UserFollowings from './pages/followings/Followings';
+import UserRoute from './pages/user/UserRoute';
 
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from './store/slices/authSlice';
@@ -25,37 +23,29 @@ function App() {
       {isAuth === null ? (
         <Landing />
       ) : (
-        <>
-          <Switch>
-            <Route exact path='/login'>
-              <Login />
-            </Route>
-            <Route exact path='/signup'>
-              <Signup />
-            </Route>
-            <Route exact path='/'>
-              <Auth />
-            </Route>
+        <Switch>
+          <Route exact path='/login'>
+            <Login />
+          </Route>
+          <Route exact path='/signup'>
+            <Signup />
+          </Route>
+          <Route exact path='/'>
+            <Auth />
+          </Route>
 
-            <Layout>
-              <Route exact path='/home'>
-                <Home />
-              </Route>
-              <Route exact path='/posts/:id'>
-                <FullPost />
-              </Route>
-              <Route exact path='/users/:username'>
-                <Profile />
-              </Route>
-              <Route exact path='/users/:username/followers'>
-                <UserFollowers />
-              </Route>
-              <Route exact path='/users/:username/following'>
-                <UserFollowings />
-              </Route>
-            </Layout>
-          </Switch>
-        </>
+          <Layout>
+            <Route exact path='/home'>
+              <Home />
+            </Route>
+            <Route exact path='/posts/:id'>
+              <FullPost />
+            </Route>
+            <Route path='/users/:username'>
+              <UserRoute />
+            </Route>
+          </Layout>
+        </Switch>
       )}
     </Router>
   );
