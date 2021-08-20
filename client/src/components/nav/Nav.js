@@ -24,6 +24,7 @@ const Container = styled.nav`
 
   padding: 0.5em;
   min-height: 100vh;
+
   & > * + * {
     margin-top: 0.5em;
   }
