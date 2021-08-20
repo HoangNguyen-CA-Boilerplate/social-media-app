@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Post from '../components/post/Post';
-import LoadAsync from '../components/LoadAsync';
-import LayoutHeader from '../components/layout/LayoutHeader';
+import Post from '../../components/post/Post';
+import LoadAsync from '../../components/LoadAsync';
+import LayoutHeader from '../../components/layout/LayoutHeader';
 
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ import {
   getPost,
   likePost,
   deletePost,
-} from '../store/slices/fullpostSlice';
+} from '../../store/slices/fullpostSlice';
 
 function FullPost() {
   const { id } = useParams();

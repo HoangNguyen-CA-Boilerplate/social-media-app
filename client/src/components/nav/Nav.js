@@ -43,15 +43,23 @@ function Nav() {
 
   return (
     <Container>
-      <NavLink icon={<Logo />} to='/home' />
-      <NavLink icon={<AiOutlineHome />} to='/home'>
+      <NavLink aria-label='logo' icon={<Logo />} to='/home' />
+      <NavLink aria-label='home' icon={<AiOutlineHome />} to='/home'>
         Home
       </NavLink>
-      <NavLink icon={<FaRegUser />} to={`/users/${user.username}`}>
+      <NavLink
+        aria-label='profile'
+        icon={<FaRegUser />}
+        to={`/users/${user.username}`}
+      >
         Profile
       </NavLink>
 
-      <BottomNavLink icon={<VscSignOut />} onClick={() => dispatch(logout())}>
+      <BottomNavLink
+        aria-label='logout'
+        icon={<VscSignOut />}
+        onClick={() => dispatch(logout())}
+      >
         Logout
       </BottomNavLink>
     </Container>

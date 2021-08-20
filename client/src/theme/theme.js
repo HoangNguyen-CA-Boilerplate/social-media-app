@@ -2,7 +2,7 @@ const theme = {
   clrs: {
     primary: {
       100: '#d3f1ff',
-      500: '#19B5FE',
+      500: '#1DA1F2',
       600: '#01a7f4',
     },
     neutral: {
