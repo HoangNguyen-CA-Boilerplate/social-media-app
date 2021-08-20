@@ -17,7 +17,7 @@ function UserRoute() {
       <Route exact path={path}>
         <Profile username={username}></Profile>
       </Route>
-      <Route path={[`${url}/followers`, `${url}/following`]}>
+      <Route exact path={[`${url}/followers`, `${url}/following`]}>
         <LayoutHeader>{username}</LayoutHeader>
         <FlexLinkContainer>
           <FlexLink to={`${url}/followers`}>Followers</FlexLink>
