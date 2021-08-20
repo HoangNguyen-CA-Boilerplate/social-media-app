@@ -17,7 +17,6 @@ import {
   getUser,
   followUser,
   selectUserPostsStatus,
-  selectUserPostsError,
 } from '../../store/slices/userSlice';
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 
@@ -37,7 +36,6 @@ function Profile({ username }) {
 
   const posts = useSelector(selectUserPosts);
   const postsStatus = useSelector(selectUserPostsStatus);
-  const postsError = useSelector(selectUserPostsError);
 
   const authUser = useSelector(selectAuthUser);
 
@@ -67,7 +65,7 @@ function Profile({ username }) {
         ></ProfileDisplay>
       </LoadAsync>
 
-      <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
+      <LoadAsync loading={postsStatus === 'loading'}>
         <Posts posts={posts} onLike={onLike} onDelete={onDelete} />
       </LoadAsync>
     </>
