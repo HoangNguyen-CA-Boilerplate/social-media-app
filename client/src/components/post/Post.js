@@ -18,8 +18,10 @@ export const clickableStyles = css`
 
 const Container = styled.div`
   font-size: ${(props) => (props.em ? '1.4rem' : '1rem')};
+
   padding: ${({ theme }) => theme.padding.main};
   border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
+
   transition: background-color 0.2s ease-out;
 
   & > * + * {
