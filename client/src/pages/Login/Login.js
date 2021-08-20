@@ -9,12 +9,14 @@ import {
   login,
   selectIsAuth,
   selectLoginError,
+  selectLoginStatus,
 } from '../../store/slices/authSlice';
 
 function Login() {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const error = useSelector(selectLoginError);
+  const status = useSelector(selectLoginStatus);
 
   const handleSubmit = (data) => {
     dispatch(login({ email: data.email, password: data.password }));
@@ -23,7 +25,7 @@ function Login() {
   if (isAuth) return <Redirect to='/home' />;
 
   return (
-    <AuthLayout header='Log In' error={error}>
+    <AuthLayout header='Log In' error={error} loading={status === 'loading'}>
       <LoginForm onSubmit={handleSubmit} />
     </AuthLayout>
   );

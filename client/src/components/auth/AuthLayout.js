@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import AuthError from './AuthError';
+import Spinner from '../Spinner';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,11 +24,12 @@ const Header = styled.h1`
   margin-bottom: 0.5em;
 `;
 
-const AuthLayout = ({ children, header, error }) => {
+const AuthLayout = ({ children, header, error, loading }) => {
   return (
     <Wrapper>
       <Container>
         <Header>{header}</Header>
+        {loading && <Spinner />}
         <AuthError>{error}</AuthError>
         {children}
       </Container>

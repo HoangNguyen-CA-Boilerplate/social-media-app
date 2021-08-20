@@ -9,12 +9,14 @@ import {
   signup,
   selectIsAuth,
   selectSignupError,
+  selectSignupStatus,
 } from '../../store/slices/authSlice';
 
 function Signup() {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const error = useSelector(selectSignupError);
+  const status = useSelector(selectSignupStatus);
 
   const handleSubmit = (data) => {
     dispatch(
@@ -29,7 +31,7 @@ function Signup() {
   if (isAuth) return <Redirect to='/home' />;
 
   return (
-    <AuthLayout header='Sign up' error={error}>
+    <AuthLayout header='Sign up' error={error} loading={status === 'loading'}>
       <SignupForm onSubmit={handleSubmit} />
     </AuthLayout>
   );

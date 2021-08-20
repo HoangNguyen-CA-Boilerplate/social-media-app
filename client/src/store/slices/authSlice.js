@@ -123,4 +123,6 @@ export const selectIsAuth = (state) => state.auth.isAuth;
 export const selectToken = (state) => state.auth.token;
 export const selectLoginError = (state) => state.auth.loginError;
 export const selectSignupError = (state) => state.auth.signupError;
+export const selectLoginStatus = (state) => state.auth.loginStatus;
+export const selectSignupStatus = (state) => state.auth.signupStatus;
 export const selectUser = (state) => state.auth.user;

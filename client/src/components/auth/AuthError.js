@@ -11,7 +11,7 @@ const Container = styled.div`
   text-transform: capitalize;
 `;
 function Error({ children }) {
-  return <>{children && <Container>{children}</Container>}</>;
+  return children && <Container>{children}</Container>;
 }
 
 export default Error;
