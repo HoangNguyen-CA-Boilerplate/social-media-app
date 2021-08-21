@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled, { css } from 'styled-components';
 import UserPreview from '../user/UserPreview';
 import LikeControl from './LikeControl';
 import DeleteControl from './DeleteControl';
+import DeleteModal from './DeleteModal';
 
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
@@ -41,6 +42,8 @@ const Controls = styled.div`
 `;
 
 function Post({ text, user, _id, likes, onDelete, onLike, em }) {
+  const [showDelete, setShowDelete] = useState(false);
+
   const history = useHistory();
   const authUser = useSelector(selectUser);
 
@@ -56,20 +59,29 @@ function Post({ text, user, _id, likes, onDelete, onLike, em }) {
   };
 
   return (
-    <Container onClick={routeToPost} clickable={clickable} em={em}>
-      <UserPreview user={user} onClick={routeToUser} />
-      <Text> {text}</Text>
-      <Controls>
-        <LikeControl
-          userLikes={likes.includes(authUser._id)}
-          numLikes={likes.length}
-          onLike={onLike}
-        ></LikeControl>
-        {authUser._id === user._id && (
-          <DeleteControl onDelete={onDelete}></DeleteControl>
-        )}
-      </Controls>
-    </Container>
+    <>
+      <DeleteModal
+        show={showDelete}
+        close={() => setShowDelete(false)}
+        header='Delete post?'
+        onDelete={onDelete}
+      ></DeleteModal>
+
+      <Container onClick={routeToPost} clickable={clickable} em={em}>
+        <UserPreview user={user} onClick={routeToUser} />
+        <Text> {text}</Text>
+        <Controls>
+          <LikeControl
+            userLikes={likes.includes(authUser._id)}
+            numLikes={likes.length}
+            onClick={onLike}
+          ></LikeControl>
+          {authUser._id === user._id && (
+            <DeleteControl onClick={() => setShowDelete(true)}></DeleteControl>
+          )}
+        </Controls>
+      </Container>
+    </>
   );
 }
 

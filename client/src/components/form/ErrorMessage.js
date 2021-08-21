@@ -6,7 +6,7 @@ const Message = styled.small.attrs({
   role: 'alert',
 })`
   display: block;
-  color: ${({ theme }) => theme.clrs.danger};
+  color: ${({ theme }) => theme.clrs.accent1[500]};
   text-transform: capitalize;
 `;
 
@@ -21,7 +21,7 @@ const Container = styled.div`
 const AlertIcon = styled(GoAlert)`
   font-size: 1rem;
   display: block;
-  color: ${({ theme }) => theme.clrs.danger};
+  color: ${({ theme }) => theme.clrs.accent1[500]};
 `;
 
 function ErrorMessage({ children }) {

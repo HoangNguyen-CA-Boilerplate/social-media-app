@@ -15,10 +15,10 @@ const theme = {
       900: '#0F1419',
     },
     accent1: {
-      500: '#CF000F',
+      500: '#F22613',
       100: '#ffe0e2',
+      700: '#b7190a',
     },
-    danger: '#F22613',
   },
 
   padding: {
@@ -26,7 +26,7 @@ const theme = {
     button: '0.7em 1em',
     buttonSmall: '0.5em 0.9em',
     main: '1rem',
-    modal: '0.5em',
+    modal: '1.5rem',
   },
 
   breakpoints: {

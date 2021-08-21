@@ -11,7 +11,7 @@ const Input = styled.input.attrs((props) => ({
   outline: none;
   border: ${(props) =>
     props.error
-      ? '1px solid ' + props.theme.clrs.danger
+      ? '1px solid ' + props.theme.clrs.accent1[500]
       : '1px solid ' + props.theme.clrs.neutral[400]};
 
   &:focus {

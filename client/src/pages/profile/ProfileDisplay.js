@@ -77,9 +77,9 @@ function ProfileDisplay({ user, authUser, onFollow }) {
         <ProfileAvatar></ProfileAvatar>
 
         {authUser._id === user._id ? (
-          <Button empty>Edit Profile</Button>
+          <Button $type='empty'>Edit Profile</Button>
         ) : (
-          <Button empty={!following} onClick={onFollow}>
+          <Button $type={!following ? 'empty' : null} onClick={onFollow}>
             {following ? 'Following' : 'Follow'}
           </Button>
         )}

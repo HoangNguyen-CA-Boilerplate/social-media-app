@@ -9,6 +9,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[100]};
   width: 100%;
   max-width: 800px;
+  border-radius: 1rem;
 
   position: fixed;
   z-index: 100;
@@ -48,17 +49,17 @@ const Header = styled.p`
   font-weight: 700;
 `;
 
-function Modal({ show, children, close }) {
+function Modal({ show, children, close, header, className }) {
   if (!show) return null;
   return (
     <>
       <Backdrop onClick={close}></Backdrop>
-      <Container>
+      <Container className={className}>
         <TopBar>
           <Close onClick={close}>
             <VscChromeClose />
           </Close>
-          <Header>Header</Header>
+          <Header>{header}</Header>
         </TopBar>
         {children}
       </Container>

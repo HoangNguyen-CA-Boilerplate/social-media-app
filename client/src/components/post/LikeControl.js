@@ -2,10 +2,10 @@ import React from 'react';
 import PostControl from './PostControl';
 import { FaRegHeart } from 'react-icons/fa';
 
-function LikeControl({ userLikes, numLikes, onLike }) {
+function LikeControl({ userLikes, numLikes, onClick }) {
   const handleLike = async (e) => {
     e.stopPropagation();
-    onLike();
+    onClick();
   };
 
   return (
