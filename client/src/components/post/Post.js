@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import styled, { css } from 'styled-components';
 import UserPreview from '../user/UserPreview';
-import LikeControl from './LikeControl';
-import DeleteControl from './DeleteControl';
 import DeleteModal from './DeleteModal';
+import PostControl from './PostControl';
 
+import { FaRegHeart } from 'react-icons/fa';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/slices/authSlice';
@@ -18,7 +19,7 @@ export const clickableStyles = css`
 `;
 
 const Container = styled.div`
-  font-size: ${(props) => (props.em ? '1.4rem' : '1rem')};
+  font-size: ${(props) => (props.big ? '1.3rem' : '1rem')};
 
   padding: ${({ theme }) => theme.padding.main};
   border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[300]};
@@ -41,7 +42,7 @@ const Controls = styled.div`
   justify-content: space-between;
 `;
 
-function Post({ text, user, _id, likes, onDelete, onLike, em }) {
+function Post({ text, user, _id, likes, onDelete, onLike, big }) {
   const [showDelete, setShowDelete] = useState(false);
 
   const history = useHistory();
@@ -58,6 +59,11 @@ function Post({ text, user, _id, likes, onDelete, onLike, em }) {
     history.push(`/users/${user.username}`);
   };
 
+  const handleLike = (e) => {
+    e.stopPropagation();
+    onLike();
+  };
+
   return (
     <>
       <DeleteModal
@@ -67,17 +73,21 @@ function Post({ text, user, _id, likes, onDelete, onLike, em }) {
         onDelete={onDelete}
       ></DeleteModal>
 
-      <Container onClick={routeToPost} clickable={clickable} em={em}>
+      <Container onClick={routeToPost} clickable={clickable} big={big}>
         <UserPreview user={user} onClick={routeToUser} />
         <Text> {text}</Text>
         <Controls>
-          <LikeControl
-            userLikes={likes.includes(authUser._id)}
-            numLikes={likes.length}
-            onClick={onLike}
-          ></LikeControl>
+          <PostControl
+            icon={<FaRegHeart />}
+            onClick={handleLike}
+            active={likes.includes(authUser._id)}
+            label={likes.length}
+          ></PostControl>
           {authUser._id === user._id && (
-            <DeleteControl onClick={() => setShowDelete(true)}></DeleteControl>
+            <PostControl
+              icon={<RiDeleteBin5Line />}
+              onClick={() => setShowDelete(true)}
+            ></PostControl>
           )}
         </Controls>
       </Container>

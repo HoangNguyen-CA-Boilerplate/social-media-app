@@ -13,7 +13,7 @@ const ControlContainer = styled.div`
 `;
 
 const ControlLabel = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.9em;
 `;
 
 const ControlButton = styled.div`

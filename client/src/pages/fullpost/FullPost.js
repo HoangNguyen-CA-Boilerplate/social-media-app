@@ -44,7 +44,7 @@ function FullPost() {
       >
         <Post
           {...post}
-          em={true}
+          big
           onLike={() => onLike(post._id)}
           onDelete={() => onDelete(post._id)}
         />
