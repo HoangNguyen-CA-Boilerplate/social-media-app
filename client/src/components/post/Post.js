@@ -64,6 +64,11 @@ function Post({ text, user, _id, likes, onDelete, onLike, big }) {
     onLike();
   };
 
+  const handleShowDelete = (e) => {
+    e.stopPropagation();
+    setShowDelete(true);
+  };
+
   return (
     <>
       <DeleteModal
@@ -86,7 +91,7 @@ function Post({ text, user, _id, likes, onDelete, onLike, big }) {
           {authUser._id === user._id && (
             <PostControl
               icon={<RiDeleteBin5Line />}
-              onClick={() => setShowDelete(true)}
+              onClick={handleShowDelete}
             ></PostControl>
           )}
         </Controls>

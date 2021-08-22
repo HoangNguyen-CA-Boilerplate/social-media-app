@@ -8,8 +8,9 @@ describe('App', () => {
       render(<App />);
 
       userEvent.click(await screen.findByRole('button', { name: /Log In/i }));
+
       expect(
-        screen.getByRole('heading', { name: /Log in/i })
+        await screen.findByRole('heading', { name: /Log in/i })
       ).toBeInTheDocument();
     });
 
@@ -17,8 +18,9 @@ describe('App', () => {
       render(<App />);
 
       userEvent.click(await screen.findByRole('button', { name: /Sign Up/i }));
+
       expect(
-        screen.getByRole('heading', { name: /Sign up/i })
+        await screen.findByRole('heading', { name: /Sign up/i })
       ).toBeInTheDocument();
     });
   });

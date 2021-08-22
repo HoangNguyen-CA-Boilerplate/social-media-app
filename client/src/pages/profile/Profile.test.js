@@ -4,9 +4,8 @@ import mockUser from '../../mocks/mockUser';
 
 describe('Profile', () => {
   it('Renders correctly', async () => {
-    render(<Profile></Profile>, {
+    render(<Profile username={mockUser.username}></Profile>, {
       isAuth: true,
-      route: `/users/${mockUser.username}`,
     });
 
     expect(await screen.findAllByTestId('spinner')).toHaveLength(2);

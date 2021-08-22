@@ -20,7 +20,7 @@ const Spinner = styled.div.attrs({ 'data-testid': 'spinner' })`
   }
   font-size: 1rem;
 
-  margin: 2em auto;
+  margin: ${({ theme }) => theme.padding.main} auto;
   position: relative;
   text-indent: -9999em;
   border-top: 5px solid ${({ theme }) => theme.clrs.primary[100]};

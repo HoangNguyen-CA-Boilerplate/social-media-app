@@ -23,8 +23,6 @@ import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 function Profile({ username }) {
   const dispatch = useDispatch();
 
-  console.log('Hello world');
-
   useEffect(() => {
     dispatch(getUser({ username }));
     dispatch(getUserPosts({ username }));
@@ -39,11 +37,11 @@ function Profile({ username }) {
 
   const authUser = useSelector(selectAuthUser);
 
-  const onLike = (id) => {
+  const onLikePost = (id) => {
     dispatch(likeUserPost(id));
   };
 
-  const onDelete = (id) => {
+  const onDeletePost = (id) => {
     dispatch(deleteUserPost(id));
   };
 
@@ -66,7 +64,7 @@ function Profile({ username }) {
       </LoadAsync>
 
       <LoadAsync loading={postsStatus === 'loading'}>
-        <Posts posts={posts} onLike={onLike} onDelete={onDelete} />
+        <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
       </LoadAsync>
     </>
   );
