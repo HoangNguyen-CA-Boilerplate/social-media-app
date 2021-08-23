@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 import Avatar from '../../components/user/Avatar';
@@ -69,7 +69,22 @@ const DateContainer = styled.div`
 `;
 
 function ProfileDisplay({ user, authUser, onFollow }) {
-  const following = user.followers.includes(authUser._id);
+  const [followers, setFollowers] = useState(user.followers);
+
+  useEffect(() => {
+    setFollowers(user.followers);
+  }, [user]);
+
+  const handleFollow = () => {
+    onFollow();
+
+    if (user.followers.includes(authUser._id)) {
+      setFollowers(user.followers.filter((id) => id !== authUser._id));
+    } else {
+      setFollowers([...user.followers, authUser._id]);
+    }
+  };
+
   return (
     <>
       <Cover></Cover>
@@ -79,8 +94,11 @@ function ProfileDisplay({ user, authUser, onFollow }) {
         {authUser._id === user._id ? (
           <Button $type='empty'>Edit Profile</Button>
         ) : (
-          <Button $type={!following ? 'empty' : null} onClick={onFollow}>
-            {following ? 'Following' : 'Follow'}
+          <Button
+            $type={followers.includes(authUser._id) ? null : 'empty'}
+            onClick={handleFollow}
+          >
+            {followers.includes(authUser._id) ? 'Following' : 'Follow'}
           </Button>
         )}
       </Top>

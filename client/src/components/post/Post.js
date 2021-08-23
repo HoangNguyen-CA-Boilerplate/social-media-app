@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled, { css } from 'styled-components';
 import UserPreview from '../user/UserPreview';
@@ -42,26 +42,37 @@ const Controls = styled.div`
   justify-content: space-between;
 `;
 
-function Post({ text, user, _id, likes, onDelete, onLike, big }) {
+function Post({ post, onDelete, onLike, big }) {
   const [showDelete, setShowDelete] = useState(false);
+  const [likes, setLikes] = useState(post?.likes);
+
+  useEffect(() => {
+    setLikes(post.likes);
+  }, [post.likes]);
 
   const history = useHistory();
   const authUser = useSelector(selectUser);
 
-  const clickable = history.location.pathname !== `/posts/${_id}`;
+  const clickable = history.location.pathname !== `/posts/${post?._id}`;
 
   const routeToPost = () => {
-    if (clickable) history.push(`/posts/${_id}`);
+    if (clickable) history.push(`/posts/${post?._id}`);
   };
 
   const routeToUser = (e) => {
     e.stopPropagation();
-    history.push(`/users/${user.username}`);
+    history.push(`/users/${post?.user?.username}`);
   };
 
   const handleLike = (e) => {
     e.stopPropagation();
     onLike();
+
+    if (post.likes.includes(authUser._id)) {
+      setLikes(post.likes.filter((id) => id !== authUser._id));
+    } else {
+      setLikes([...post.likes, authUser._id]);
+    }
   };
 
   const handleShowDelete = (e) => {
@@ -79,8 +90,8 @@ function Post({ text, user, _id, likes, onDelete, onLike, big }) {
       ></DeleteModal>
 
       <Container onClick={routeToPost} clickable={clickable} big={big}>
-        <UserPreview user={user} onClick={routeToUser} />
-        <Text> {text}</Text>
+        <UserPreview user={post?.user} onClick={routeToUser} />
+        <Text> {post?.text}</Text>
         <Controls>
           <PostControl
             icon={<FaRegHeart />}
@@ -88,7 +99,7 @@ function Post({ text, user, _id, likes, onDelete, onLike, big }) {
             active={likes.includes(authUser._id)}
             label={likes.length}
           ></PostControl>
-          {authUser._id === user._id && (
+          {authUser._id === post.user._id && (
             <PostControl
               icon={<RiDeleteBin5Line />}
               onClick={handleShowDelete}

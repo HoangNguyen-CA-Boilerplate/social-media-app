@@ -43,7 +43,7 @@ function FullPost() {
         error={postError}
       >
         <Post
-          {...post}
+          post={post}
           big
           onLike={() => onLike(post._id)}
           onDelete={() => onDelete(post._id)}

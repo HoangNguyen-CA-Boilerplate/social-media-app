@@ -2,14 +2,13 @@ import React from 'react';
 import Post from './Post';
 
 function Posts({ posts, onDelete, onLike }) {
-  return posts.map(({ _id, ...fields }) => {
+  return posts.map((post) => {
     return (
       <Post
-        key={_id}
-        _id={_id}
-        {...fields}
-        onDelete={() => onDelete(_id)}
-        onLike={() => onLike(_id)}
+        key={post?._id}
+        post={post}
+        onDelete={() => onDelete(post?._id)}
+        onLike={() => onLike(post?._id)}
       />
     );
   });
