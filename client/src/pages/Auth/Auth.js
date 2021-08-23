@@ -1,11 +1,12 @@
 import React from 'react';
 
 import LinkButton from '../../components/button/LinkButton';
+import Button from '../../components/button/Button';
 import styled from 'styled-components';
 
 import { Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../../store/slices/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectIsAuth, login } from '../../store/slices/authSlice';
 import { brandName, BrandIcon } from '../../theme/brand';
 
 const Container = styled.div`
@@ -87,9 +88,14 @@ const Icon = styled(BrandIcon)`
 `;
 
 function AuthScreen() {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
 
   if (isAuth) return <Redirect to='/home' />;
+
+  const handleDemo = () => {
+    dispatch(login({ email: 'demo_user@gmail.com', password: 'demo_user' }));
+  };
 
   return (
     <Container>
@@ -107,6 +113,9 @@ function AuthScreen() {
           <LinkButton $fill to='/login'>
             Log In
           </LinkButton>
+          <Button $fill $type='empty' onClick={handleDemo}>
+            Log In As Demo User
+          </Button>
         </ContentContainer>
       </Inner>
     </Container>
