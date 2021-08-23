@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Spinner from './components/Spinner';
-import Layout from './components/layout/Layout';
+import Spinner from './components/Spinner.js';
+import Layout from './components/layout/Layout.js';
 import ErrorBoundary from './components/ErrorBoundary';
 import Landing from './pages/Landing';
 
