@@ -7,7 +7,7 @@ import Button from '../button/Button';
 const StyledModal = styled(Modal)`
   max-width: 380px;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 `;
 
 const Container = styled.div`

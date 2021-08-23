@@ -12,6 +12,7 @@ const activeStyles = css`
 const StyledLink = styled(Link)`
   width: 100%;
   padding: 1em;
+
   text-align: center;
   text-decoration: none;
   color: ${({ theme }) => theme.clrs.neutral[600]};

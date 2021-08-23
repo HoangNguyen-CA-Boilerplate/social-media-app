@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Users from '../../components/user/Users';
-import LoadAsync from '../../components/LoadAsync';
+import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutMessage from '../../components/layout/LayoutMessage';
 
 import { useSelector, useDispatch } from 'react-redux';

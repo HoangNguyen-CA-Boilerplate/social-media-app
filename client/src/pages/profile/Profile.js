@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import ProfileDisplay from './ProfileDisplay';
 import Posts from '../../components/post/Posts';
-import LoadAsync from '../../components/LoadAsync';
+import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 
 import { useSelector, useDispatch } from 'react-redux';

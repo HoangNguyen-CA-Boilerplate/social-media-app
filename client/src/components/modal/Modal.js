@@ -14,9 +14,7 @@ const Container = styled.div`
   position: fixed;
   z-index: 100;
   top: 2em;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0 !important;
+  margin: auto 0 !important;
 `;
 
 const TopBar = styled.div`

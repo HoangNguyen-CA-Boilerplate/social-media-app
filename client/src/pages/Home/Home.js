@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import LoadAsync from '../../components/LoadAsync';
+import LoadAsync from '../../components/loadAsync/LoadAsync';
 import CreatePost from '../../components/createPost/CreatePost';
 import Posts from '../../components/post/Posts';
 import LayoutHeader from '../../components/layout/LayoutHeader';

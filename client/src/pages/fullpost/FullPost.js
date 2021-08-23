@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Post from '../../components/post/Post';
-import LoadAsync from '../../components/LoadAsync';
+import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
 
 import { useParams, useHistory } from 'react-router-dom';

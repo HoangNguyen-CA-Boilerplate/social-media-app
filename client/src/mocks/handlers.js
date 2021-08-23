@@ -24,4 +24,8 @@ export const handlers = [
   rest.get('http://localhost/api/users/:username/posts', (req, res, ctx) => {
     return res(ctx.json([mockPost]));
   }),
+
+  rest.get('http://localhost/api/posts/:id', (req, res, ctx) => {
+    return res(ctx.json(mockPost));
+  }),
 ];
