@@ -12,7 +12,7 @@ export const initialState = {
   token: localStorage.getItem('token'),
 };
 
-const defaultError = 'something went wrong';
+const defaultError = 'network error';
 
 export const login = createAsyncThunk(
   'auth/login',

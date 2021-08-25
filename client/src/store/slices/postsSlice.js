@@ -10,7 +10,7 @@ export const initialState = {
   createError: '',
 };
 
-const defaultError = 'something went wrong';
+const defaultError = 'network error';
 
 export const getPosts = createAsyncThunk(
   'posts/getPosts',

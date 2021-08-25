@@ -17,7 +17,7 @@ export const initialState = {
   postsError: '',
 };
 
-const defaultError = 'something went wrong';
+const defaultError = 'network error';
 
 export const getUser = createAsyncThunk(
   'user/getUser',

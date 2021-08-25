@@ -38,7 +38,7 @@ function useAsyncFn(asyncFn, initialData = null) {
         if (e.response)
           dispatch({ type: 'FETCH_FAIL', payload: e.response.data.error });
         else {
-          dispatch({ type: 'FETCH_FAIL', payload: 'something went wrong' });
+          dispatch({ type: 'FETCH_FAIL', payload: 'network error' });
         }
       }
     }

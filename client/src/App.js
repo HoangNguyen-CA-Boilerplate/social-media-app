@@ -43,20 +43,22 @@ function App() {
 
               <Route>
                 <Layout>
-                  <Switch>
-                    <Route exact path='/home'>
-                      <Home />
-                    </Route>
-                    <Route exact path='/posts/:id'>
-                      <FullPost />
-                    </Route>
-                    <Route path='/users/:username'>
-                      <UserRoute />
-                    </Route>
-                    <Route>
-                      <PageNotFound />
-                    </Route>
-                  </Switch>
+                  <ErrorBoundary>
+                    <Switch>
+                      <Route exact path='/home'>
+                        <Home />
+                      </Route>
+                      <Route exact path='/posts/:id'>
+                        <FullPost />
+                      </Route>
+                      <Route path='/users/:username'>
+                        <UserRoute />
+                      </Route>
+                      <Route>
+                        <PageNotFound />
+                      </Route>
+                    </Switch>
+                  </ErrorBoundary>
                 </Layout>
               </Route>
             </Switch>
