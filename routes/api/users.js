@@ -30,11 +30,13 @@ router.delete(
 router.patch(
   '/',
   body('displayName')
-    .matches(/^[a-zA-Z0-9_]+$/)
-    .withMessage('display name is not valid')
-    .isLength({ min: 1, max: 15 })
-    .withMessage('display name must be 1 to 15 characters long'),
+    .trim()
+    .escape()
+    .isLength({ min: 1, max: 25 })
+    .withMessage('display name must be 1 to 25 characters long'),
   body('bio')
+    .trim()
+    .escape()
     .isLength({ max: 160 })
     .withMessage('bio must be at most 160 characters long'),
   isAuth,

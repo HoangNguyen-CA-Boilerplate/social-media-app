@@ -4,6 +4,9 @@ import { tokenConfig } from '../utils';
 
 export const initialState = {
   userStatus: 'initial',
+  editStatus: 'initial',
+  editError: '',
+
   user: null,
   userError: '',
   getFollowersStatus: 'initial',
@@ -117,6 +120,24 @@ export const followUser = createAsyncThunk(
   }
 );
 
+export const editUser = createAsyncThunk(
+  'user/editUser',
+  async ({ displayName, bio, success }, { rejectWithValue, getState }) => {
+    try {
+      const res = await axios.patch(
+        `/api/users/`,
+        { displayName, bio },
+        tokenConfig(getState)
+      );
+      success();
+      return res.data;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -185,6 +206,21 @@ const userSlice = createSlice({
       state.getFollowingsStatus = 'fail';
       state.getFollowingsError = action.payload;
     },
+
+    [editUser.pending]: (state) => {
+      state.editStatus = 'loading';
+      state.editError = '';
+    },
+
+    [editUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.editStatus = 'success';
+    },
+
+    [editUser.rejected]: (state, action) => {
+      state.editStatus = 'fail';
+      state.editError = action.payload;
+    },
   },
 });
 
@@ -208,3 +244,6 @@ export const selectGetFollowingsStatus = (state) =>
   state.user.getFollowingsStatus;
 export const selectGetFollowingsError = (state) =>
   state.user.getFollowingsError;
+
+export const selectEditStatus = (state) => state.user.editStatus;
+export const selectEditError = (state) => state.user.editError;

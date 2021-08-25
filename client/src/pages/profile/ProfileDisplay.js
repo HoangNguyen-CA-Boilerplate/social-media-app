@@ -5,8 +5,7 @@ import Avatar from '../../components/user/Avatar';
 import Button from '../../components/button/Button';
 import FollowLinks from './FollowLinks';
 import ProfileEditModal from './ProfileEditModal';
-
-import { FaRegCalendarAlt } from 'react-icons/fa';
+import ProfileDate from './ProfileDate';
 
 const Cover = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[400]};
@@ -56,19 +55,6 @@ const Username = styled.p`
   color: ${({ theme }) => theme.clrs.neutral[600]};
 `;
 
-const DateContainer = styled.div`
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.clrs.neutral[600]};
-
-  & > * {
-    display: block;
-  }
-  & > * + * {
-    margin-left: 0.5em;
-  }
-`;
-
 function ProfileDisplay({ user, authUser, onFollow }) {
   const [followers, setFollowers] = useState(user.followers);
   const [editOpen, setEditOpen] = useState(false);
@@ -113,11 +99,7 @@ function ProfileDisplay({ user, authUser, onFollow }) {
           <Username>@{user.username}</Username>
         </div>
 
-        <DateContainer>
-          <FaRegCalendarAlt />
-          <time>Joined {new Date(user.createdAt).toDateString()}</time>
-        </DateContainer>
-
+        <ProfileDate date={user.createdAt} />
         <FollowLinks user={user} />
       </Main>
     </>
