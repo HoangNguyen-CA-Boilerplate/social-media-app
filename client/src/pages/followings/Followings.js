@@ -24,8 +24,8 @@ function Followings({ username }) {
   return (
     <LoadAsync loading={status === 'loading'} error={error}>
       {followings.length === 0 ? (
-        <LayoutMessage sub="When someone follows them, they'll be listed here.">
-          @{username} doesn't have any followers
+        <LayoutMessage sub="When they do, they'll be listed here.">
+          @{username} isn't following anyone yet
         </LayoutMessage>
       ) : (
         <Users users={followings}></Users>
