@@ -6,12 +6,9 @@ import Button from '../button/Button';
 
 const StyledModal = styled(Modal)`
   max-width: 380px;
-  top: 50%;
-  transform: translateY(-50%);
 `;
 
 const Container = styled.div`
-  padding: ${({ theme }) => theme.padding.modal};
   & > * + * {
     margin-top: 1.5em;
   }
@@ -23,7 +20,7 @@ const Message = styled.p`
 
 function DeleteModal({ onDelete, ...props }) {
   return (
-    <StyledModal {...props}>
+    <StyledModal center {...props}>
       <Container>
         <Message>
           This can’t be undone and it will be removed from your profile.

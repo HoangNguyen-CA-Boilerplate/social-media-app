@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Avatar from '../../components/user/Avatar';
 import Button from '../../components/button/Button';
-import FollowDisplay from './FollowDisplay';
+import FollowLinks from './FollowLinks';
+import ProfileEditModal from './ProfileEditModal';
 
 import { FaRegCalendarAlt } from 'react-icons/fa';
 
@@ -70,6 +71,7 @@ const DateContainer = styled.div`
 
 function ProfileDisplay({ user, authUser, onFollow }) {
   const [followers, setFollowers] = useState(user.followers);
+  const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
     setFollowers(user.followers);
@@ -87,12 +89,15 @@ function ProfileDisplay({ user, authUser, onFollow }) {
 
   return (
     <>
+      <ProfileEditModal show={editOpen} close={() => setEditOpen(false)} />
       <Cover></Cover>
       <Top>
         <ProfileAvatar></ProfileAvatar>
 
         {authUser._id === user._id ? (
-          <Button $type='empty'>Edit Profile</Button>
+          <Button $type='empty' onClick={() => setEditOpen(true)}>
+            Edit Profile
+          </Button>
         ) : (
           <Button
             $type={followers.includes(authUser._id) ? null : 'empty'}
@@ -113,7 +118,7 @@ function ProfileDisplay({ user, authUser, onFollow }) {
           <time>Joined {new Date(user.createdAt).toDateString()}</time>
         </DateContainer>
 
-        <FollowDisplay user={user} />
+        <FollowLinks user={user} />
       </Main>
     </>
   );

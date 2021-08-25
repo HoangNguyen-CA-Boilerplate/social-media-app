@@ -6,6 +6,10 @@ const Label = styled.label`
   height: max-content;
 
   font-size: 1rem;
+
+  & > * + * {
+    margin-top: 4px;
+  }
 `;
 
 export default Label;

@@ -8,10 +8,10 @@ function FormGroup({ label, error, inputProps, type }) {
   let inputElement;
   switch (type) {
     case 'textarea':
-      inputElement = <TextArea {...inputProps} />;
+      inputElement = <TextArea {...inputProps} error={error} />;
       break;
     default:
-      inputElement = <Input {...inputProps} />;
+      inputElement = <Input {...inputProps} error={error} />;
   }
   return (
     <>

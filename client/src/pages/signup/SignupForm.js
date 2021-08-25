@@ -18,7 +18,6 @@ function Signup({ onSubmit }) {
         label='Username:'
         error={errors.username?.message}
         inputProps={{
-          error: errors.username?.message,
           ...register('username', {
             required: 'username is required',
             minLength: {
@@ -41,7 +40,6 @@ function Signup({ onSubmit }) {
         label='Email:'
         error={errors.email?.message}
         inputProps={{
-          error: errors.email?.message,
           type: 'email',
           ...register('email', {
             required: 'email is required',
@@ -56,7 +54,6 @@ function Signup({ onSubmit }) {
         label='Password:'
         error={errors.password?.message}
         inputProps={{
-          error: errors.password?.message,
           type: 'password',
           ...register('password', {
             required: 'password is required',

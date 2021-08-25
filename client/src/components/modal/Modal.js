@@ -1,20 +1,29 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Backdrop from './Backdrop';
-
 import { VscChromeClose } from 'react-icons/vsc';
+
+const centerStyles = css`
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[100]};
   width: 100%;
-  max-width: 800px;
+  max-width: 580px;
   border-radius: 1rem;
 
   position: fixed;
   z-index: 100;
   top: 2em;
-  margin: auto 0 !important;
+  left: 50%;
+  transform: translateX(-50%);
+
+  margin: 0 !important;
+
+  ${(props) => (props.$center ? centerStyles : null)};
 `;
 
 const TopBar = styled.div`
@@ -47,19 +56,23 @@ const Header = styled.p`
   font-weight: 700;
 `;
 
-function Modal({ show, children, close, header, className }) {
+const Main = styled.div`
+  padding: ${({ theme }) => theme.padding.modal};
+`;
+
+function Modal({ show, children, close, header, className, center }) {
   if (!show) return null;
   return (
     <>
       <Backdrop onClick={close}></Backdrop>
-      <Container className={className}>
+      <Container className={className} $center={center}>
         <TopBar>
           <Close onClick={close}>
             <VscChromeClose />
           </Close>
           <Header>{header}</Header>
         </TopBar>
-        {children}
+        <Main>{children}</Main>
       </Container>
     </>
   );

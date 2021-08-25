@@ -26,7 +26,7 @@ const Link = styled.a`
   }
 `;
 
-function FollowControls({ user }) {
+function FollowLinks({ user }) {
   const history = useHistory();
 
   const routeToFollowers = () => {
@@ -49,4 +49,4 @@ function FollowControls({ user }) {
   );
 }
 
-export default FollowControls;
+export default FollowLinks;

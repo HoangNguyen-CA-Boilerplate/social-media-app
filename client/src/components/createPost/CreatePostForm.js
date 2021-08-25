@@ -28,7 +28,6 @@ function CreatePostForm({ onSubmit, error }) {
         type='textarea'
         inputProps={{
           placeholder: "What's happening?",
-          error: errors.text?.message,
           type: 'text',
           ...register('text', {
             required: 'text is required',
