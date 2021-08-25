@@ -1,6 +1,8 @@
 const express = require('express');
 
-const { wrapAsync } = require('../../util');
+const { body } = require('express-validator');
+
+const { wrapAsync, handleValidationErrors } = require('../../util');
 const { isAuth } = require('../../middleware/auth');
 const AppError = require('../../AppError');
 const User = require('../../models/User.js');
@@ -21,6 +23,32 @@ router.delete(
     deletedUser.password = undefined; // important
     deletedUser.email = undefined;
     res.status(200).json(deletedUser);
+  })
+);
+
+//update user
+router.patch(
+  '/',
+  body('displayName')
+    .matches(/^[a-zA-Z0-9_]+$/)
+    .withMessage('display name is not valid')
+    .isLength({ min: 1, max: 15 })
+    .withMessage('display name must be 1 to 15 characters long'),
+  body('bio')
+    .isLength({ max: 160 })
+    .withMessage('bio must be at most 160 characters long'),
+  isAuth,
+  wrapAsync(async (req, res) => {
+    handleValidationErrors(req);
+
+    const { displayName, bio } = req.body;
+    const user = req.user;
+
+    user.displayName = displayName;
+    user.bio = bio;
+
+    const savedUser = await user.save();
+    res.status(200).json(savedUser);
   })
 );
 
