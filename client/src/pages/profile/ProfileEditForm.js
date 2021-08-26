@@ -6,12 +6,15 @@ import Button from '../../components/button/Button';
 
 import { useForm } from 'react-hook-form';
 
-function ProfileEditForm({ onSubmit }) {
+function ProfileEditForm({ onSubmit, user }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur' });
+  } = useForm({
+    mode: 'onBlur',
+    defaultValues: { displayName: user.displayName, bio: user.bio || '' },
+  });
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} name='Edit profile'>
@@ -21,6 +24,11 @@ function ProfileEditForm({ onSubmit }) {
         inputProps={{
           ...register('displayName', {
             required: 'display name is required',
+            maxLength: {
+              value: 15,
+              message:
+                'display name can only have a maximum length of 15 characters',
+            },
           }),
         }}
       />
@@ -28,7 +36,12 @@ function ProfileEditForm({ onSubmit }) {
         label='Bio:'
         error={errors.bio?.message}
         inputProps={{
-          ...register('bio'),
+          ...register('bio', {
+            maxLength: {
+              value: 160,
+              message: 'bio can only have a maximum length of 160 characters',
+            },
+          }),
         }}
       />
 

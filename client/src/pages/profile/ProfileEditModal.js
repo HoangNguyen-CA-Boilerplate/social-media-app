@@ -37,7 +37,7 @@ const ProfileEditModal = (props) => {
   return (
     <Modal {...props} center header='Edit Profile'>
       {alert}
-      <ProfileEditForm onSubmit={onSubmit} />
+      <ProfileEditForm onSubmit={onSubmit} user={props.user} />
     </Modal>
   );
 };

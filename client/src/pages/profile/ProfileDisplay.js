@@ -75,7 +75,11 @@ function ProfileDisplay({ user, authUser, onFollow }) {
 
   return (
     <>
-      <ProfileEditModal show={editOpen} close={() => setEditOpen(false)} />
+      <ProfileEditModal
+        show={editOpen}
+        close={() => setEditOpen(false)}
+        user={user}
+      />
       <Cover></Cover>
       <Top>
         <ProfileAvatar></ProfileAvatar>
