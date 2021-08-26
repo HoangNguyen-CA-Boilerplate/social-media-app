@@ -7,9 +7,11 @@ import Spinner from '../Spinner';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
+
+  min-width: 320px;
+  min-height: 100vh;
 `;
 
 const Container = styled.div`

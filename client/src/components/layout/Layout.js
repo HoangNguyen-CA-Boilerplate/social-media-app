@@ -8,6 +8,7 @@ import { selectIsAuth } from '../../store/slices/authSlice';
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  min-width: 320px;
 `;
 
 const MainContainer = styled.div`

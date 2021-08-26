@@ -5,8 +5,9 @@ import { logout } from '../../store/slices/authSlice';
 import { selectUser } from '../../store/slices/authSlice';
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { FaRegUser } from 'react-icons/fa';
+import {} from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
+import { RiUserSharedLine, RiUserLine } from 'react-icons/ri';
 
 import { BrandIcon } from '../../theme/brand';
 
@@ -15,8 +16,11 @@ import NavLink from './NavLink';
 const Container = styled.nav`
   display: flex;
   flex-direction: column;
-  width: max-content;
-  height: max-content;
+  min-width: max-content;
+  height: 100vh;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 
   position: sticky;
   top: 0;
@@ -50,10 +54,18 @@ function Nav() {
       </NavLink>
       <NavLink
         aria-label='profile'
-        icon={<FaRegUser />}
+        icon={<RiUserLine />}
         to={`/users/${user.username}`}
       >
         Profile
+      </NavLink>
+
+      <NavLink
+        aria-label='profile'
+        icon={<RiUserSharedLine />}
+        to={`/users/${user.username}/following`}
+      >
+        Following
       </NavLink>
 
       <BottomNavLink

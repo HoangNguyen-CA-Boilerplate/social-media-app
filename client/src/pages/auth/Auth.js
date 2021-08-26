@@ -12,6 +12,7 @@ import { brandName, BrandIcon } from '../../theme/brand';
 const Container = styled.div`
   display: flex;
   min-height: 100vh;
+  min-width: 320px;
 
   @media ${({ theme }) => theme.breakpoints.tablet} {
     flex-direction: column;
@@ -72,7 +73,7 @@ const ContentContainer = styled.div`
 `;
 
 const Header = styled.h1`
-  font-size: 3em;
+  font-size: 2.7em;
   margin-bottom: 1em;
 `;
 
