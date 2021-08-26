@@ -7,7 +7,7 @@ describe('App', () => {
     it('Routing to login', async () => {
       render(<App />);
 
-      userEvent.click(await screen.findByRole('button', { name: /Log In/i }));
+      userEvent.click(await screen.findByRole('button', { name: 'Log In' }));
 
       expect(
         await screen.findByRole('heading', { name: /Log in/i })

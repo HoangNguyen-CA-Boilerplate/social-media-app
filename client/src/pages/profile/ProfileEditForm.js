@@ -13,7 +13,10 @@ function ProfileEditForm({ onSubmit, user }) {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    defaultValues: { displayName: user.displayName, bio: user.bio || '' },
+    defaultValues: {
+      displayName: user?.displayName || '',
+      bio: user?.bio || '',
+    },
   });
 
   return (
