@@ -61,7 +61,7 @@ function Nav() {
       </NavLink>
 
       <NavLink
-        aria-label='profile'
+        aria-label='following'
         icon={<RiUserSharedLine />}
         to={`/users/${user.username}/following`}
       >
