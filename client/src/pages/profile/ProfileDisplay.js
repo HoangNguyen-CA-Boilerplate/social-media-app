@@ -6,6 +6,7 @@ import Button from '../../components/button/Button';
 import FollowLinks from './FollowLinks';
 import ProfileEditModal from './ProfileEditModal';
 import ProfileDate from './ProfileDate';
+import ProfileHeader from './ProfileHeader';
 
 const Cover = styled.div`
   background-color: ${({ theme }) => theme.clrs.neutral[400]};
@@ -42,18 +43,11 @@ const Main = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[400]};
 
   & > * + * {
-    margin-top: 0.5em;
+    margin-top: 0.7em;
   }
 `;
 
-const DisplayName = styled.h2`
-  font-weight: 700;
-  font-size: 1.5rem;
-`;
-
-const Username = styled.p`
-  color: ${({ theme }) => theme.clrs.neutral[600]};
-`;
+const Bio = styled.p``;
 
 function ProfileDisplay({ user, authUser, onFollow }) {
   const [followers, setFollowers] = useState(user.followers);
@@ -98,11 +92,8 @@ function ProfileDisplay({ user, authUser, onFollow }) {
         )}
       </Top>
       <Main>
-        <div>
-          <DisplayName>{user.displayName}</DisplayName>
-          <Username>@{user.username}</Username>
-        </div>
-
+        <ProfileHeader user={user} />
+        {user?.bio && <Bio>{user.bio}</Bio>}
         <ProfileDate date={user.createdAt} />
         <FollowLinks user={user} />
       </Main>
