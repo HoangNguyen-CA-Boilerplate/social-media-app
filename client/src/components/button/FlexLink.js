@@ -5,12 +5,14 @@ import { useHistory } from 'react-router-dom';
 
 const activeStyles = css`
   color: ${({ theme }) => theme.clrs.neutral[900]};
+  font-size: calc(1rem + 1px);
   border-bottom: 4px solid ${({ theme }) => theme.clrs.primary[500]};
 `;
 
 const StyledLink = styled.button`
   width: 100%;
   padding: 1em;
+  font-weight: 600;
 
   text-align: center;
   text-decoration: none;

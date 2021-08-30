@@ -40,7 +40,7 @@ const Top = styled.div`
 const Main = styled.div`
   padding: 0 ${({ theme }) => theme.padding.main}
     ${({ theme }) => theme.padding.main} ${({ theme }) => theme.padding.main};
-  border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[400]};
+  /* border-bottom: 1px solid ${({ theme }) => theme.clrs.neutral[400]}; */
 
   & > * + * {
     margin-top: 0.7em;

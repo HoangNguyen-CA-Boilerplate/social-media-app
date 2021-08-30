@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 
 import ProfileDisplay from './ProfileDisplay';
 import Posts from '../../components/post/Posts';
+import PageNotFound from '../PageNotFound';
 import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
+import FlexLink, { FlexLinkContainer } from '../../components/button/FlexLink';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -19,9 +21,11 @@ import {
   selectUserPostsStatus,
 } from '../../store/slices/userSlice';
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
 function Profile({ username }) {
   const dispatch = useDispatch();
+  const { path, url } = useRouteMatch();
 
   useEffect(() => {
     dispatch(getUser({ username }));
@@ -63,9 +67,22 @@ function Profile({ username }) {
         ></ProfileDisplay>
       </LoadAsync>
 
-      <LoadAsync loading={postsStatus === 'loading'}>
-        <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
-      </LoadAsync>
+      <FlexLinkContainer>
+        <FlexLink to={url}>Posts</FlexLink>
+        <FlexLink to={`${url}/likes`}>Likes</FlexLink>
+      </FlexLinkContainer>
+
+      <Switch>
+        <Route exact path={path}>
+          <LoadAsync loading={postsStatus === 'loading'}>
+            <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
+          </LoadAsync>
+        </Route>
+        <Route exact path={`${path}/likes`}></Route>
+        <Route>
+          <PageNotFound />
+        </Route>
+      </Switch>
     </>
   );
 }

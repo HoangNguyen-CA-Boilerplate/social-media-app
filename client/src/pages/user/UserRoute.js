@@ -3,7 +3,6 @@ import Profile from '../profile/Profile';
 import Followings from '../followings/Followings';
 import Followers from '../followers/Followers';
 import LayoutHeader from '../../components/layout/LayoutHeader';
-import PageNotFound from '../PageNotFound';
 import FlexLink, { FlexLinkContainer } from '../../components/button/FlexLink';
 
 import { useRouteMatch, Route, Switch, useParams } from 'react-router-dom';
@@ -14,11 +13,8 @@ function UserRoute() {
 
   return (
     <Switch>
-      <Route exact path={path}>
-        <Profile username={username}></Profile>
-      </Route>
       <Route exact path={[`${path}/followers`, `${path}/following`]}>
-        <LayoutHeader>{username}</LayoutHeader>
+        <LayoutHeader bottomless>{username}</LayoutHeader>
         <FlexLinkContainer>
           <FlexLink to={`${url}/followers`}>Followers</FlexLink>
           <FlexLink to={`${url}/following`}>Following</FlexLink>
@@ -33,7 +29,7 @@ function UserRoute() {
         </Switch>
       </Route>
       <Route>
-        <PageNotFound />
+        <Profile username={username}></Profile>
       </Route>
     </Switch>
   );
