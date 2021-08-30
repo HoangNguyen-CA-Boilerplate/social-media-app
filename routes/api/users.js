@@ -132,6 +132,20 @@ router.get(
   })
 );
 
+router.get(
+  '/:username/posts/liked',
+  wrapAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (!user) throw new AppError(400, "user doesn't exist");
+
+    const posts = await Post.find({ likes: user._id })
+      .sort({ createdAt: -1 })
+      .populate('user');
+    res.status(200).json(posts);
+  })
+);
+
 router.put('/');
 
 module.exports = router;

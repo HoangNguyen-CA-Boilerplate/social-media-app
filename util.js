@@ -9,7 +9,7 @@ const wrapAsync = (action) => (req, res, next) =>
 
 const issueJWT = (user) => {
   const _id = user._id;
-  const expiresIn = '1d';
+  const expiresIn = '14d';
 
   const payload = {
     sub: _id,
