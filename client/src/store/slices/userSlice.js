@@ -18,6 +18,9 @@ export const initialState = {
   postsStatus: 'initial', // initial, loading, success, fail
   posts: [],
   postsError: '',
+  likedPostsStatus: 'initial',
+  likedPosts: [],
+  likedPostsError: '',
 };
 
 const defaultError = 'network error';
@@ -65,6 +68,19 @@ export const getUserPosts = createAsyncThunk(
   async ({ username }, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/api/users/${username}/posts`);
+      return res.data;
+    } catch (e) {
+      if (e.response) return rejectWithValue(e.response.data.error);
+      return rejectWithValue(defaultError);
+    }
+  }
+);
+
+export const getUserLikedPosts = createAsyncThunk(
+  'user/getUserLikedPosts',
+  async ({ username }, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/api/users/${username}/posts/liked`);
       return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
@@ -156,6 +172,7 @@ const userSlice = createSlice({
       state.userStatus = 'fail';
       state.userError = action.payload;
     },
+
     [getUserPosts.pending]: (state) => {
       state.postsStatus = 'loading';
       state.postsError = '';
@@ -168,6 +185,20 @@ const userSlice = createSlice({
       state.postsStatus = 'fail';
       state.postsError = action.payload;
     },
+
+    [getUserLikedPosts.pending]: (state) => {
+      state.likedPostsStatus = 'loading';
+      state.likedPostsError = '';
+    },
+    [getUserLikedPosts.fulfilled]: (state, action) => {
+      state.likedPostsStatus = 'success';
+      state.likedPosts = action.payload;
+    },
+    [getUserLikedPosts.rejected]: (state, action) => {
+      state.likedPostsStatus = 'fail';
+      state.likedPostsError = action.payload;
+    },
+
     [deleteUserPost.fulfilled]: (state, action) => {
       state.posts = state.posts.filter(
         (post) => post._id !== action.payload._id
@@ -229,6 +260,10 @@ export default userSlice.reducer;
 export const selectUserPosts = (state) => state.user.posts;
 export const selectUserPostsStatus = (state) => state.user.postsStatus;
 export const selectUserPostsError = (state) => state.user.postsError;
+
+export const selectLikedPosts = (state) => state.user.likedPosts;
+export const selectLikedPostsStatus = (state) => state.user.likedPostsStatus;
+export const selectLikedPostsError = (state) => state.user.likedPostsError;
 
 export const selectUser = (state) => state.user.user;
 export const selectUserStatus = (state) => state.user.userStatus;
