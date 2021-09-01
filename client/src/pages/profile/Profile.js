@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 
 import ProfileDisplay from './ProfileDisplay';
-import Posts from '../../components/post/Posts';
+import ProfilePosts from './ProfilePosts';
+import ProfileLikedPosts from './ProfileLikedPosts';
 import PageNotFound from '../PageNotFound';
 import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
@@ -16,15 +17,6 @@ import {
   followUser,
 } from '../../store/slices/userSlice';
 
-import {
-  getPosts,
-  deletePost,
-  likePost,
-  selectUserPostsStatus,
-  selectUserPosts,
-  selectUserPostsError,
-} from '../../store/slices/userPostsSlice.js';
-
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
@@ -34,26 +26,13 @@ function Profile({ username }) {
 
   useEffect(() => {
     dispatch(getUser({ username }));
-    dispatch(getPosts({ username }));
   }, [dispatch, username]);
 
   const user = useSelector(selectUser);
   const userStatus = useSelector(selectUserStatus);
   const userError = useSelector(selectUserError);
 
-  const posts = useSelector(selectUserPosts);
-  const postsStatus = useSelector(selectUserPostsStatus);
-  const postsError = useSelector(selectUserPostsError);
-
   const authUser = useSelector(selectAuthUser);
-
-  const onLikePost = (id) => {
-    dispatch(likePost(id));
-  };
-
-  const onDeletePost = (id) => {
-    dispatch(deletePost(id));
-  };
 
   const onFollow = () => {
     dispatch(followUser(username));
@@ -80,11 +59,11 @@ function Profile({ username }) {
 
       <Switch>
         <Route exact path={path}>
-          <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
-            <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
-          </LoadAsync>
+          <ProfilePosts username={username} />
         </Route>
-        <Route exact path={`${path}/likes`}></Route>
+        <Route exact path={`${path}/likes`}>
+          <ProfileLikedPosts username={username} />
+        </Route>
         <Route>
           <PageNotFound />
         </Route>

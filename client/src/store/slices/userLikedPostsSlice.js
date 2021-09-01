@@ -11,10 +11,10 @@ const initialState = {
 const defaultError = 'network error';
 
 export const getPosts = createAsyncThunk(
-  'userPosts/getPosts',
+  'userLikedPosts/getPosts',
   async ({ username }, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`/api/users/${username}/posts`);
+      const res = await axios.get(`/api/users/${username}/posts/liked`);
       return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
@@ -24,7 +24,7 @@ export const getPosts = createAsyncThunk(
 );
 
 export const deletePost = createAsyncThunk(
-  'userPosts/deletePost',
+  'userLikedPosts/deletePost',
   async (id, { rejectWithValue, getState }) => {
     try {
       const res = await axios.delete(`/api/posts/${id}`, tokenConfig(getState));
@@ -37,7 +37,7 @@ export const deletePost = createAsyncThunk(
 );
 
 export const likePost = createAsyncThunk(
-  'userPosts/likePost',
+  'userLikedPosts/likePost',
   async (id, { rejectWithValue, getState }) => {
     try {
       const res = await axios.patch(
@@ -54,7 +54,7 @@ export const likePost = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-  name: 'userPosts',
+  name: 'userLikedPosts',
   initialState,
 
   extraReducers: {
@@ -86,6 +86,8 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const selectUserPosts = (state) => state.userPosts.posts;
-export const selectUserPostsStatus = (state) => state.userPosts.postsStatus;
-export const selectUserPostsError = (state) => state.userPosts.postsError;
+export const selectUserLikedPosts = (state) => state.userLikedPosts.posts;
+export const selectUserLikedPostsStatus = (state) =>
+  state.userLikedPosts.postsStatus;
+export const selectUserLikedPostsError = (state) =>
+  state.userLikedPosts.postsError;
