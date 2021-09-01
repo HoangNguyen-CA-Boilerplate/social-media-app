@@ -4,23 +4,19 @@ import { tokenConfig } from '../utils';
 
 export const initialState = {
   userStatus: 'initial',
+  user: null,
+  userError: '',
+
   editStatus: 'initial',
   editError: '',
 
-  user: null,
-  userError: '',
   getFollowersStatus: 'initial',
-  getFollowersError: '',
-  getFollowingsStatus: 'initial',
-  getFollowingsError: '',
   followers: [],
+  getFollowersError: '',
+
+  getFollowingsStatus: 'initial',
   followings: [],
-  postsStatus: 'initial', // initial, loading, success, fail
-  posts: [],
-  postsError: '',
-  likedPostsStatus: 'initial',
-  likedPosts: [],
-  likedPostsError: '',
+  getFollowingsError: '',
 };
 
 const defaultError = 'network error';
@@ -55,62 +51,6 @@ export const getFollowings = createAsyncThunk(
   async (username, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/api/users/${username}/followings`);
-      return res.data;
-    } catch (e) {
-      if (e.response) return rejectWithValue(e.response.data.error);
-      return rejectWithValue(defaultError);
-    }
-  }
-);
-
-export const getUserPosts = createAsyncThunk(
-  'user/getUserPosts',
-  async ({ username }, { rejectWithValue }) => {
-    try {
-      const res = await axios.get(`/api/users/${username}/posts`);
-      return res.data;
-    } catch (e) {
-      if (e.response) return rejectWithValue(e.response.data.error);
-      return rejectWithValue(defaultError);
-    }
-  }
-);
-
-export const getUserLikedPosts = createAsyncThunk(
-  'user/getUserLikedPosts',
-  async ({ username }, { rejectWithValue }) => {
-    try {
-      const res = await axios.get(`/api/users/${username}/posts/liked`);
-      return res.data;
-    } catch (e) {
-      if (e.response) return rejectWithValue(e.response.data.error);
-      return rejectWithValue(defaultError);
-    }
-  }
-);
-
-export const deleteUserPost = createAsyncThunk(
-  'user/deleteUserPost',
-  async (id, { rejectWithValue, getState }) => {
-    try {
-      const res = await axios.delete(`/api/posts/${id}`, tokenConfig(getState));
-      return res.data;
-    } catch (e) {
-      if (e.response) return rejectWithValue(e.response.data.error);
-      return rejectWithValue(defaultError);
-    }
-  }
-);
-
-export const likeUserPost = createAsyncThunk(
-  'user/likeUserPost',
-  async (id, { rejectWithValue, getState }) => {
-    try {
-      const res = await axios.patch(
-        `/api/posts/${id}/like`,
-        {},
-        tokenConfig(getState)
-      );
       return res.data;
     } catch (e) {
       if (e.response) return rejectWithValue(e.response.data.error);
@@ -173,41 +113,6 @@ const userSlice = createSlice({
       state.userError = action.payload;
     },
 
-    [getUserPosts.pending]: (state) => {
-      state.postsStatus = 'loading';
-      state.postsError = '';
-    },
-    [getUserPosts.fulfilled]: (state, action) => {
-      state.postsStatus = 'success';
-      state.posts = action.payload;
-    },
-    [getUserPosts.rejected]: (state, action) => {
-      state.postsStatus = 'fail';
-      state.postsError = action.payload;
-    },
-
-    [getUserLikedPosts.pending]: (state) => {
-      state.likedPostsStatus = 'loading';
-      state.likedPostsError = '';
-    },
-    [getUserLikedPosts.fulfilled]: (state, action) => {
-      state.likedPostsStatus = 'success';
-      state.likedPosts = action.payload;
-    },
-    [getUserLikedPosts.rejected]: (state, action) => {
-      state.likedPostsStatus = 'fail';
-      state.likedPostsError = action.payload;
-    },
-
-    [deleteUserPost.fulfilled]: (state, action) => {
-      state.posts = state.posts.filter(
-        (post) => post._id !== action.payload._id
-      );
-    },
-    [likeUserPost.fulfilled]: (state, action) => {
-      const found = state.posts.find((post) => post._id === action.payload._id);
-      found.likes = action.payload.likes;
-    },
     [followUser.fulfilled]: (state, action) => {
       state.user = action.payload;
     },
@@ -242,12 +147,10 @@ const userSlice = createSlice({
       state.editStatus = 'loading';
       state.editError = '';
     },
-
     [editUser.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.editStatus = 'success';
     },
-
     [editUser.rejected]: (state, action) => {
       state.editStatus = 'fail';
       state.editError = action.payload;
@@ -256,14 +159,6 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-
-export const selectUserPosts = (state) => state.user.posts;
-export const selectUserPostsStatus = (state) => state.user.postsStatus;
-export const selectUserPostsError = (state) => state.user.postsError;
-
-export const selectLikedPosts = (state) => state.user.likedPosts;
-export const selectLikedPostsStatus = (state) => state.user.likedPostsStatus;
-export const selectLikedPostsError = (state) => state.user.likedPostsError;
 
 export const selectUser = (state) => state.user.user;
 export const selectUserStatus = (state) => state.user.userStatus;

@@ -12,14 +12,19 @@ import {
   selectUser,
   selectUserStatus,
   selectUserError,
-  selectUserPosts,
-  likeUserPost,
-  deleteUserPost,
-  getUserPosts,
   getUser,
   followUser,
-  selectUserPostsStatus,
 } from '../../store/slices/userSlice';
+
+import {
+  getPosts,
+  deletePost,
+  likePost,
+  selectUserPostsStatus,
+  selectUserPosts,
+  selectUserPostsError,
+} from '../../store/slices/userPostsSlice.js';
+
 import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
@@ -29,7 +34,7 @@ function Profile({ username }) {
 
   useEffect(() => {
     dispatch(getUser({ username }));
-    dispatch(getUserPosts({ username }));
+    dispatch(getPosts({ username }));
   }, [dispatch, username]);
 
   const user = useSelector(selectUser);
@@ -38,15 +43,16 @@ function Profile({ username }) {
 
   const posts = useSelector(selectUserPosts);
   const postsStatus = useSelector(selectUserPostsStatus);
+  const postsError = useSelector(selectUserPostsError);
 
   const authUser = useSelector(selectAuthUser);
 
   const onLikePost = (id) => {
-    dispatch(likeUserPost(id));
+    dispatch(likePost(id));
   };
 
   const onDeletePost = (id) => {
-    dispatch(deleteUserPost(id));
+    dispatch(deletePost(id));
   };
 
   const onFollow = () => {
@@ -74,7 +80,7 @@ function Profile({ username }) {
 
       <Switch>
         <Route exact path={path}>
-          <LoadAsync loading={postsStatus === 'loading'}>
+          <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
             <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
           </LoadAsync>
         </Route>
