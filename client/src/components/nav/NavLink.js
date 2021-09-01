@@ -56,10 +56,15 @@ const NavText = styled.p`
   }
 `;
 
-function NavLink({ to, icon, children, ...props }) {
-  const location = useLocation();
+function NavLink({ to, icon, children, exact = true, ...props }) {
+  const { pathname } = useLocation();
 
-  const active = location.pathname === to;
+  let active;
+  if (exact) {
+    active = pathname === to;
+  } else {
+    active = pathname.startsWith(to);
+  }
 
   let linkElement = (
     <ButtonLink {...props}>

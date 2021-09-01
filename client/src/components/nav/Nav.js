@@ -7,7 +7,7 @@ import { selectUser } from '../../store/slices/authSlice';
 import { AiOutlineHome } from 'react-icons/ai';
 import {} from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
-import { RiUserSharedLine, RiUserLine } from 'react-icons/ri';
+import { RiUserLine } from 'react-icons/ri';
 
 import { BrandIcon } from '../../theme/brand';
 
@@ -56,16 +56,9 @@ function Nav() {
         aria-label='profile'
         icon={<RiUserLine />}
         to={`/users/${user.username}`}
+        exact={false}
       >
         Profile
-      </NavLink>
-
-      <NavLink
-        aria-label='following'
-        icon={<RiUserSharedLine />}
-        to={`/users/${user.username}/following`}
-      >
-        Following
       </NavLink>
 
       <BottomNavLink
