@@ -39,7 +39,7 @@ export const deletePost = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   'fullpost/likePost',
-  async (id, { rejectWithValue, getState }) => {
+  async ({ id }, { rejectWithValue, getState }) => {
     try {
       const res = await axios.patch(
         `/api/posts/${id}/like`,

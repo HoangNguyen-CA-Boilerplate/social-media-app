@@ -27,7 +27,7 @@ export const getPosts = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
-  async (id, { rejectWithValue, getState }) => {
+  async ({ id }, { rejectWithValue, getState }) => {
     try {
       const res = await axios.delete(`/api/posts/${id}`, tokenConfig(getState));
       return res.data;
@@ -57,7 +57,7 @@ export const createPost = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   'posts/likePost',
-  async (id, { rejectWithValue, getState }) => {
+  async ({ id }, { rejectWithValue, getState }) => {
     try {
       const res = await axios.patch(
         `/api/posts/${id}/like`,

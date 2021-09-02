@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import LoadAsync from '../../components/loadAsync/LoadAsync';
+import LayoutMessage from '../../components/layout/LayoutMessage';
 import Posts from '../../components/post/Posts';
 
 import {
@@ -21,11 +22,11 @@ function ProfileLikedPostss({ username }) {
   }, [dispatch, username]);
 
   const onLikePost = (id) => {
-    dispatch(likePost(id));
+    dispatch(likePost({ id }));
   };
 
   const onDeletePost = (id) => {
-    dispatch(deletePost(id));
+    dispatch(deletePost({ id }));
   };
 
   const postsStatus = useSelector(selectUserLikedPostsStatus);
@@ -34,7 +35,13 @@ function ProfileLikedPostss({ username }) {
 
   return (
     <LoadAsync loading={postsStatus === 'loading'} error={postsError}>
-      <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
+      {posts.length !== 0 ? (
+        <Posts posts={posts} onLike={onLikePost} onDelete={onDeletePost} />
+      ) : (
+        <LayoutMessage sub='When they like a post, it will show up here.'>
+          This has user no likes yet
+        </LayoutMessage>
+      )}
     </LoadAsync>
   );
 }

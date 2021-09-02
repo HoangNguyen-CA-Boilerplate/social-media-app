@@ -28,7 +28,7 @@ function FullPost() {
   const postError = useSelector(selectPostError);
 
   const onLike = (id) => {
-    dispatch(likePost(id));
+    dispatch(likePost({ id }));
   };
 
   const onDelete = (id) => {

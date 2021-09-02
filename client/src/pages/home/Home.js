@@ -26,11 +26,11 @@ function Home() {
   }, [dispatch]);
 
   const onDelete = (id) => {
-    dispatch(deletePost(id));
+    dispatch(deletePost({ id }));
   };
 
   const onLike = (id) => {
-    dispatch(likePost(id));
+    dispatch(likePost({ id }));
   };
 
   return (
