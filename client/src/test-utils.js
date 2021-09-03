@@ -10,6 +10,8 @@ import authReducer, { initialState } from './store/slices/authSlice';
 import postsReducer from './store/slices/postsSlice';
 import userReducer from './store/slices/userSlice';
 import fullpostReducer from './store/slices/fullpostSlice';
+import userPostsReducer from './store/slices/userPostsSlice';
+import userLikedPostsReducer from './store/slices/userLikedPostsSlice';
 
 import mockUser from './mocks/mockUser';
 
@@ -32,6 +34,8 @@ const customRender = (ui, { isAuth, route = '/', ...options } = {}) => {
       posts: postsReducer,
       user: userReducer,
       fullpost: fullpostReducer,
+      userPosts: userPostsReducer,
+      userLikedPosts: userLikedPostsReducer,
     },
     preloadedState,
   });
