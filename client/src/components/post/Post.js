@@ -46,12 +46,12 @@ function Post({ post, onDelete, onLike, big }) {
   const [showDelete, setShowDelete] = useState(false);
   const [likes, setLikes] = useState(post?.likes);
 
+  const history = useHistory();
+  const authUser = useSelector(selectUser);
+
   useEffect(() => {
     setLikes(post.likes);
   }, [post.likes]);
-
-  const history = useHistory();
-  const authUser = useSelector(selectUser);
 
   const clickable = history.location.pathname !== `/posts/${post?._id}`;
 
