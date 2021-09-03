@@ -2,7 +2,6 @@ import React, { useEffect, Suspense } from 'react';
 
 import Spinner from '../../components/Spinner';
 import ProfileDisplay from './ProfileDisplay';
-import ProfilePosts from './ProfilePosts';
 import PageNotFound from '../PageNotFound';
 import LoadAsync from '../../components/loadAsync/LoadAsync';
 import LayoutHeader from '../../components/layout/LayoutHeader';
@@ -21,6 +20,7 @@ import { selectUser as selectAuthUser } from '../../store/slices/authSlice';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
 const ProfileLikedPosts = React.lazy(() => import('./ProfileLikedPosts.js'));
+const ProfilePosts = React.lazy(() => import('./ProfilePosts.js'));
 
 function Profile({ username }) {
   const dispatch = useDispatch();
